@@ -25,6 +25,18 @@
     <Filter Include="Pliki źródłowe\ui">
       <UniqueIdentifier>{6c0c737d-715a-4d55-9a7d-b6245b63fa07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\drawing">
+      <UniqueIdentifier>{c00c125c-9024-47cc-a4bc-b76380089c42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\drawing">
+      <UniqueIdentifier>{658cfbb1-3868-4df4-a864-38ca7f7d6334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\test">
+      <UniqueIdentifier>{925629eb-02fe-404b-95b8-ab36d628dda7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\test">
+      <UniqueIdentifier>{5aece0b5-1e76-4139-9a62-7d6522f11acb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -32,6 +44,15 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Racket.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawnObject.h">
+      <Filter>Pliki nagłówkowe\drawing</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalObject.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +64,12 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Racket.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalObject.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
