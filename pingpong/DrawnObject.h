@@ -8,7 +8,6 @@ protected:
 	T* dObject;
 
 public:
-
 	DrawnObject(T* obj) {
 		this->dObject = obj;
 		sendDrawObject();
