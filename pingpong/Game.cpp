@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Game.h"
 
+std::vector<UpdateObject*> Game::updateVector;
 std::vector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
@@ -14,6 +15,19 @@ void Game::createWindow(int xSize, int ySize, int refreshRate, bool verticalSync
 	this->windowObj->setFramerateLimit(refreshRate);
 	this->windowObj->setVerticalSyncEnabled(verticalSync);
 	this->_event = new sf::Event;
+}
+
+void Game::addUpdateObjectToUpdateVector(UpdateObject* obj) {
+	updateVector.push_back(obj);
+}
+
+void Game::deleteUpdateObjectFromUpdateVector(UpdateObject* obj) {
+	for (std::vector<UpdateObject*>::iterator i = updateVector.begin(); i != updateVector.end(); i++) {
+		if (*i == obj) {
+			updateVector.erase(i);
+			break;
+		}
+	}
 }
 
 void Game::addDrawableObjectToDrawVector(sf::Drawable* obj) {
@@ -38,10 +52,12 @@ void Game::manageWindowEvents() {
 }
 
 void Game::updateObjects() {
-
+	for (UpdateObject* obj : updateVector) {
+		obj->update();
+	}
 }
 
-void Game::drawDrawableObjects() {
+void Game::drawObjects() {
 	for (sf::Drawable* o : drawVector) {
 		windowObj->draw(*o);
 	}
@@ -52,7 +68,7 @@ void Game::run() {
 		windowObj->clear();
 		manageWindowEvents();
 		updateObjects();
-		drawDrawableObjects();
+		drawObjects();
 		windowObj->display();
 
 
