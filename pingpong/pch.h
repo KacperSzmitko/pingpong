@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <memory>
 #include <vector>
 #include <iterator>
 

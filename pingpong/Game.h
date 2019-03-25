@@ -4,8 +4,8 @@
 class Game {
 private:
 
-	sf::RenderWindow* windowObj;
-	sf::Event* _event;
+	std::unique_ptr<sf::RenderWindow> windowObj;
+	std::unique_ptr<sf::Event> _event;
 	static sf::Clock clock;
 	static sf::Clock frameClock;
 	static std::vector<UpdateObject*> updateVector;

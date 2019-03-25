@@ -11,10 +11,10 @@ Game::Game() {
 }
 
 void Game::createWindow(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) {
-	this->windowObj = new sf::RenderWindow(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
+	this->windowObj = std::make_unique<sf::RenderWindow>(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
 	this->windowObj->setFramerateLimit(refreshRate);
 	this->windowObj->setVerticalSyncEnabled(verticalSync);
-	this->_event = new sf::Event;
+	this->_event = std::make_unique<sf::Event>();
 }
 
 void Game::addUpdateObjectToUpdateVector(UpdateObject* obj) {
@@ -84,6 +84,5 @@ void Game::test() {
 }
 
 Game::~Game() {
-	delete _event;
-	delete windowObj;
+
 }
