@@ -6,15 +6,9 @@ std::vector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
 
-Game::Game() {
-
-}
-
-void Game::createWindow(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) {
-	this->windowObj = std::make_unique<sf::RenderWindow>(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
-	this->windowObj->setFramerateLimit(refreshRate);
-	this->windowObj->setVerticalSyncEnabled(verticalSync);
-	this->_event = std::make_unique<sf::Event>();
+Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : windowObj(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close), _event() {
+	this->windowObj.setFramerateLimit(refreshRate);
+	this->windowObj.setVerticalSyncEnabled(verticalSync);
 }
 
 void Game::addUpdateObjectToUpdateVector(UpdateObject* obj) {
@@ -44,9 +38,9 @@ void Game::deleteDrawableObjectFromDrawVector(sf::Drawable* obj) {
 }
 
 void Game::manageWindowEvents() {
-	while (windowObj->pollEvent(*_event)) {
-		if (_event->type == sf::Event::Closed) {
-			windowObj->close();
+	while (windowObj.pollEvent(_event)) {
+		if (_event.type == sf::Event::Closed) {
+			windowObj.close();
 		}
 	}
 }
@@ -59,17 +53,17 @@ void Game::updateObjects() {
 
 void Game::drawObjects() {
 	for (sf::Drawable* o : drawVector) {
-		windowObj->draw(*o);
+		windowObj.draw(*o);
 	}
 }
 
 void Game::run() {
-	while (windowObj->isOpen()) {
-		windowObj->clear();
+	while (windowObj.isOpen()) {
+		windowObj.clear();
 		manageWindowEvents();
 		updateObjects();
 		drawObjects();
-		windowObj->display();
+		windowObj.display();
 
 
 
