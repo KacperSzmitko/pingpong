@@ -13,13 +13,46 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\gameplay">
+      <UniqueIdentifier>{be5a6b26-71ae-4b5c-be39-409fc36e562f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\ui">
+      <UniqueIdentifier>{b66fa2c4-2aff-41c1-92d8-d7abd7d445df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\gameplay">
+      <UniqueIdentifier>{a0799b08-2f9a-400a-baf5-837c90d3eef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\ui">
+      <UniqueIdentifier>{6c0c737d-715a-4d55-9a7d-b6245b63fa07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\test">
+      <UniqueIdentifier>{925629eb-02fe-404b-95b8-ab36d628dda7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\test">
+      <UniqueIdentifier>{5aece0b5-1e76-4139-9a62-7d6522f11acb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h">
+    <ClInclude Include="Game.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Racket.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalObject.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateObject.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawnObject.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +60,18 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="pingpong.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Racket.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalObject.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateObject.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
