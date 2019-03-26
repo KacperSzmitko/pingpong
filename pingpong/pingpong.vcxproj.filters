@@ -54,6 +54,9 @@
     <ClInclude Include="Physics.h">
       <Filter>Pliki nagłówkowe\gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -73,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="UpdateObject.cpp">
       <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

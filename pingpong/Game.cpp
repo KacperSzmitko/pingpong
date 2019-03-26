@@ -11,6 +11,10 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 	this->windowObj.setVerticalSyncEnabled(verticalSync);
 }
 
+sf::Time Game::getTime() {
+	return clock.getElapsedTime();
+}
+
 void Game::addUpdateObjectToUpdateVector(UpdateObject* obj) {
 	updateVector.push_back(obj);
 }
@@ -74,7 +78,7 @@ void Game::run() {
 }
 
 void Game::test() {
-	std::cout << 1.0f / frameClock.getElapsedTime().asSeconds() << " | " << clock.getElapsedTime().asMilliseconds() << std::endl;
+	std::cout << 1.0f / frameClock.getElapsedTime().asSeconds() << " | " << clock.getElapsedTime().asSeconds() << std::endl;
 }
 
 Game::~Game() {

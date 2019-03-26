@@ -4,9 +4,12 @@
 #include "PhysicalObject.h"
 #include "UpdateObject.h"
 
-class Racket : private UpdateObject, private DrawnObject<sf::RectangleShape>, private PhysicalObject {
+class Racket : public UpdateObject, public DrawnObject<sf::RectangleShape>, public PhysicalObject {
+
+	
+
 public:
-	Racket(float sizeX, float sizeY, float posX, float posY);
+	Racket(float sizeX, float sizeY, float posX, float posY,float mass, Physics* physics);
 
 	void update();
 

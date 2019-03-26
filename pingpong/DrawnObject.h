@@ -13,10 +13,10 @@ public:
 		sendDrawObject();
 	}
 
-	virtual void sendDrawObject() {
+	void sendDrawObject() {
 		Game::addDrawableObjectToDrawVector(dObject);
 	}
-	virtual void deleteDrawObject() {
+	void deleteDrawObject() {
 		Game::deleteDrawableObjectFromDrawVector(dObject);
 	}
 
