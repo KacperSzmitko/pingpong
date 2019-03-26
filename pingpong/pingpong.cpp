@@ -4,8 +4,7 @@
 
 int main() {
 
-	Game game;
-	game.createWindow(1280, 720, 60, true, "Ping-Pong");
+	Game game(1280, 720, 60, true, "Ping-Pong");
 	
 	Racket *test1 = new Racket(5, 45, 300, 300);
 	Racket *test2 = new Racket(5, 45, 150, 200);

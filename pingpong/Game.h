@@ -4,8 +4,8 @@
 class Game {
 private:
 
-	std::unique_ptr<sf::RenderWindow> windowObj;
-	std::unique_ptr<sf::Event> _event;
+	sf::RenderWindow windowObj;
+	sf::Event _event;
 	static sf::Clock clock;
 	static sf::Clock frameClock;
 	static std::vector<UpdateObject*> updateVector;
@@ -13,9 +13,8 @@ private:
 
 public:
 
-	Game();
+	Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);
 
-	void createWindow(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);
 	static void addUpdateObjectToUpdateVector(UpdateObject* obj);
 	static void deleteUpdateObjectFromUpdateVector(UpdateObject* obj);
 	static void addDrawableObjectToDrawVector(sf::Drawable* obj);
