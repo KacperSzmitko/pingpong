@@ -4,8 +4,9 @@
 
 int main() {
 
-	Game game(1280, 720, 60, true, "Ping-Pong");
+	Game game(1280, 720, 60, false, "Ping-Pong");
 
+	Racket r(5, 30, 100, 100, 1, nullptr);
 	
 
 	game.run();

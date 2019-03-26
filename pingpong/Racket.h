@@ -6,10 +6,8 @@
 
 class Racket : public UpdateObject, public DrawnObject<sf::RectangleShape>, public PhysicalObject {
 
-	
-
 public:
-	Racket(float sizeX, float sizeY, float posX, float posY,float mass, Physics* physics);
+	Racket(float sizeX, float sizeY, float posX, float posY, float mass, std::shared_ptr<Physics> physics);
 
 	void update();
 

@@ -5,17 +5,12 @@
 class PhysicalObject {
 protected:
 
-	float mass,shape,Ek,Ep,momentum;
-	sf::Vector2f speed,acceleration;
-	Physics *physics;
-	sf::Time last_clock;
+	float mass, Ek, Ep, momentum;
+	sf::Vector2f speed, acceleration;
+	std::shared_ptr<Physics> physics;
 
-
-	sf::Time timeDiffrence();
-	
-	
 public:
-	PhysicalObject(float mass,Physics *physics);
+	PhysicalObject(float mass, std::shared_ptr<Physics> physics);
 	// float calculate_speed(float direction, float road, Physics *phy, float time);
 	virtual ~PhysicalObject();
 };

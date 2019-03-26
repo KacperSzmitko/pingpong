@@ -1,18 +1,17 @@
 #include "pch.h"
 #include "Racket.h"
-#include "Physics.h"
 
-Racket::Racket(float sizeX, float sizeY, float posX, float posY, float mass,Physics* physics) : 
-UpdateObject(),
-DrawnObject(new sf::RectangleShape(sf::Vector2f(sizeX, sizeY))),
-PhysicalObject(mass,physics){
-	
-	this->dObject->setPosition(posX, posY);
+Racket::Racket(float sizeX, float sizeY, float posX, float posY, float mass, std::shared_ptr<Physics> physics) : UpdateObject(), DrawnObject(new sf::RectangleShape(sf::Vector2f(sizeX, sizeY)), posX, posY), PhysicalObject(mass, physics) {
+	this->dObject->setPosition(pos);
 }
 
 void Racket::update() {
 
-	dObject->move(sf::Vector2f(1, 1));
+	//Dla testów
+	CalcElapsedTime();
+	pos.x += 50.0f * elapsedTime.asSeconds();
+	pos.y += 50.0f * elapsedTime.asSeconds();
+	dObject->setPosition(pos);
 	
 }
 
