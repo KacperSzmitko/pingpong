@@ -7,7 +7,7 @@ UpdateObject::UpdateObject() {
 	lastTime = Game::getTime();
 }
 
-void UpdateObject::CalcElapsedTime() {
+void UpdateObject::calcElapsedTime() {
 	elapsedTime = Game::getTime() - lastTime;
 	lastTime = Game::getTime();
 }

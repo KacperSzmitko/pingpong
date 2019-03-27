@@ -11,7 +11,7 @@ private:
 	float Hmax = 0,Vx,Vy;
 
 public:
-	Ball(float posX, float posY, float mass, Physics* physics,float r);
+	Ball(float r, float posX, float posY, float mass, Physics* physics);
 	void update();
 	void CalculateSx();
 	void CalculateSy();

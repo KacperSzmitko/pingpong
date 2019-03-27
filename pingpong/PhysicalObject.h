@@ -5,13 +5,15 @@
 class PhysicalObject {
 protected:
 
-	float mass, Ek, Ep, momentum;
-	sf::Vector2f speed, acceleration;
-	Physics * physics;
+	float mass, kineticEnergy, speed;
+	sf::Vector2f speedVector;
+	Physics *physics;
+
+	sf::Vector2f calcSpeedVector(sf::Vector2f lastPos, sf::Vector2f newPos, float &t);
+	float calcSpeedFromSpeedVector(sf::Vector2f &speedVector);
 
 public:
-	PhysicalObject(float mass, Physics* physics);
-	// float calculate_speed(float direction, float road, Physics *phy, float time);
+	PhysicalObject(float mass, sf::Vector2f vectorSpeed, Physics* physics);
 	virtual ~PhysicalObject();
 };
 

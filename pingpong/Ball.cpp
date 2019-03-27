@@ -1,17 +1,17 @@
 #include "pch.h"
 #include "Ball.h"
 
-Ball::Ball(float posX, float posY, float mass, Physics *physics, float r) :
+Ball::Ball(float r, float posX, float posY, float mass, Physics *physics) :
 	UpdateObject(),
 	DrawnObject(new sf::CircleShape(r)),
-	PhysicalObject(mass, physics),
+	PhysicalObject(mass, sf::Vector2f(0, 0), physics),
 	r(r)
 {
 	dObject->setPosition(posX, posY);
 }
 void Ball::update()
 {
-	dObject->move(0.01, 0.01);
+	dObject->move(0.01f, 0.01f);
 }
 
 float Ball::CalculateVx()

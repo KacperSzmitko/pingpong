@@ -12,8 +12,8 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 	this->windowObj.setMouseCursorVisible(false);
 }
 
-sf::Time Game::getTime() {
-	return clock.getElapsedTime();
+float Game::getTime() {
+	return clock.getElapsedTime().asSeconds();
 }
 
 void Game::addUpdateObjectToUpdateVector(UpdateObject* obj) {

@@ -15,7 +15,7 @@ public:
 
 	Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);
 
-	static sf::Time getTime();
+	static float getTime();
 	static void addUpdateObjectToUpdateVector(UpdateObject* obj);
 	static void deleteUpdateObjectFromUpdateVector(UpdateObject* obj);
 	static void addDrawableObjectToDrawVector(sf::Drawable* obj);

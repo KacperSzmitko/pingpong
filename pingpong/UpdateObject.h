@@ -2,10 +2,10 @@
 
 class UpdateObject {
 protected:
-	sf::Time lastTime;
-	sf::Time elapsedTime;
+	float lastTime;
+	float elapsedTime;
 
-	void CalcElapsedTime();
+	void calcElapsedTime();
 
 public:
 	UpdateObject();
