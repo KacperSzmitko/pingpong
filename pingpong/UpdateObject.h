@@ -1,12 +1,14 @@
 #pragma once
 
 class UpdateObject {
+protected:
+	sf::Time lastTime;
+	sf::Time elapsedTime;
+
+	void CalcElapsedTime();
+
 public:
-
-	sf::Time lastClock;
-
 	UpdateObject();
-	sf::Time timeDiffrence();
 	
 	virtual void update() = 0;
 	virtual void sendUpdateObject();

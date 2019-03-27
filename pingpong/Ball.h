@@ -4,7 +4,7 @@
 #include "PhysicalObject.h"
 #include "UpdateObject.h"
 
-class Ball : public UpdateObject,public PhysicalObject,public DrawnObject<sf::CircleShape>
+class Ball : public UpdateObject, public PhysicalObject, public DrawnObject<sf::CircleShape>
 {
 private:
 	float r;
