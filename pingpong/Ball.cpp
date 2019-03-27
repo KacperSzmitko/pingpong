@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Ball.h"
 
-Ball::Ball(float posX, float posY, float mass, std::shared_ptr<Physics> physics, float r) :
+Ball::Ball(float posX, float posY, float mass, Physics *physics, float r) :
 	UpdateObject(),
 	DrawnObject(new sf::CircleShape(r)),
 	PhysicalObject(mass, physics),
@@ -16,12 +16,12 @@ void Ball::update()
 
 float Ball::CalculateVx()
 {
-
+	return 0;
 };
 
 float Ball::CalculateVy()
 {
-
+	return 0;
 };
 
 void Ball::calculateHmax()

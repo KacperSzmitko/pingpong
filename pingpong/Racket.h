@@ -12,7 +12,7 @@ private:
 	sf::Vector2f intVectorToFloatVector(const sf::Vector2i &vec);
 
 public:
-	Racket(float sizeX, float sizeY, int posX, int posY, float mass, std::shared_ptr<Physics> physics);
+	Racket(float sizeX, float sizeY, int posX, int posY, float mass, Physics * physics);
 
 	void update();
 

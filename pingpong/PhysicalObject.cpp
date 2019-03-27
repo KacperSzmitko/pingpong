@@ -4,7 +4,7 @@
 #include <cmath>
 
 
-PhysicalObject::PhysicalObject(float mass, std::shared_ptr<Physics> physics) : mass(mass), physics(physics) {
+PhysicalObject::PhysicalObject(float mass, Physics* physics) : mass(mass), physics(physics) {
 
 }
 

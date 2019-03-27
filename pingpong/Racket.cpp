@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Racket.h"
 
-Racket::Racket(float sizeX, float sizeY, int posX, int posY, float mass, std::shared_ptr<Physics> physics) : UpdateObject(), DrawnObject(new sf::RectangleShape(sf::Vector2f(sizeX, sizeY))), PhysicalObject(mass, physics), lastPos(posX, posY), newPos(posX, posY) {
+Racket::Racket(float sizeX, float sizeY, int posX, int posY, float mass, Physics * physics) : UpdateObject(), DrawnObject(new sf::RectangleShape(sf::Vector2f(sizeX, sizeY))), PhysicalObject(mass, physics), lastPos(posX, posY), newPos(posX, posY) {
 	this->dObject->setPosition(intVectorToFloatVector(newPos));
 }
 

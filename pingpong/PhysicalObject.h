@@ -7,10 +7,10 @@ protected:
 
 	float mass, Ek, Ep, momentum;
 	sf::Vector2f speed, acceleration;
-	std::shared_ptr<Physics> physics;
+	Physics * physics;
 
 public:
-	PhysicalObject(float mass, std::shared_ptr<Physics> physics);
+	PhysicalObject(float mass, Physics* physics);
 	// float calculate_speed(float direction, float road, Physics *phy, float time);
 	virtual ~PhysicalObject();
 };
