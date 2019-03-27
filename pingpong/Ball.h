@@ -7,10 +7,19 @@
 class Ball : public UpdateObject,public PhysicalObject,public DrawnObject<sf::CircleShape>
 {
 private:
-	double r;
+	float r;
+	float Hmax = 0,Vx,Vy;
 
 public:
-	Ball();
+	Ball(float posX, float posY, float mass, Physics* physics,float r);
+	void update();
+	void CalculateSx();
+	void CalculateSy();
+	float CalculateVx();
+	float CalculateVy();
+	void CalculateA();
+	void calculateHmax();
+
 };
 
 

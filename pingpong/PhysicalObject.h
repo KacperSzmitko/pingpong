@@ -16,7 +16,7 @@ protected:
 	
 public:
 	PhysicalObject(float mass,Physics *physics);
-	// float calculate_speed(float direction, float road, Physics *phy, float time);
+	
 	virtual ~PhysicalObject();
 };
 

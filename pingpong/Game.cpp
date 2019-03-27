@@ -69,10 +69,6 @@ void Game::run() {
 		drawObjects();
 		windowObj.display();
 
-
-
-		test(); //Dla testowania
-		
 		frameClock.restart();
 	}
 }

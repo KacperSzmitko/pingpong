@@ -14,6 +14,10 @@ void UpdateObject::deleteUpdateObject() {
 	Game::deleteUpdateObjectFromUpdateVector(this);
 }
 
+
+
 UpdateObject::~UpdateObject() {
 	deleteUpdateObject();
 }
+
+
