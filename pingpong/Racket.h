@@ -6,7 +6,7 @@
 
 class Racket : public UpdateObject, public DrawnObject<sf::RectangleShape>, public PhysicalObject {
 private:
-	sf::Vector2i lastPos, newPos;
+	sf::Vector2i lastPixelPos, newPixelPos;
 	sf::Vector2f intVectorToFloatVector(sf::Vector2i &vec);
 
 public:

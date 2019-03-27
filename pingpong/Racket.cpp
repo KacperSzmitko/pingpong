@@ -1,14 +1,14 @@
 #include "pch.h"
 #include "Racket.h"
 
-Racket::Racket(float sizeX, float sizeY, int posX, int posY, float mass, Physics * physics) : 
+Racket::Racket(float sizeX, float sizeY, int posX, int posY, float mass, Physics *physics) : 
 	UpdateObject(), 
 	DrawnObject(new sf::RectangleShape(sf::Vector2f(sizeX, sizeY))), 
 	PhysicalObject(mass, sf::Vector2f(0, 0), physics),
-	lastPos(posX, posY), 
-	newPos(posX, posY) {
+	lastPixelPos(posX, posY), 
+	newPixelPos(posX, posY) {
 
-	this->dObject->setPosition(intVectorToFloatVector(newPos));
+	this->dObject->setPosition(intVectorToFloatVector(newPixelPos));
 }
 
 sf::Vector2f Racket::intVectorToFloatVector(sf::Vector2i &vec) {
@@ -17,14 +17,14 @@ sf::Vector2f Racket::intVectorToFloatVector(sf::Vector2i &vec) {
 
 void Racket::update() {
 	calcElapsedTime();
-	newPos = sf::Mouse::getPosition();
-	speedVector = calcSpeedVector(intVectorToFloatVector(lastPos), intVectorToFloatVector(newPos), elapsedTime);
-	speed = calcSpeedFromSpeedVector(speedVector);
-	dObject->setPosition(intVectorToFloatVector(newPos));
-	lastPos = newPos;
+	newPixelPos = sf::Mouse::getPosition();
+	realSpeedVector = calcRealSpeedVector(intVectorToFloatVector(lastPixelPos), intVectorToFloatVector(newPixelPos), elapsedTime);
+	realSpeed = calcRealSpeedFromRealSpeedVector(realSpeedVector);
+	dObject->setPosition(intVectorToFloatVector(newPixelPos));
+	lastPixelPos = newPixelPos;
 
 	//Testy
-	std::cout << speed << " m/s" << std::endl; 
+	std::cout << realSpeed << " m/s" << std::endl;
 }
 
 Racket::~Racket() {}

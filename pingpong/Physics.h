@@ -1,10 +1,9 @@
 #pragma once
 
 struct Physics {
-	float resistance, pressure, grav;
+	float resistance, pressure, grav, pixelToRealRatio;
 	sf::Vector2f wind;
-	float pixelToRealRatio;
 
-	Physics(float resistance, float pressure, sf::Vector2f wind, float grav);
+	Physics(float resistance, float pressure, float grav, sf::Vector2f wind);
 
 };

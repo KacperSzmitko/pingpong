@@ -6,7 +6,9 @@ std::vector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
 
-Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : windowObj(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close), _event() {
+Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : 
+	windowObj(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close), _event() {
+
 	this->windowObj.setFramerateLimit(refreshRate);
 	this->windowObj.setVerticalSyncEnabled(verticalSync);
 	this->windowObj.setMouseCursorVisible(false);

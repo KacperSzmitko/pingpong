@@ -2,19 +2,20 @@
 #include "Game.h"
 #include "PhysicalObject.h"
 
-PhysicalObject::PhysicalObject(float mass, sf::Vector2f speedVector, Physics* physics) {
+PhysicalObject::PhysicalObject(float mass, sf::Vector2f realSpeedVector, Physics* physics) {
 	this->mass = mass;
-	this->speedVector = speedVector;
-	this->speed = calcSpeedFromSpeedVector(speedVector);
+	this->realSpeedVector = realSpeedVector;
 	this->physics = physics;
+	this->realSpeed = calcRealSpeedFromRealSpeedVector(realSpeedVector);
 }
 
-sf::Vector2f PhysicalObject::calcSpeedVector(sf::Vector2f lastPos, sf::Vector2f newPos, float &time) {
-	return ((newPos - lastPos) * physics->pixelToRealRatio) / time;
+sf::Vector2f PhysicalObject::calcRealSpeedVector(sf::Vector2f lastPixelPos, sf::Vector2f newPixelPos, float &time) {
+	return (newPixelPos - lastPixelPos) / time;
 }
 
-float PhysicalObject::calcSpeedFromSpeedVector(sf::Vector2f &speedVector) {
-	return sqrt(pow(speedVector.x, 2) + pow(speedVector.y, 2));
+float PhysicalObject::calcRealSpeedFromRealSpeedVector(sf::Vector2f &realSpeedVector) {
+	float ptrr = physics->pixelToRealRatio;
+	return sqrt(pow((realSpeedVector.x * ptrr), 2) + pow((realSpeedVector.y * ptrr), 2));
 }
 
 PhysicalObject::~PhysicalObject() {}
