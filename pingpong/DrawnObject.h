@@ -6,7 +6,6 @@
 template <typename T> class DrawnObject { 
 protected:
 	T* dObject;
-	
 
 public:
 	DrawnObject(T* obj) : dObject(obj) {
