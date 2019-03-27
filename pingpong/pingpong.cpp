@@ -6,7 +6,9 @@
 int main() {
 
 	Game game(1280, 720, 60, true, "Ping-Pong");
-	Physics *physics = new Physics(0.0431, 0, sf::Vector2f(0, 0));
+	Physics physics(0.0068, 1, sf::Vector2f(1, 1), 10);
+	std::shared_ptr<Physics> physic = std::make_shared<Physics>(physic);
+
 	Ball bal(0, 600, 10, physics, 20);
 	
 

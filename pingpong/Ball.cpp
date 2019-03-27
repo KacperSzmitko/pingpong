@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Ball.h"
 
-Ball::Ball(float posX, float posY, float mass, Physics* physics, float r) :
+Ball::Ball(float posX, float posY, float mass, std::shared_ptr<Physics> physics, float r) :
 	UpdateObject(),
 	DrawnObject(new sf::CircleShape(r)),
 	PhysicalObject(mass, physics),
@@ -26,7 +26,7 @@ float Ball::CalculateVy()
 
 void Ball::calculateHmax()
 {
-	Hmax = pow(Vx/100, 2) / (2 * physics->tendency);
+	Hmax = pow(Vx/100, 2) / (2 * physics->grav);
 }
 
 

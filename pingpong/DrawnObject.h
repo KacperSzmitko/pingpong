@@ -6,10 +6,10 @@
 template <typename T> class DrawnObject { 
 protected:
 	T* dObject;
-	sf::Vector2f pos;
+	
 
 public:
-	DrawnObject(T* obj, float posX, float posY) : dObject(obj), pos(posX, posY) {
+	DrawnObject(T* obj) : dObject(obj) {
 		sendDrawObject();
 	}
 
