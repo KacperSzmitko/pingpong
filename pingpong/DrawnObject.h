@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Game.h"
 
 //Klasy szablonowe musz¹ byæ w ca³oœci zdefnionowanê w nag³ówku, dlatego nie ma DrawnObject.cpp

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Game.h"
 #include "Racket.h"
 #include "Ball.h"
 
