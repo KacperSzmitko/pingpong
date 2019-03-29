@@ -4,14 +4,14 @@
 Ball::Ball(float r, float posX, float posY, float mass, Physics *physics) :
 	UpdateObject(),
 	DrawnObject(new sf::CircleShape(r)),
-	PhysicalObject(mass, sf::Vector2f(0, 0), physics),
+	PhysicalObject(physics, mass, posX, posY, { 0.0f, 0.0f }),
 	r(r)
 {
 	dObject->setPosition(posX, posY);
 }
 void Ball::update()
 {
-	dObject->move(0.01f, 0.01f);
+	dObject->move(0.1f, 0.1f);
 }
 
 float Ball::CalculateVx()

@@ -4,13 +4,18 @@
 #include "PhysicalObject.h"
 #include "UpdateObject.h"
 
+#define DEFAULT_RACKET_MASS 0.160f
+#define DEFAULT_RACKET_SIZE_X 5.0f
+#define DEFAULT_RACKET_SIZE_Y 35.0f
+#define DEFAULT_MAX_RACKET_VELOCITY 50.0f
+
 class Racket : public UpdateObject, public DrawnObject<sf::RectangleShape>, public PhysicalObject {
 private:
-	sf::Vector2i lastPixelPos, newPixelPos;
-	sf::Vector2f intVectorToFloatVector(sf::Vector2i &vec);
+	bool firstFrame;
 
 public:
-	Racket(float sizeX, float sizeY, int posX, int posY, float mass, Physics *physics);
+	Racket(Physics *physics, float sizeX, float sizeY, float mass, float posX, float posY);
+	Racket(Physics *physics, float posX, float posY);
 
 	void update();
 

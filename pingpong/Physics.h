@@ -6,4 +6,6 @@ struct Physics {
 
 	Physics(float resistance, float pressure, float grav, sf::Vector2f wind);
 
+
+
 };

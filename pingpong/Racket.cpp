@@ -1,30 +1,46 @@
 #include "pch.h"
 #include "Racket.h"
 
-Racket::Racket(float sizeX, float sizeY, int posX, int posY, float mass, Physics *physics) : 
+Racket::Racket(Physics *physics, float sizeX, float sizeY, float mass, float posX, float posY) :
 	UpdateObject(), 
-	DrawnObject(new sf::RectangleShape(sf::Vector2f(sizeX, sizeY))), 
-	PhysicalObject(mass, sf::Vector2f(0, 0), physics),
-	lastPixelPos(posX, posY), 
-	newPixelPos(posX, posY) {
+	DrawnObject(new sf::RectangleShape({ sizeX, sizeY })),
+	PhysicalObject(physics, mass, posX, posY) {
 
-	this->dObject->setPosition(intVectorToFloatVector(newPixelPos));
+	this->firstFrame = true;
 }
 
-sf::Vector2f Racket::intVectorToFloatVector(sf::Vector2i &vec) {
-	return sf::Vector2f((float)vec.x, (float)vec.y);
+Racket::Racket(Physics *physics, float posX, float posY) :
+	UpdateObject(),
+	DrawnObject(new sf::RectangleShape({ DEFAULT_RACKET_SIZE_X, DEFAULT_RACKET_SIZE_Y })),
+	PhysicalObject(physics, DEFAULT_RACKET_MASS, posX, posY) {
+
+	this->firstFrame = true;
 }
+
 
 void Racket::update() {
 	calcElapsedTime();
-	newPixelPos = sf::Mouse::getPosition();
-	realSpeedVector = calcRealSpeedVector(intVectorToFloatVector(lastPixelPos), intVectorToFloatVector(newPixelPos), elapsedTime);
-	realSpeed = calcRealSpeedFromRealSpeedVector(realSpeedVector);
-	dObject->setPosition(intVectorToFloatVector(newPixelPos));
-	lastPixelPos = newPixelPos;
+
+	newRealPos = calcRealPos(sf::Mouse::getPosition(Game::getWindowObj()));
+
+	if (firstFrame) {
+		firstFrame = false;
+	} else {
+		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
+		velocity = calcVelocityFromVelocityVector(velocityVector);
+		if (velocity > DEFAULT_MAX_RACKET_VELOCITY) {
+			velocity = DEFAULT_MAX_RACKET_VELOCITY;
+		}
+		kineticEnergy = calcKineticEnergy(mass, velocity);
+	}
+
+	dObject->setPosition(calcPixelPos(newRealPos));
+	lastRealPos = newRealPos;
+
+	
 
 	//Testy
-	std::cout << realSpeed << " m/s" << std::endl;
+	std::cout << velocity << " m/s" << std::endl;
 }
 
 Racket::~Racket() {}

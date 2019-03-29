@@ -9,8 +9,7 @@ int main() {
 
 	Physics *physics = new Physics(1, 1, 1, { 1, 1 });
 	
-	Racket rac(10, 100, 150, 150, 10, physics);
-	Ball bal(20, 0, 600, 10, physics);
+	Racket rac(physics, 100.0f, 100.0f);
 	
 
 	game.run();

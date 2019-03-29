@@ -1,17 +1,21 @@
 #include "pch.h"
 #include "Game.h"
 
+sf::RenderWindow Game::windowObj;
 std::vector<UpdateObject*> Game::updateVector;
 std::vector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
 
-Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : 
-	windowObj(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close), _event() {
-
+Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : _event() {
+	this->windowObj.create(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
 	this->windowObj.setFramerateLimit(refreshRate);
 	this->windowObj.setVerticalSyncEnabled(verticalSync);
 	this->windowObj.setMouseCursorVisible(false);
+}
+
+const sf::RenderWindow& Game::getWindowObj() {
+	return windowObj;
 }
 
 float Game::getTime() {
@@ -81,5 +85,7 @@ void Game::test() {
 }
 
 Game::~Game() {
-
+	windowObj.close();
+	updateVector.clear();
+	drawVector.clear();
 }
