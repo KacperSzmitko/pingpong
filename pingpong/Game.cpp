@@ -6,6 +6,7 @@ std::vector<UpdateObject*> Game::updateVector;
 std::vector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
+//Gameplay *Game::gameplay;
 
 Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : _event() {
 	this->windowObj.create(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
@@ -46,6 +47,10 @@ void Game::deleteDrawableObjectFromDrawVector(sf::Drawable* obj) {
 			break;
 		}
 	}
+}
+
+void Game::startGameplay() {
+	gameplay = new Gameplay;
 }
 
 void Game::manageWindowEvents() {

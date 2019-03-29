@@ -1,5 +1,6 @@
 #pragma once
 #include "UpdateObject.h"
+#include "Gameplay.h"
 
 class Game {
 private:
@@ -9,6 +10,7 @@ private:
 	static sf::Clock frameClock;
 	static std::vector<UpdateObject*> updateVector;
 	static std::vector<sf::Drawable*> drawVector;
+	static Gameplay *gameplay;
 
 	sf::Event _event;
 
@@ -22,6 +24,7 @@ public:
 	static void deleteUpdateObjectFromUpdateVector(UpdateObject* obj);
 	static void addDrawableObjectToDrawVector(sf::Drawable* obj);
 	static void deleteDrawableObjectFromDrawVector(sf::Drawable* obj);
+	static void startGameplay();
 	void manageWindowEvents();
 	void updateObjects();
 	void drawObjects();
