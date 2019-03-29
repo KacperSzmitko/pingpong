@@ -12,7 +12,7 @@ Racket::Racket(Physics *physics, float sizeX, float sizeY, float mass, float pos
 Racket::Racket(Physics *physics, float posX, float posY) :
 	UpdateObject(),
 	DrawnObject(new sf::RectangleShape({ DEFAULT_RACKET_SIZE_X, DEFAULT_RACKET_SIZE_Y })),
-	PhysicalObject(physics, DEFAULT_RACKET_MASS, posX, posY) {
+	PhysicalObject(physics, posX, posY, DEFAULT_RACKET_MASS) {
 
 	this->firstFrame = true;
 }
@@ -40,7 +40,7 @@ void Racket::update() {
 	
 
 	//Testy
-	std::cout << velocity << " m/s" << std::endl;
+	std::cout << velocity << " m/s " << kineticEnergy << " J" << std::endl;
 }
 
 Racket::~Racket() {}

@@ -46,7 +46,7 @@ float PhysicalObject::calcVelocityFromVelocityVector(const sf::Vector2f &velocit
 }
 
 float PhysicalObject::calcKineticEnergy(const float &mass, const float &velocity) {
-	return 0.5f * mass * pow(velocity, 2);
+	return (mass * (velocity * velocity)) / 2.0f;
 }
 
 PhysicalObject::~PhysicalObject() {}
