@@ -27,7 +27,8 @@ Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector
 }
 
 sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const float &time) {
-	return { lastRealPos.x + (velocityVector.x * time), lastRealPos.y + (2.0f * velocityVector.y - physics->grav * time) * time * 0.5f };
+	return { lastRealPos.x + (((mass*velocityVector.x)/physics->resistance)*(1-exp((-physics->resistance*time)/mass))), 
+		lastRealPos.y + (2.0f * velocityVector.y - physics->grav * time) * time * 0.5f };
 }
 
 void Ball::update()
