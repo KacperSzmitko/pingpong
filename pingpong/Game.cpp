@@ -84,7 +84,11 @@ void Game::run() {
 		drawObjects();
 		windowObj.display();
 
+
+		test();
 		frameClock.restart();
+
+
 	}
 }
 

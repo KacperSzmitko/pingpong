@@ -6,7 +6,7 @@ Ball::Ball(Physics *physics, float r, float mass, float posX, float posY) :
 	DrawnObject(new sf::CircleShape(r)),
 	PhysicalObject(physics, mass, posX, posY) {
 	this->realRaidus = calcRealValue(r);
-	this->dObject->setPosition(posX, posY);
+	this->dObject->setPosition(swapY({ posX, posY }));
 }
 
 Ball::Ball(Physics* physics, float posX, float posY) : 
@@ -14,7 +14,7 @@ Ball::Ball(Physics* physics, float posX, float posY) :
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
 	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY) {
 	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
-	this->dObject->setPosition(posX, posY);
+	this->dObject->setPosition(swapY({ posX, posY }));
 }
 
 Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector) :
@@ -22,11 +22,18 @@ Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
 	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY, velocityVector) {
 	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
-	this->dObject->setPosition(posX, posY);
+	this->dObject->setPosition(swapY({ posX, posY }));
 }
 
-sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const float &time) {
-	return { lastRealPos.x + (velocityVector.x * time), lastRealPos.y + (2.0f * velocityVector.y - physics->grav * time) * time * 0.5f };
+sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lV, const sf::Vector2f &vV, const float &t) {
+
+	sf::Vector2f nV(lV);
+	float a = physics->grav;
+
+	nV.x += vV.x * t;
+	nV.y += (2.0f * vV.y - a * t) * t * 0.5f;
+
+	return nV;
 }
 
 void Ball::update()
@@ -36,6 +43,7 @@ void Ball::update()
 	newRealPos = calcNewRealPos(lastRealPos, velocityVector, elapsedTime);
 	
 	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
+
 
 	velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
 	lastRealPos = newRealPos;
