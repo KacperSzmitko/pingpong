@@ -11,18 +11,15 @@ class Ball : public UpdateObject, public PhysicalObject, public DrawnObject<sf::
 {
 private:
 	float realRaidus;
-	float Hmax = 0,Vx,Vy;
+
+	sf::Vector2f calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const float &time);
 
 public:
-	Ball(float realRaidus, float posX, float posY, float mass, Physics* physics);
+	Ball(Physics* physics, float realRaidus, float mass, float posX, float posY);
 	Ball(Physics* physics, float posX, float posY);
+	Ball(Physics* physics, float posX, float posY, sf::Vector2f velocityVector);
 	void update();
-	void CalculateSx();
-	void CalculateSy();
-	float CalculateVx();
-	float CalculateVy();
-	void CalculateA();
-	void calculateHmax();
+	
 
 };
 

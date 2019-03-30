@@ -89,5 +89,8 @@
     <ClCompile Include="Gameplay.cpp">
       <Filter>Pliki źródłowe\gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="DrawnObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

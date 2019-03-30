@@ -3,7 +3,7 @@
 
 int main() {
 
-	Game game(1280, 720, 60, false, "Ping-Pong");
+	Game game(1280, 720, 60, true, "Ping-Pong");
 	
 	game.startGameplay();
 

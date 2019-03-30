@@ -13,13 +13,14 @@ private:
 	static std::vector<sf::Drawable*> drawVector;
 	static Gameplay *gameplay;
 
+	sf::View view;
 	sf::Event _event;
 
 public:
 
 	Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);
 
-	const static sf::RenderWindow& getWindowObj();
+	const static sf::RenderWindow &getWindowObj();
 	static float getTime();
 	static void addUpdateObjectToUpdateVector(UpdateObject* obj);
 	static void deleteUpdateObjectFromUpdateVector(UpdateObject* obj);

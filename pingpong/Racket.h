@@ -12,6 +12,7 @@
 class Racket : public DrawnObject<sf::RectangleShape>, public UpdateObject, public PhysicalObject {
 private:
 	bool firstFrame;
+	const sf::RenderWindow &windowObj;
 
 public:
 	Racket(Physics *physics, float sizeX, float sizeY, float mass, float posX, float posY);
