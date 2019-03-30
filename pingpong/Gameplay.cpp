@@ -1,7 +1,10 @@
 #include "pch.h"
 #include "Gameplay.h"
 
-Gameplay::Gameplay() : physics(), player1(&physics, 100, 100), ball(&physics, 100, 100, { 3.5f, 3.5f }) {
+Gameplay::Gameplay() {
+	this->physics = new Physics();
+	this->ball = new Ball(physics, 100.0f, 100.0f, { 200.0f, 200.0f });
+	this->player1 = new Racket(physics, 100.0f, 100.0f);
 
 }
 

@@ -6,6 +6,9 @@ Ball::Ball(Physics *physics, float r, float mass, float posX, float posY) :
 	DrawnObject(new sf::CircleShape(r)),
 	PhysicalObject(physics, mass, posX, posY) {
 	this->realRaidus = calcRealValue(r);
+	this->crossSectionArea = PI * pow(realRaidus, 2);
+	this->drag = BALL_DEFAULT_DRAG;
+	this->acc = { 0.0f, 0.0f };
 	this->dObject->setPosition(swapY({ posX, posY }));
 }
 
@@ -14,6 +17,9 @@ Ball::Ball(Physics* physics, float posX, float posY) :
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
 	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY) {
 	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
+	this->crossSectionArea = 2.0f * PI * pow(realRaidus, 2);
+	this->drag = BALL_DEFAULT_DRAG;
+	this->acc = { 0.0f, 0.0f };
 	this->dObject->setPosition(swapY({ posX, posY }));
 }
 
@@ -22,30 +28,47 @@ Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
 	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY, velocityVector) {
 	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
+	this->crossSectionArea = 2.0f * PI * pow(realRaidus, 2);
+	this->drag = BALL_DEFAULT_DRAG;
+	this->acc = { 0.0f, 0.0f };
 	this->dObject->setPosition(swapY({ posX, posY }));
 }
 
-sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lV, const sf::Vector2f &vV, const float &t) {
+void Ball::applyGravity() {
+	acc += {0, -physics->grav};
+}
 
-	sf::Vector2f nV(lV);
-	float a = physics->grav;
+void Ball::applyAirResistance(const sf::Vector2f &vV, const float &v) {
+	if (v != 0.0f) {
+		sf::Vector2f unitVector = vV / v;
+		acc += (-0.5f * physics->viscosity * pow(v, 2) * crossSectionArea * drag * unitVector) / mass;
+	}
+}
 
-	nV.x += vV.x * t;
-	nV.y += (2.0f * vV.y - a * t) * t * 0.5f;
+void Ball::applyForces() {
+	applyGravity();
+	applyAirResistance(velocityVector, velocity);
+}
 
-	return nV;
+sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lV, const sf::Vector2f &vV, const sf::Vector2f &acc, const float &t) {
+
+	applyForces();
+	return lV + (((2.0f * vV) + (acc * t)) * t) * 0.5f;
 }
 
 void Ball::update()
 {
 	calcElapsedTime();
 
-	newRealPos = calcNewRealPos(lastRealPos, velocityVector, elapsedTime);
-	
+	newRealPos = calcNewRealPos(lastRealPos, velocityVector, acc, elapsedTime);
+
 	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
-
-
 	velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
+	velocity = calcVelocityFromVelocityVector(velocityVector);	
+
+	std::cout << elapsedTime << " " << velocityVector.x << " " << velocityVector.y << std::endl;
 	lastRealPos = newRealPos;
+	acc = { 0.0f, 0.0f };
+
 }
 

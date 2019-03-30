@@ -5,8 +5,8 @@
 PhysicalObject::PhysicalObject(Physics* physics, float mass, float posX, float posY, sf::Vector2f velocityVector) {
 	this->physics = physics;
 	this->mass = mass;
-	this->lastRealPos = calcRealVector(sf::Vector2f(posX, posY));
-	this->newRealPos = lastRealPos;
+	this->newRealPos = calcRealVector(sf::Vector2f(posX, posY));
+	this->lastRealPos = newRealPos;
 	this->velocityVector = velocityVector;
 	this->velocity = calcVelocityFromVelocityVector(this->velocityVector);
 	this->kineticEnergy = calcKineticEnergy(this->mass, this->velocity);
@@ -15,8 +15,8 @@ PhysicalObject::PhysicalObject(Physics* physics, float mass, float posX, float p
 PhysicalObject::PhysicalObject(Physics* physics, float mass, float posX, float posY) {
 	this->physics = physics;
 	this->mass = mass;
-	this->lastRealPos = calcRealVector(sf::Vector2f(posX, posY));
-	this->newRealPos = lastRealPos;
+	this->newRealPos = calcRealVector(sf::Vector2f(posX, posY));
+	this->lastRealPos = newRealPos;
 	this->velocityVector = { 0.0f, 0.0f };
 	this->velocity = 0.0f;
 }
@@ -56,6 +56,8 @@ sf::Vector2f PhysicalObject::calcVelocityVector(const sf::Vector2f &lastRealPos,
 float PhysicalObject::calcVelocityFromVelocityVector(const sf::Vector2f &velocityVector) {
 	return sqrt(pow((velocityVector.x), 2) + pow((velocityVector.y), 2));
 }
+
+
 
 float PhysicalObject::calcKineticEnergy(const float &mass, const float &velocity) {
 	return (mass * (velocity * velocity)) / 2.0f;
