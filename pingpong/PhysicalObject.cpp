@@ -49,6 +49,11 @@ sf::Vector2f PhysicalObject::swapY(const sf::Vector2f &pos) {
 	return { pos.x, -pos.y };
 }
 
+sf::Vector2f PhysicalObject::calcResistanceVector(sf::Vector2f AirVelocityVector, float resistance)
+{
+	return { pow(calcVelocityFromVelocityVector(AirVelocityVector),2)*resistance,-AirVelocityVector.y };
+}
+
 sf::Vector2f PhysicalObject::calcVelocityVector(const sf::Vector2f &lastRealPos, const sf::Vector2f &newRealPos, const float &time) {
 	return (newRealPos - lastRealPos) / time;
 }

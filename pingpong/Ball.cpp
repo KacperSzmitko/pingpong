@@ -2,6 +2,7 @@
 #include "Ball.h"
 #include "CountingFunctions.h"
 
+
 Ball::Ball(Physics *physics, float r, float mass, float posX, float posY) :
 	UpdateObject(),
 	DrawnObject(new sf::CircleShape(r)),
@@ -27,19 +28,20 @@ Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector
 }
 
 sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const float &time) {
-	return { lastRealPos.x + (((mass*velocityVector.x)/physics->resistance)*(1-exp((-physics->resistance*time)/mass))), 
-		lastRealPos.y + (2.0f * velocityVector.y - physics->grav * time) * time * 0.5f };
+	return { lastRealPos.x + (((mass*velocityVector.x) / physics->resistance)*(1 - exp((-physics->resistance*time) / mass))),
+		 (lastRealPos.y + (((2.0f * velocityVector.y - physics->grav * elapsedTime) * elapsedTime * 0.5f)))
+			 };
 }
 
 void Ball::update()
 {
 	calcElapsedTime();
-
+	
 	newRealPos = calcNewRealPos(lastRealPos, velocityVector, elapsedTime);
 	
 	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
 
-	velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
+	velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime) - AirAccelerationVector;
 	lastRealPos = newRealPos;
 }
 
