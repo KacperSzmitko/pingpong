@@ -6,15 +6,19 @@ std::vector<UpdateObject*> Game::updateVector;
 std::vector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
+Gameplay *Game::gameplay;
 
-Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : _event() {
+Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : 
+	view({ (float)xSize / 2.0f, (float)ySize / -2.0f }, { (float)xSize, (float)ySize }) {
+
 	this->windowObj.create(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
 	this->windowObj.setFramerateLimit(refreshRate);
 	this->windowObj.setVerticalSyncEnabled(verticalSync);
 	this->windowObj.setMouseCursorVisible(false);
+	this->windowObj.setView(view);
 }
 
-const sf::RenderWindow& Game::getWindowObj() {
+const sf::RenderWindow &Game::getWindowObj() {
 	return windowObj;
 }
 
@@ -46,6 +50,10 @@ void Game::deleteDrawableObjectFromDrawVector(sf::Drawable* obj) {
 			break;
 		}
 	}
+}
+
+void Game::startGameplay() {
+	gameplay = new Gameplay;
 }
 
 void Game::manageWindowEvents() {
@@ -88,4 +96,5 @@ Game::~Game() {
 	windowObj.close();
 	updateVector.clear();
 	drawVector.clear();
+	delete gameplay;
 }

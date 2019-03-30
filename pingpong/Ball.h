@@ -5,16 +5,20 @@
 #include "UpdateObject.h"
 #define PI 3.14159265
 
+#define BALL_DEFAULT_PIXEL_RADIUS 4.0f
+#define BALL_DEFAULT_MASS 0.0025f
+
 class Ball : public UpdateObject, public PhysicalObject, public DrawnObject<sf::CircleShape>
 {
 private:
-	float Vp, Vx_p, Vy_p,r,angle;
-	sf::Vector2f ActualPosition;
-	float Vx, Vy;
-	
+	float realRaidus;
+
+	sf::Vector2f calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const float &time);
 
 public:
-	Ball(float r, float posX, float posY, float mass, Physics* physics, float Vp);
+	Ball(Physics* physics, float realRaidus, float mass, float posX, float posY);
+	Ball(Physics* physics, float posX, float posY);
+	Ball(Physics* physics, float posX, float posY, sf::Vector2f velocityVector);
 	void update();
 	
 

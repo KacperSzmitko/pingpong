@@ -2,32 +2,43 @@
 #include "Ball.h"
 #include "CountingFunctions.h"
 
-Ball::Ball(float r, float posX, float posY, float mass, Physics *physics, float Vp) :
+Ball::Ball(Physics *physics, float r, float mass, float posX, float posY) :
 	UpdateObject(),
 	DrawnObject(new sf::CircleShape(r)),
-	PhysicalObject(physics, mass, posX, posY, { 0.0f, 0.0f }),
-	r(r), Vp(Vp)
-{
-	Vx_p = CalculateVxStart(Vp, 45 * PI / 180);
-	Vy_p = CalculateVyStart(Vp, 45 * PI / 180);
-	dObject->setPosition(posX, posY);
-	
+	PhysicalObject(physics, mass, posX, posY) {
+	this->realRaidus = calcRealValue(r);
+	this->dObject->setPosition(posX, posY);
 }
+
+Ball::Ball(Physics* physics, float posX, float posY) : 
+	UpdateObject(),
+	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
+	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY) {
+	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
+	this->dObject->setPosition(posX, posY);
+}
+
+Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector) :
+	UpdateObject(),
+	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
+	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY, velocityVector) {
+	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
+	this->dObject->setPosition(posX, posY);
+}
+
+sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const float &time) {
+	return { lastRealPos.x + (velocityVector.x * time), lastRealPos.y + (2.0f * velocityVector.y - physics->grav * time) * time * 0.5f };
+}
+
 void Ball::update()
 {
 	calcElapsedTime();
-	Vx = Vx_p;
-	Vy = Vy_p;
+
+	newRealPos = calcNewRealPos(lastRealPos, velocityVector, elapsedTime);
 	
-	newRealPos = (sf::Vector2f((CalculateSx(Game::getTime(),Vx,mass,physics->resistance)),
-		(Vy*Game::getTime())-(5*pow(Game::getTime(),2))));
-	Vx_p = CalculateVx(Vx, Game::getTime(), mass, physics->resistance);
-	
-	std::cout << Vy_p << "\n";
-	
-	dObject->setPosition(calcPixelPos(newRealPos));
+	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
+
+	velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
+	lastRealPos = newRealPos;
 }
-
-
-
 
