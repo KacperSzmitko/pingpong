@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "PhysicalObject.h"
 
+
 PhysicalObject::PhysicalObject(Physics* physics, float posX, float posY, float mass, sf::Vector2f velocityVector) {
 	this->physics = physics;
 	this->mass = mass;
