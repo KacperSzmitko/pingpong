@@ -31,6 +31,9 @@ void Racket::update() {
 	} else {
 		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
 		velocity = calcVelocityFromVelocityVector(velocityVector);
+		if (velocity != 0.0f) {
+			unitVector = calcUnitVector(velocityVector, velocity);
+		}
 		if (velocity > RACKET_DEFAULT_MAX_VELOCITY) {
 			velocity = RACKET_DEFAULT_MAX_VELOCITY;
 		}
@@ -43,7 +46,7 @@ void Racket::update() {
 	
 
 	//Testy
-	//std::cout << velocityVector.x << " " << velocityVector.y << std::endl;
+	
 }
 
 Racket::~Racket() {}

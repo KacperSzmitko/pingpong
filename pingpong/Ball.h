@@ -12,12 +12,15 @@ class Ball : public UpdateObject, public PhysicalObject, public DrawnObject<sf::
 {
 private:
 	float realRaidus;
-	float crossSectionArea;
 	float drag;
+	float dragK;
+
 	sf::Vector2f acc;
 
+	int start_i;
+
 	void applyGravity();
-	void applyAirResistance(const sf::Vector2f &velocityVector, const float &velocity);
+	void applyAirResistance(const float &velocity, const sf::Vector2f &unitVector);
 	void applyForces();
 	sf::Vector2f calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const sf::Vector2f &acc, const float &time);
 
