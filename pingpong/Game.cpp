@@ -84,12 +84,16 @@ void Game::run() {
 		drawObjects();
 		windowObj.display();
 
+
+		test();
 		frameClock.restart();
+
+
 	}
 }
 
 void Game::test() {
-	std::cout << 1.0f / frameClock.getElapsedTime().asSeconds() << " | " << clock.getElapsedTime().asSeconds() << std::endl;
+	
 }
 
 Game::~Game() {

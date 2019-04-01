@@ -1,14 +1,17 @@
 #include "pch.h"
 #include "Ball.h"
-#include "CountingFunctions.h"
-
 
 Ball::Ball(Physics *physics, float r, float mass, float posX, float posY) :
 	UpdateObject(),
 	DrawnObject(new sf::CircleShape(r)),
 	PhysicalObject(physics, mass, posX, posY) {
 	this->realRaidus = calcRealValue(r);
-	this->dObject->setPosition(posX, posY);
+	this->drag = BALL_DEFAULT_DRAG;
+	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
+	this->acc = { 0.0f, 0.0f };
+	this->dObject->setPosition(swapY({ posX, posY }));
+
+	this->start_i = 0;
 }
 
 Ball::Ball(Physics* physics, float posX, float posY) : 
@@ -16,7 +19,12 @@ Ball::Ball(Physics* physics, float posX, float posY) :
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
 	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY) {
 	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
-	this->dObject->setPosition(posX, posY);
+	this->drag = BALL_DEFAULT_DRAG;
+	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
+	this->acc = { 0.0f, 0.0f };
+	this->dObject->setPosition(swapY({ posX, posY }));
+
+	this->start_i = 0;
 }
 
 Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector) :
@@ -24,22 +32,53 @@ Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
 	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY, velocityVector) {
 	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
-	this->dObject->setPosition(posX, posY);
+	this->drag = BALL_DEFAULT_DRAG;
+	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
+	this->acc = { 0.0f, 0.0f };
+	this->dObject->setPosition(swapY({ posX, posY }));
+
+	this->start_i = 0;
 }
 
-sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const float &time) {
-	return { lastRealPos.x + (((mass*velocityVector.x) / physics->resistance)*(1 - exp((-physics->resistance*time) / mass))),
-		 (lastRealPos.y + (((2.0f * velocityVector.y - physics->grav * elapsedTime) * elapsedTime * 0.5f)))
-			 };
+void Ball::applyGravity() {
+	acc += {0, -physics->grav};
+}
+
+void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {
+	if (v != 0.0f) {
+		acc += dragK * pow(v, 2) * uV;
+	}
+}
+
+void Ball::applyForces() {
+	applyGravity();
+	applyAirResistance(velocity, unitVector);
+}
+
+sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lV, const sf::Vector2f &vV, const sf::Vector2f &acc, const float &t) {
+
+	applyForces();
+	return lV + (((2.0f * vV) + (acc * t)) * t) * 0.5f;
 }
 
 void Ball::update()
 {
 	calcElapsedTime();
-	
-	newRealPos = calcNewRealPos(lastRealPos, velocityVector, elapsedTime);
-	
+	acc = { 0.0f, 0.0f };
+
+	if (start_i >= 5) {
+		newRealPos = calcNewRealPos(lastRealPos, velocityVector, acc, elapsedTime);
+
+		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
+		velocity = calcVelocityFromVelocityVector(velocityVector);
+		unitVector = calcUnitVector(velocityVector, velocity);
+		
+	} else {
+		start_i++;
+	}
+
 	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
+	lastRealPos = newRealPos;
 
 	velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime) - AirAccelerationVector;
 	lastRealPos = newRealPos;

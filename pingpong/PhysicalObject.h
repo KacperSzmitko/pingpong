@@ -6,7 +6,7 @@ class PhysicalObject {
 protected:
 
 	float mass, kineticEnergy, velocity;
-	sf::Vector2f lastRealPos, newRealPos, velocityVector, AirAccelerationVector{0.05,0.05};
+	sf::Vector2f lastRealPos, newRealPos, velocityVector, unitVector;
 	Physics *physics;
 
 	sf::Vector2f calcRealVector(const sf::Vector2f &pixelVector);
@@ -25,6 +25,7 @@ protected:
 
 
 	float calcVelocityFromVelocityVector(const sf::Vector2f &velocityVector);
+	sf::Vector2f calcUnitVector(const sf::Vector2f &velocityVector, const float &velocity);
 	float calcKineticEnergy(const float &mass, const float &velocity);
 
 
