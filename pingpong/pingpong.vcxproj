@@ -165,7 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
-    <ClInclude Include="CountingFunctions.h" />
+    <ClInclude Include="Colision.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="DrawnObject.h" />
     <ClInclude Include="Gameplay.h" />
@@ -173,10 +173,12 @@
     <ClInclude Include="PhysicalObject.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Racket.h" />
+    <ClInclude Include="Table.h" />
     <ClInclude Include="UpdateObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Colision.cpp" />
     <ClCompile Include="DrawnObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameplay.cpp" />
@@ -190,6 +192,7 @@
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="pingpong.cpp" />
     <ClCompile Include="Racket.cpp" />
+    <ClCompile Include="Table.cpp" />
     <ClCompile Include="UpdateObject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

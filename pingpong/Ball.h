@@ -3,9 +3,9 @@
 #include "DrawnObject.h"
 #include "PhysicalObject.h"
 #include "UpdateObject.h"
-#define PI 3.14159265
 
-#define BALL_DEFAULT_PIXEL_RADIUS 4.0f
+
+#define BALL_DEFAULT_PIXEL_RADIUS 3.0f
 #define BALL_DEFAULT_DRAG 0.47f;
 #define BALL_DEFAULT_MASS 0.0025f
 
@@ -15,11 +15,11 @@ private:
 	float realRaidus;
 	float drag;
 	float dragK;
-
+	
 	sf::Vector2f acc;
 
 	int start_i;
-
+	void applyWindVelocity();
 	void applyGravity();
 	void applyAirResistance(const float &velocity, const sf::Vector2f &unitVector);
 	void applyForces();

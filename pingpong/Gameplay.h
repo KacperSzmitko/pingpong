@@ -2,6 +2,8 @@
 
 #include "Racket.h"
 #include "Ball.h"
+#include "Table.h"
+#include "Colision.h"
 
 class Gameplay {
 
@@ -9,6 +11,8 @@ class Gameplay {
 	Racket *player1;
 	//Racket player2;
 	Ball *ball;
+	Table *table;
+
 
 public:
 	Gameplay();

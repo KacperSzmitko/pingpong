@@ -10,7 +10,7 @@ Ball::Ball(Physics *physics, float r, float mass, float posX, float posY) :
 	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
 	this->acc = { 0.0f, 0.0f };
 	this->dObject->setPosition(swapY({ posX, posY }));
-
+	
 	this->start_i = 0;
 }
 
@@ -36,21 +36,30 @@ Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector
 	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
 	this->acc = { 0.0f, 0.0f };
 	this->dObject->setPosition(swapY({ posX, posY }));
+	
 
 	this->start_i = 0;
 }
 
 void Ball::applyGravity() {
+	if(lastRealPos.y !=0)
 	acc += {0, -physics->grav};
 }
 
 void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {
 	if (v != 0.0f) {
-		acc += dragK * pow(v, 2) * uV;
+		acc.x += dragK * pow(v, 2) * uV.x;
+		acc.y += dragK * pow(v, 2) * uV.y;
 	}
 }
 
+void Ball::applyWindVelocity()
+{
+	acc += {-windVelocity, 0};
+}
+
 void Ball::applyForces() {
+	applyWindVelocity();
 	applyGravity();
 	applyAirResistance(velocity, unitVector);
 }
@@ -66,7 +75,7 @@ void Ball::update()
 	calcElapsedTime();
 	acc = { 0.0f, 0.0f };
 
-	if (start_i >= 5) {
+	if (start_i >= 3) {
 		newRealPos = calcNewRealPos(lastRealPos, velocityVector, acc, elapsedTime);
 
 		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
@@ -77,10 +86,34 @@ void Ball::update()
 		start_i++;
 	}
 
-	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
 	lastRealPos = newRealPos;
+	lastPixelPos = calcPixelVector(newRealPos);
+	newPixelPos = lastPixelPos;
+	//std::cout << "x: " << lastPixelPos.x << " y: " << lastPixelPos.y << "\n";
 
-	velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime) - AirAccelerationVector;
-	lastRealPos = newRealPos;
+	
+
+		if (lastPixelPos.x >= 1275.0f)
+		{
+			newPixelPos.x = 3.0f;
+			velocityVector.x *= (-1.0f);
+		}
+		if (lastPixelPos.x <= 3.0f)
+		{
+			newPixelPos.x = 3.0f;
+			velocityVector.x *= (-1.0f);
+		}
+		if (lastPixelPos.y < 3.0f)
+		{
+			newPixelPos.y = 3.0f;
+			velocityVector.y *= (-1.0f);		
+		}
+		
+
+	dObject->setPosition(swapY(newPixelPos));
+	
+	
+
+
 }
 
