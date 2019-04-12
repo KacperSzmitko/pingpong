@@ -1,5 +1,6 @@
 #pragma once
 
+#include "PhysicalObject.h"
 #include "Racket.h"
 #include "Ball.h"
 #include "Table.h"
@@ -12,9 +13,14 @@ class Gameplay {
 	Ball *ball;
 	Table *table;
 
+	std::vector<PhysicalObject*> collisionObjects;
+
 
 public:
 	Gameplay();
+
+	void collisionCheck();
+
 	~Gameplay();
 };
 
