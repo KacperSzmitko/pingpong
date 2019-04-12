@@ -85,7 +85,7 @@ void Game::run() {
 		windowObj.display();
 
 
-		//test();
+		test();
 		frameClock.restart();
 
 
@@ -93,7 +93,7 @@ void Game::run() {
 }
 
 void Game::test() {
-	std::cout << 1.0f / frameClock.getElapsedTime().asSeconds() << " | " << clock.getElapsedTime().asSeconds() << std::endl;
+	
 }
 
 Game::~Game() {
