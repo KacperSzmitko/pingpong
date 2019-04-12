@@ -48,13 +48,14 @@ void Ball::applyGravity() {
 
 void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {
 	if (v != 0.0f) {
-		acc += dragK * pow(v, 2) * uV;
+		acc.x += dragK * pow(v, 2) * uV.x;
+		acc.y += dragK * pow(v, 2) * uV.y;
 	}
 }
 
 void Ball::applyWindVelocity()
 {
-	acc += {physics->wind, 0};
+	acc += {-windVelocity, 0};
 }
 
 void Ball::applyForces() {

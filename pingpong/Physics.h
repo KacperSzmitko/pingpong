@@ -7,9 +7,10 @@
 #define PI 3.141592f
 
 struct Physics {
-	float viscosity, pressure, grav, wind, pixelToRealRatio;
+	float viscosity, pressure, grav, pixelToRealRatio;
+	sf::Vector2f wind;
 
-	Physics(float viscosity, float grav, float wind);
+	Physics(float viscosity, float grav, sf::Vector2f wind);
 	Physics();
 
 
