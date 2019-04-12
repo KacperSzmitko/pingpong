@@ -172,6 +172,7 @@
     <ClInclude Include="PhysicalObject.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Racket.h" />
+    <ClInclude Include="Table.h" />
     <ClInclude Include="UpdateObject.h" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +190,7 @@
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="pingpong.cpp" />
     <ClCompile Include="Racket.cpp" />
+    <ClCompile Include="Table.cpp" />
     <ClCompile Include="UpdateObject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

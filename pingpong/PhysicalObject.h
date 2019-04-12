@@ -5,8 +5,8 @@
 class PhysicalObject {
 protected:
 
-	float mass, kineticEnergy, velocity;
-	sf::Vector2f lastRealPos, newRealPos, velocityVector, unitVector;
+	float mass, kineticEnergy, velocity, windVelocity=0;
+	sf::Vector2f lastRealPos,newPixelPos,lastPixelPos, newRealPos, velocityVector, unitVector;
 	Physics *physics;
 
 	sf::Vector2f calcRealVector(const sf::Vector2f &pixelVector);
@@ -32,6 +32,7 @@ protected:
 public:
 	PhysicalObject(Physics* physics, float mass, float posX, float posY, sf::Vector2f velocityVector);
 	PhysicalObject(Physics* physics, float mass, float posX, float posY);
+
 	virtual ~PhysicalObject();
 };
 
