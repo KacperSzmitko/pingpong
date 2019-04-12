@@ -3,7 +3,6 @@
 #include "DrawnObject.h"
 #include "PhysicalObject.h"
 #include "UpdateObject.h"
-#define PI 3.14159265
 
 #define BALL_DEFAULT_PIXEL_RADIUS 4.0f
 #define BALL_DEFAULT_DRAG 0.47f;
