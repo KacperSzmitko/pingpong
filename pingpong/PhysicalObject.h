@@ -5,8 +5,8 @@
 class PhysicalObject {
 protected:
 
-	float mass, kineticEnergy, velocity;
-	sf::Vector2f lastRealPos, newRealPos, velocityVector;
+	float mass, kineticEnergy, velocity, windVelocity=0;
+	sf::Vector2f lastRealPos,newPixelPos,lastPixelPos, newRealPos, velocityVector, unitVector;
 	Physics *physics;
 
 	sf::Vector2f calcRealVector(const sf::Vector2f &pixelVector);
@@ -15,15 +15,24 @@ protected:
 	float calcRealValue(const float &pixelValue);
 	float calcPixelValue(const float &realValue);
 
+
 	sf::Vector2f swapY(const sf::Vector2f &pos);
 
 	sf::Vector2f calcVelocityVector(const sf::Vector2f &lastRealPos, const sf::Vector2f &newRealPos, const float &t);
+
+
+	sf::Vector2f calcResistanceVector(sf::Vector2f VelocityVector, float resistance);
+
+
 	float calcVelocityFromVelocityVector(const sf::Vector2f &velocityVector);
+	sf::Vector2f calcUnitVector(const sf::Vector2f &velocityVector, const float &velocity);
 	float calcKineticEnergy(const float &mass, const float &velocity);
+
 
 public:
 	PhysicalObject(Physics* physics, float mass, float posX, float posY, sf::Vector2f velocityVector);
 	PhysicalObject(Physics* physics, float mass, float posX, float posY);
+
 	virtual ~PhysicalObject();
 };
 
