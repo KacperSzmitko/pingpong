@@ -11,6 +11,8 @@ PhysicalObject::PhysicalObject(Physics* physics, float mass, float friction, flo
 	this->lastRealPos = newRealPos;
 	this->velocityVector = { 0.0f, 0.0f };
 	this->velocity = 0.0f;
+
+	Game::addCollisionObjectToCollisionVector(this);
 }
 
 //*****PRIVATE*****
@@ -77,4 +79,6 @@ void PhysicalObject::setRealPos(const sf::Vector2f &rP) {
 
 
 
-PhysicalObject::~PhysicalObject() {}
+PhysicalObject::~PhysicalObject() {
+	Game::deleteCollisionObjectFromCollisionVector(this);
+}

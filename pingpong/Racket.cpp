@@ -39,8 +39,14 @@ void Racket::update() {
 
 	
 
-	//Testy
+	
 	
 }
 
-Racket::~Racket() {}
+Racket::~Racket() {
+
+}
+
+void Racket::test() {
+
+}

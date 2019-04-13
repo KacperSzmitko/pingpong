@@ -2,6 +2,7 @@
 #include "Game.h"
 
 sf::RenderWindow Game::windowObj;
+std::vector<PhysicalObject*> Game::collisionVector;
 std::vector<UpdateObject*> Game::updateVector;
 std::vector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
@@ -24,6 +25,19 @@ const sf::RenderWindow &Game::getWindowObj() {
 
 float Game::getTime() {
 	return clock.getElapsedTime().asSeconds();
+}
+
+void Game::addCollisionObjectToCollisionVector(PhysicalObject* obj) {
+	collisionVector.push_back(obj);
+}
+
+void Game::deleteCollisionObjectFromCollisionVector(PhysicalObject* obj) {
+	for (std::vector<PhysicalObject*>::iterator i = collisionVector.begin(); i != collisionVector.end(); i++) {
+		if (*i == obj) {
+			collisionVector.erase(i);
+			break;
+		}
+	}
 }
 
 void Game::addUpdateObjectToUpdateVector(UpdateObject* obj) {
@@ -85,19 +99,20 @@ void Game::run() {
 		windowObj.display();
 
 
-		test();
+		tests();
 		frameClock.restart();
 
 
 	}
 }
 
-void Game::test() {
-	
+void Game::tests() {
+	gameplay->objectsTest();
 }
 
 Game::~Game() {
 	windowObj.close();
+	collisionVector.clear();
 	updateVector.clear();
 	drawVector.clear();
 	delete gameplay;

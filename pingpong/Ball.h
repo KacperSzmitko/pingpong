@@ -31,6 +31,8 @@ public:
 
 	void setPixelSize(const float &pixelRaidus);
 	void update();
+
+	void test();
 	
 
 };

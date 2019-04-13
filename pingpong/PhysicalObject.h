@@ -23,7 +23,7 @@ protected:
 	float calcKineticEnergy(const float &mass, const float &velocity);
 
 public:
-	PhysicalObject(Physics* physics, float mass, float friction, float elasticity, float posX, float posY);
+	PhysicalObject(Physics *physics, float mass, float friction, float elasticity, float posX, float posY);
 
 	void setMass(const float &mass);
 	void setVelocityVector(const sf::Vector2f &velocityVector);

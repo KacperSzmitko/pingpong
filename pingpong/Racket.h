@@ -24,5 +24,7 @@ public:
 	void update();
 
 	~Racket();
+
+	void test();
 };
 

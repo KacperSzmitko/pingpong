@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Ball.h"
 
-Ball::Ball(Physics* physics, float posX, float posY) : 
+Ball::Ball(Physics* physics, float posX, float posY) :
 	UpdateObject(),
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
 	PhysicalObject(physics, BALL_DEFAULT_MASS, BALL_FRICTION, BALL_ELASTICITY, posX, posY) {
@@ -59,7 +59,9 @@ void Ball::update()
 	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
 	lastRealPos = newRealPos;
 
-	//Testy
-	std::cout << "Ball velocity: " << velocity << " | Ball unit vector: [" << unitVector.x << "; " << unitVector.y << "]" << std::endl;
+}
+
+void Ball::test() {
+	std::cout << "Test";
 }
 
