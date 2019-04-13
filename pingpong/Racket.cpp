@@ -2,24 +2,18 @@
 #include "Racket.h"
 #include "Game.h"
 
-Racket::Racket(Physics *physics, float sizeX, float sizeY, float mass, float posX, float posY) :
-	UpdateObject(), 
-	DrawnObject(new sf::RectangleShape({ sizeX, sizeY })),
-	PhysicalObject(physics, mass, posX, posY), windowObj(Game::getWindowObj()) {
-
-	this->dObject->setOrigin({ sizeX / 2.0f, sizeY / 2.0f });
-	this->firstFrame = true;
-}
-
 Racket::Racket(Physics *physics, float posX, float posY) :
 	UpdateObject(),
 	DrawnObject(new sf::RectangleShape({ RACKET_DEFAULT_PIXEL_SIZE_X, RACKET_DEFAULT_PIXEL_SIZE_Y })),
-	PhysicalObject(physics, posX, posY, RACKET_DEFAULT_MASS), windowObj(Game::getWindowObj()) {
+	PhysicalObject(physics, mass, RACKET_FRICTION, RACKET_ELASTICITY, posX, posY), windowObj(Game::getWindowObj()) {
 
 	this->dObject->setOrigin({ RACKET_DEFAULT_PIXEL_SIZE_X / 2.0f, RACKET_DEFAULT_PIXEL_SIZE_Y / 2.0f });
 	this->firstFrame = true;
 }
 
+void Racket::setPixelSize(const float &sizeX, const float &sizeY) {
+	dObject->setSize({ sizeX, sizeY });
+}
 
 void Racket::update() {
 	calcElapsedTime();

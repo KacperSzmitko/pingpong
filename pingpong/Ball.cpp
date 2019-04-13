@@ -1,36 +1,10 @@
 #include "pch.h"
 #include "Ball.h"
 
-Ball::Ball(Physics *physics, float r, float mass, float posX, float posY) :
-	UpdateObject(),
-	DrawnObject(new sf::CircleShape(r)),
-	PhysicalObject(physics, mass, posX, posY) {
-	this->realRaidus = calcRealValue(r);
-	this->drag = BALL_DEFAULT_DRAG;
-	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
-	this->acc = { 0.0f, 0.0f };
-	this->dObject->setPosition(swapY({ posX, posY }));
-
-	this->start_i = 0;
-}
-
 Ball::Ball(Physics* physics, float posX, float posY) : 
 	UpdateObject(),
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
-	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY) {
-	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
-	this->drag = BALL_DEFAULT_DRAG;
-	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
-	this->acc = { 0.0f, 0.0f };
-	this->dObject->setPosition(swapY({ posX, posY }));
-
-	this->start_i = 0;
-}
-
-Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector) :
-	UpdateObject(),
-	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
-	PhysicalObject(physics, BALL_DEFAULT_MASS, posX, posY, velocityVector) {
+	PhysicalObject(physics, BALL_DEFAULT_MASS, BALL_FRICTION, BALL_ELASTICITY, posX, posY) {
 	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
 	this->drag = BALL_DEFAULT_DRAG;
 	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
@@ -61,12 +35,17 @@ sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lV, const sf::Vector2f &vV
 	return lV + (((2.0f * vV) + (acc * t)) * t) * 0.5f;
 }
 
+void Ball::setPixelSize(const float &pR) {
+	dObject->setRadius(pR);
+	realRaidus = calcRealValue(pR);
+}
+
 void Ball::update()
 {
 	calcElapsedTime();
 	acc = { 0.0f, 0.0f };
 
-	if (start_i >= 5) {
+	if (start_i >= 3) {
 		newRealPos = calcNewRealPos(lastRealPos, velocityVector, acc, elapsedTime);
 
 		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);

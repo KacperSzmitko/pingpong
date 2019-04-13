@@ -5,7 +5,7 @@
 class PhysicalObject {
 protected:
 
-	float mass, kineticEnergy, velocity;
+	float mass, friction, elasticity, kineticEnergy, velocity;
 	sf::Vector2f lastRealPos, newRealPos, velocityVector, unitVector;
 	Physics *physics;
 
@@ -23,8 +23,12 @@ protected:
 	float calcKineticEnergy(const float &mass, const float &velocity);
 
 public:
-	PhysicalObject(Physics* physics, float mass, float posX, float posY, sf::Vector2f velocityVector);
-	PhysicalObject(Physics* physics, float mass, float posX, float posY);
+	PhysicalObject(Physics* physics, float mass, float friction, float elasticity, float posX, float posY);
+
+	void setMass(const float &mass);
+	void setVelocityVector(const sf::Vector2f &velocityVector);
+	void setRealPos(const sf::Vector2f &realPos);
+
 	virtual ~PhysicalObject();
 };
 

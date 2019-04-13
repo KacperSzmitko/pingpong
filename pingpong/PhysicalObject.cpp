@@ -2,28 +2,18 @@
 #include "Game.h"
 #include "PhysicalObject.h"
 
-PhysicalObject::PhysicalObject(Physics* physics, float mass, float posX, float posY, sf::Vector2f velocityVector) {
+PhysicalObject::PhysicalObject(Physics* physics, float mass, float friction, float elasticity, float posX, float posY) {
 	this->physics = physics;
 	this->mass = mass;
-	this->newRealPos = calcRealVector(sf::Vector2f(posX, posY));
-	this->lastRealPos = newRealPos;
-	this->velocityVector = velocityVector;
-	this->velocity = calcVelocityFromVelocityVector(this->velocityVector);
-	this->kineticEnergy = calcKineticEnergy(this->mass, this->velocity);
-
-	if (velocity != 0.0f) {
-		this->unitVector = this->velocityVector / this->velocity;
-	}
-}
-
-PhysicalObject::PhysicalObject(Physics* physics, float mass, float posX, float posY) {
-	this->physics = physics;
-	this->mass = mass;
+	this->friction = friction;
+	this->elasticity = elasticity;
 	this->newRealPos = calcRealVector(sf::Vector2f(posX, posY));
 	this->lastRealPos = newRealPos;
 	this->velocityVector = { 0.0f, 0.0f };
 	this->velocity = 0.0f;
 }
+
+//*****PRIVATE*****
 
 sf::Vector2f PhysicalObject::calcRealVector(const sf::Vector2f &pixelVector) {
 	float ptrr = physics->pixelToRealRatio;
@@ -68,5 +58,23 @@ sf::Vector2f PhysicalObject::calcUnitVector(const sf::Vector2f &velocityVector, 
 float PhysicalObject::calcKineticEnergy(const float &mass, const float &velocity) {
 	return (mass * (velocity * velocity)) / 2.0f;
 }
+
+//*****PUBLIC*****
+
+void PhysicalObject::setMass(const float &m) {
+	mass = m;
+}
+
+void PhysicalObject::setVelocityVector(const sf::Vector2f &vV) {
+	velocityVector = vV;
+	velocity = calcVelocityFromVelocityVector(velocityVector);
+}
+
+void PhysicalObject::setRealPos(const sf::Vector2f &rP) {
+	newRealPos = rP;
+	lastRealPos = newRealPos;
+}
+
+
 
 PhysicalObject::~PhysicalObject() {}
