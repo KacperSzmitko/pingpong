@@ -63,9 +63,6 @@
     <ClInclude Include="Table.h">
       <Filter>Pliki nagłówkowe\gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="Colision.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -100,9 +97,6 @@
     </ClCompile>
     <ClCompile Include="Table.cpp">
       <Filter>Pliki źródłowe\gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="Colision.cpp">
-      <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

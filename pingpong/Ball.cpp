@@ -41,8 +41,17 @@ Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector
 	this->start_i = 0;
 }
 
+
+void Ball::ColisinWithGround()
+{
+	;
+}
+
+
+
+
 void Ball::applyGravity() {
-	if(lastRealPos.y !=0)
+	
 	acc += {0, -physics->grav};
 }
 
@@ -55,7 +64,8 @@ void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {
 
 void Ball::applyWindVelocity()
 {
-	acc += {-windVelocity, 0};
+	
+	acc += {-physics->Windvelocity, 0};
 }
 
 void Ball::applyForces() {
@@ -74,6 +84,7 @@ void Ball::update()
 {
 	calcElapsedTime();
 	acc = { 0.0f, 0.0f };
+	applyForces();
 
 	if (start_i >= 3) {
 		newRealPos = calcNewRealPos(lastRealPos, velocityVector, acc, elapsedTime);
@@ -89,26 +100,26 @@ void Ball::update()
 	lastRealPos = newRealPos;
 	lastPixelPos = calcPixelVector(newRealPos);
 	newPixelPos = lastPixelPos;
-	//std::cout << "x: " << lastPixelPos.x << " y: " << lastPixelPos.y << "\n";
+	if (lastPixelPos.x >= 1275.0f)
+	{
+		newPixelPos.x = dObject->getRadius();
+		velocityVector.x *= (-1.0f);
+	}
+	if (lastPixelPos.x <=  dObject->getRadius())
+	{
+		newPixelPos.x =  dObject->getRadius();
+		velocityVector.x *= (-1.0f);
+	}
+	if (lastPixelPos.y <=  dObject->getRadius())
+	{
+		newPixelPos.y =  2*dObject->getRadius();
+		velocityVector.y = velocityVector.y *(-1.0f);
 
-	
-
-		if (lastPixelPos.x >= 1275.0f)
-		{
-			newPixelPos.x = 3.0f;
-			velocityVector.x *= (-1.0f);
-		}
-		if (lastPixelPos.x <= 3.0f)
-		{
-			newPixelPos.x = 3.0f;
-			velocityVector.x *= (-1.0f);
-		}
-		if (lastPixelPos.y < 3.0f)
-		{
-			newPixelPos.y = 3.0f;
-			velocityVector.y *= (-1.0f);		
-		}
-		
+	}
+	newPixelPos.x = abs(newPixelPos.x);
+	newPixelPos.y = abs(newPixelPos.y);
+	std::cout << "x: " << lastPixelPos.x << "\n";
+	std::cout << "y: " << lastPixelPos.y << "\n";
 
 	dObject->setPosition(swapY(newPixelPos));
 	
