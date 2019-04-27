@@ -9,6 +9,13 @@ protected:
 	sf::Vector2f lastRealPos, newRealPos, velocityVector, unitVector;
 	Physics *physics;
 
+	struct CollisionData {
+		float friction, elasticity, kineticEnergy, velocity;
+		sf::Vector2f lastRealPos, newRealPos, velocityVector, unitVector;
+	};
+
+	CollisionData collisionData;
+
 	sf::Vector2f calcRealVector(const sf::Vector2f &pixelVector);
 	sf::Vector2f calcRealVector(const sf::Vector2i &pixelVector);
 	sf::Vector2f calcPixelVector(const sf::Vector2f &realVector);
@@ -28,6 +35,10 @@ public:
 	void setMass(const float &mass);
 	void setVelocityVector(const sf::Vector2f &velocityVector);
 	void setRealPos(const sf::Vector2f &realPos);
+	
+	CollisionData *getCollisionData();
+
+	
 
 	virtual ~PhysicalObject();
 };

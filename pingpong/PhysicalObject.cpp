@@ -77,6 +77,19 @@ void PhysicalObject::setRealPos(const sf::Vector2f &rP) {
 	lastRealPos = newRealPos;
 }
 
+PhysicalObject::CollisionData *PhysicalObject::getCollisionData() {
+	collisionData.elasticity = elasticity;
+	collisionData.friction = friction;
+	collisionData.kineticEnergy = kineticEnergy;
+	collisionData.lastRealPos = lastRealPos;
+	collisionData.newRealPos = newRealPos;
+	collisionData.unitVector = unitVector;
+	collisionData.velocity = velocity;
+	collisionData.velocityVector = velocityVector;
+
+	return &collisionData;
+}
+
 
 
 PhysicalObject::~PhysicalObject() {

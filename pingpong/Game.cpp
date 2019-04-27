@@ -27,6 +27,10 @@ float Game::getTime() {
 	return clock.getElapsedTime().asSeconds();
 }
 
+const std::vector<PhysicalObject*>* Game::getCollisionVector() {
+	return &collisionVector;
+}
+
 void Game::addCollisionObjectToCollisionVector(PhysicalObject* obj) {
 	collisionVector.push_back(obj);
 }
@@ -95,6 +99,7 @@ void Game::run() {
 		windowObj.clear();
 		manageWindowEvents();
 		updateObjects();
+		if (gameplay != nullptr) gameplay->checkCollisions();
 		drawObjects();
 		windowObj.display();
 

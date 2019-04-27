@@ -40,6 +40,13 @@ void Ball::setPixelSize(const float &pR) {
 	realRaidus = calcRealValue(pR);
 }
 
+void Ball::checkCollision(CollisionData *cD) {
+	float distance = sqrt(pow(cD->newRealPos.x - this->newRealPos.x, 2) + pow(cD->newRealPos.y - this->newRealPos.y, 2));
+	if (distance < 0.5f) {
+		std::cout << "Blisko";
+	}
+}
+
 void Ball::update()
 {
 	calcElapsedTime();
@@ -62,6 +69,6 @@ void Ball::update()
 }
 
 void Ball::test() {
-	std::cout << "Test";
+	
 }
 

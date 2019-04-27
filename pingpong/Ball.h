@@ -10,8 +10,7 @@
 #define BALL_FRICTION 1.0f
 #define BALL_ELASTICITY 1.0f
 
-class Ball : public UpdateObject, public PhysicalObject, public DrawnObject<sf::CircleShape>
-{
+class Ball : public UpdateObject, public PhysicalObject, public DrawnObject<sf::CircleShape> {
 private:
 	float realRaidus;
 	float drag;
@@ -30,6 +29,7 @@ public:
 	Ball(Physics* physics, float posX, float posY);
 
 	void setPixelSize(const float &pixelRaidus);
+	void checkCollision(CollisionData *collisionData);
 	void update();
 
 	void test();

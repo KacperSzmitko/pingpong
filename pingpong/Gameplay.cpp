@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Gameplay.h"
+#include "Game.h"
 
 Gameplay::Gameplay() {
 	this->ball = new Ball(&physics, 100.0f, 100.0f);
@@ -7,6 +8,15 @@ Gameplay::Gameplay() {
 
 	this->ball->setVelocityVector({ 3.0f, 3.0f });
 
+}
+
+void Gameplay::checkCollisions() {
+
+	for (PhysicalObject *obj : *Game::getCollisionVector()) {
+		if (obj != ball) {
+			ball->checkCollision(obj->getCollisionData());
+		}
+	}
 }
 
 Gameplay::~Gameplay() {

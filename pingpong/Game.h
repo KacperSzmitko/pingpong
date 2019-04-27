@@ -24,6 +24,7 @@ public:
 
 	const static sf::RenderWindow &getWindowObj();
 	static float getTime();
+	static const std::vector<PhysicalObject*>* getCollisionVector();
 	static void addCollisionObjectToCollisionVector(PhysicalObject* obj);
 	static void deleteCollisionObjectFromCollisionVector(PhysicalObject* obj);
 	static void addUpdateObjectToUpdateVector(UpdateObject* obj);
