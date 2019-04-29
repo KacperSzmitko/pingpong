@@ -51,8 +51,6 @@ void Racket::update() {
 	
 	
 
-
-	
 }
 
 Racket::~Racket() {
