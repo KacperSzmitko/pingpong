@@ -19,6 +19,16 @@ void Gameplay::checkCollisions() {
 	}
 }
 
+void Gameplay::pause() {
+	ball->pause();
+	player1->pause();
+}
+
+void Gameplay::unpause() {
+	ball->unpause();
+	player1->unpause();
+}
+
 Gameplay::~Gameplay() {
 	delete player1;
 	delete ball;

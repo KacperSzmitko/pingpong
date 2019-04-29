@@ -92,6 +92,8 @@ PhysicalObject::CollisionData *PhysicalObject::getCollisionData() {
 
 
 
+
+
 PhysicalObject::~PhysicalObject() {
 	Game::deleteCollisionObjectFromCollisionVector(this);
 }

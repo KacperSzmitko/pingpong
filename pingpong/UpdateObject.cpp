@@ -4,7 +4,8 @@
 
 UpdateObject::UpdateObject() {
 	sendUpdateObject();
-	lastTime = Game::getTime();
+	this->lastTime = Game::getTime();
+	this->_pause = false;
 }
 
 void UpdateObject::calcElapsedTime() {
@@ -20,7 +21,12 @@ void UpdateObject::deleteUpdateObject() {
 	Game::deleteUpdateObjectFromUpdateVector(this);
 }
 
-
+void UpdateObject::pause() {
+	_pause = true;
+}
+void UpdateObject::unpause() {
+	_pause = false;
+}
 
 UpdateObject::~UpdateObject() {
 	deleteUpdateObject();

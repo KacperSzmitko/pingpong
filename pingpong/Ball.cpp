@@ -10,8 +10,6 @@ Ball::Ball(Physics* physics, float posX, float posY) :
 	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
 	this->acc = { 0.0f, 0.0f };
 	this->dObject->setPosition(swapY({ posX, posY }));
-
-	this->start_i = 0;
 }
 
 void Ball::applyGravity() {
@@ -41,30 +39,25 @@ void Ball::setPixelSize(const float &pR) {
 }
 
 void Ball::checkCollision(CollisionData *cD) {
-	float distance = sqrt(pow(cD->newRealPos.x - this->newRealPos.x, 2) + pow(cD->newRealPos.y - this->newRealPos.y, 2));
-	if (distance < 0.5f) {
-		std::cout << "Blisko";
-	}
+	
 }
 
 void Ball::update()
 {
 	calcElapsedTime();
 	acc = { 0.0f, 0.0f };
+	
+	if (!_pause) {
 
-	if (start_i >= 3) {
 		newRealPos = calcNewRealPos(lastRealPos, velocityVector, acc, elapsedTime);
 
 		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		unitVector = calcUnitVector(velocityVector, velocity);
-		
-	} else {
-		start_i++;
-	}
 
-	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
-	lastRealPos = newRealPos;
+		dObject->setPosition(swapY(calcPixelVector(newRealPos)));
+		lastRealPos = newRealPos;
+	}
 
 }
 

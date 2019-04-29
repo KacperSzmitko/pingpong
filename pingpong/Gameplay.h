@@ -16,6 +16,9 @@ public:
 
 	void checkCollisions();
 
+	void pause();
+	void unpause();
+
 	~Gameplay();
 
 	void objectsTest();

@@ -38,6 +38,8 @@ public:
 	
 	CollisionData *getCollisionData();
 
+
+
 	
 
 	virtual ~PhysicalObject();

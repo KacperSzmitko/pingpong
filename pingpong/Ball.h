@@ -18,8 +18,6 @@ private:
 
 	sf::Vector2f acc;
 
-	int start_i;
-
 	void applyGravity();
 	void applyAirResistance(const float &velocity, const sf::Vector2f &unitVector);
 	void applyForces();
