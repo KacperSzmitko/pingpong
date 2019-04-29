@@ -21,6 +21,7 @@ public:
 	Racket(Physics *physics, float posX, float posY);
 
 	void setPixelSize(const float &sizeX, const float &sizeY);
+	void rotation();
 	void update();
 
 	~Racket();

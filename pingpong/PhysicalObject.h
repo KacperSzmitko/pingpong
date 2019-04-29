@@ -5,7 +5,7 @@
 class PhysicalObject {
 protected:
 
-	float mass, friction, elasticity, kineticEnergy, velocity;
+	float mass, friction, elasticity, kineticEnergy, velocity, angle;
 	sf::Vector2f lastRealPos, newRealPos, velocityVector, unitVector;
 	Physics *physics;
 

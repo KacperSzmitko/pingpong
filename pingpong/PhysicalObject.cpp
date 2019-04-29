@@ -11,6 +11,7 @@ PhysicalObject::PhysicalObject(Physics* physics, float mass, float friction, flo
 	this->lastRealPos = newRealPos;
 	this->velocityVector = { 0.0f, 0.0f };
 	this->velocity = 0.0f;
+	this->angle = 0.0f;
 
 	Game::addCollisionObjectToCollisionVector(this);
 }

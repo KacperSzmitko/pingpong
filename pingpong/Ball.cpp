@@ -49,6 +49,7 @@ void Ball::update()
 	
 	if (!_pause) {
 
+		lastRealPos = newRealPos;
 		newRealPos = calcNewRealPos(lastRealPos, velocityVector, acc, elapsedTime);
 
 		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
@@ -56,7 +57,6 @@ void Ball::update()
 		unitVector = calcUnitVector(velocityVector, velocity);
 
 		dObject->setPosition(swapY(calcPixelVector(newRealPos)));
-		lastRealPos = newRealPos;
 	}
 
 }
