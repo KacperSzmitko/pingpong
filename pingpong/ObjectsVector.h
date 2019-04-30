@@ -7,6 +7,7 @@ private:
 public:
 	void _add(T object);
 	void _delete(T object);
+	void forEach(std::function<void(T &object)> _function);
 	std::vector<T>& get();
 	~ObjectsVector();
 };

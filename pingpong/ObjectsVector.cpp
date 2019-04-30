@@ -16,14 +16,18 @@ template <typename T> void ObjectsVector<T>::_delete(T obj) {
 	}
 }
 
-template <typename T> ObjectsVector<T>::~ObjectsVector() {
-	for (T obj : vec) {
-		delete obj;
-	}
+template <typename T> void ObjectsVector<T>::forEach(std::function<void(T &obj)> f) {
+	std::for_each(vec.begin(), vec.end(), f);
 }
 
 template <typename T> std::vector<T>& ObjectsVector<T>::get() {
 	return vec;
+}
+
+template <typename T> ObjectsVector<T>::~ObjectsVector() {
+	forEach([](T &obj) {
+		delete obj;
+	});
 }
 
 template class ObjectsVector<PhysicalObject*>;

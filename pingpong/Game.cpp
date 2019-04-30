@@ -52,15 +52,15 @@ void Game::manageWindowEvents() {
 }
 
 void Game::updateObjects() {
-	for (UpdateObject* obj : updateVector.get()) {
+	updateVector.forEach([](UpdateObject* &obj) {
 		obj->update();
-	}
+	});
 }
 
 void Game::drawObjects() {
-	for (sf::Drawable* o : drawVector.get()) {
-		windowObj.draw(*o);
-	}
+	drawVector.forEach([](sf::Drawable* &obj) {
+		windowObj.draw(*obj);
+	});
 }
 
 void Game::run() {

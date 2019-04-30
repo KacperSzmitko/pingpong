@@ -11,12 +11,11 @@ Gameplay::Gameplay() {
 }
 
 void Gameplay::checkCollisions() {
-
-	for (PhysicalObject *obj : Game::getCollisionVector()->get()) {
+	Game::getCollisionVector()->forEach([this](PhysicalObject* &obj){
 		if (obj != ball) {
 			ball->checkCollision(obj->getCollisionData());
 		}
-	}
+	});
 }
 
 void Gameplay::pause() {
