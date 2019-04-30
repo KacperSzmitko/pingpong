@@ -7,10 +7,10 @@ template <typename T> DrawnObject<T>::DrawnObject(T* obj) : dObject(obj) {
 }
 
 template <typename T> void DrawnObject<T>::sendDrawObject() {
-	Game::addDrawableObjectToDrawVector(dObject);
+	Game::getDrawVector()->_add(dObject);
 }
 template <typename T> void DrawnObject<T>::deleteDrawObject() {
-	Game::deleteDrawableObjectFromDrawVector(dObject);
+	Game::getDrawVector()->_delete(dObject);
 }
 
 template <typename T> DrawnObject<T>::~DrawnObject() {

@@ -12,7 +12,7 @@ Gameplay::Gameplay() {
 
 void Gameplay::checkCollisions() {
 
-	for (PhysicalObject *obj : *Game::getCollisionVector()) {
+	for (PhysicalObject *obj : Game::getCollisionVector()->get()) {
 		if (obj != ball) {
 			ball->checkCollision(obj->getCollisionData());
 		}

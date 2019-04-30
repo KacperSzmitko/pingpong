@@ -60,6 +60,9 @@
     <ClInclude Include="Gameplay.h">
       <Filter>Pliki nagłówkowe\gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectsVector.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -90,6 +93,9 @@
       <Filter>Pliki źródłowe\gameplay</Filter>
     </ClCompile>
     <ClCompile Include="DrawnObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsVector.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>

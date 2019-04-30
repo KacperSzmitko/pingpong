@@ -13,7 +13,7 @@ PhysicalObject::PhysicalObject(Physics* physics, float mass, float friction, flo
 	this->velocity = 0.0f;
 	this->angle = 0.0f;
 
-	Game::addCollisionObjectToCollisionVector(this);
+	Game::getCollisionVector()->_add(this);
 }
 
 //*****PRIVATE*****
@@ -93,8 +93,6 @@ PhysicalObject::CollisionData *PhysicalObject::getCollisionData() {
 
 
 
-
-
 PhysicalObject::~PhysicalObject() {
-	Game::deleteCollisionObjectFromCollisionVector(this);
+	Game::getCollisionVector()->_delete(this);
 }

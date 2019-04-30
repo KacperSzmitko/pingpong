@@ -2,9 +2,9 @@
 #include "Game.h"
 
 sf::RenderWindow Game::windowObj;
-std::vector<PhysicalObject*> Game::collisionVector;
-std::vector<UpdateObject*> Game::updateVector;
-std::vector<sf::Drawable*> Game::drawVector;
+ObjectsVector<PhysicalObject*> Game::collisionVector;
+ObjectsVector<UpdateObject*> Game::updateVector;
+ObjectsVector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
 Gameplay *Game::gameplay;
@@ -27,47 +27,16 @@ float Game::getTime() {
 	return clock.getElapsedTime().asSeconds();
 }
 
-const std::vector<PhysicalObject*>* Game::getCollisionVector() {
+ObjectsVector<PhysicalObject*>* Game::getCollisionVector() {
 	return &collisionVector;
 }
 
-void Game::addCollisionObjectToCollisionVector(PhysicalObject* obj) {
-	collisionVector.push_back(obj);
+ObjectsVector<UpdateObject*>* Game::getUpdateVector() {
+	return &updateVector;
 }
 
-void Game::deleteCollisionObjectFromCollisionVector(PhysicalObject* obj) {
-	for (std::vector<PhysicalObject*>::iterator i = collisionVector.begin(); i != collisionVector.end(); i++) {
-		if (*i == obj) {
-			collisionVector.erase(i);
-			break;
-		}
-	}
-}
-
-void Game::addUpdateObjectToUpdateVector(UpdateObject* obj) {
-	updateVector.push_back(obj);
-}
-
-void Game::deleteUpdateObjectFromUpdateVector(UpdateObject* obj) {
-	for (std::vector<UpdateObject*>::iterator i = updateVector.begin(); i != updateVector.end(); i++) {
-		if (*i == obj) {
-			updateVector.erase(i);
-			break;
-		}
-	}
-}
-
-void Game::addDrawableObjectToDrawVector(sf::Drawable* obj) {
-	drawVector.push_back(obj);
-}
-
-void Game::deleteDrawableObjectFromDrawVector(sf::Drawable* obj) {
-	for (std::vector<sf::Drawable*>::iterator i = drawVector.begin(); i != drawVector.end(); i++) {
-		if (*i == obj) {
-			drawVector.erase(i);
-			break;
-		}
-	}
+ObjectsVector<sf::Drawable*>* Game::getDrawVector() {
+	return &drawVector;
 }
 
 void Game::startGameplay() {
@@ -83,13 +52,13 @@ void Game::manageWindowEvents() {
 }
 
 void Game::updateObjects() {
-	for (UpdateObject* obj : updateVector) {
+	for (UpdateObject* obj : updateVector.get()) {
 		obj->update();
 	}
 }
 
 void Game::drawObjects() {
-	for (sf::Drawable* o : drawVector) {
+	for (sf::Drawable* o : drawVector.get()) {
 		windowObj.draw(*o);
 	}
 }
@@ -117,8 +86,5 @@ void Game::tests() {
 
 Game::~Game() {
 	windowObj.close();
-	collisionVector.clear();
-	updateVector.clear();
-	drawVector.clear();
 	delete gameplay;
 }
