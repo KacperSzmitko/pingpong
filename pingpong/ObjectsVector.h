@@ -1,4 +1,6 @@
 #pragma once
+
+//Jako typename mozna uzyc: PhysicalObject*, UpdateObject*, sf::Drawable*
 template <typename T> class ObjectsVector {
 private:
 	std::vector<T> vec;

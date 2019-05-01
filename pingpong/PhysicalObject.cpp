@@ -23,7 +23,7 @@ sf::Vector2f PhysicalObject::calcRealVector(const sf::Vector2f &pixelVector) {
 	return { pixelVector.x * ptrr, pixelVector.y * ptrr };
 }
 
-//Przeci¹¿enie, aby dzia³a³o te¿ dla wektorów intowych
+//Przeciazenie, aby dzia³a³o tez dla wektorow intowych
 sf::Vector2f PhysicalObject::calcRealVector(const sf::Vector2i &pixelVector) {
 	float ptrr = physics->pixelToRealRatio;
 	return { (float)pixelVector.x * ptrr, (float)pixelVector.y * ptrr };
