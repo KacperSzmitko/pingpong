@@ -165,21 +165,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="DrawnObject.h" />
     <ClInclude Include="Gameplay.h" />
+    <ClInclude Include="MovingObject.h" />
     <ClInclude Include="ObjectsVector.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicalObject.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Racket.h" />
+    <ClInclude Include="Rect.h" />
     <ClInclude Include="UpdateObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DrawnObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameplay.cpp" />
+    <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="ObjectsVector.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -191,6 +196,7 @@
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="pingpong.cpp" />
     <ClCompile Include="Racket.cpp" />
+    <ClCompile Include="Rect.cpp" />
     <ClCompile Include="UpdateObject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

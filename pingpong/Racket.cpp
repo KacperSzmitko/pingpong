@@ -2,17 +2,11 @@
 #include "Racket.h"
 #include "Game.h"
 
-Racket::Racket(Physics *physics, float posX, float posY) :
-	UpdateObject(),
-	DrawnObject(new sf::RectangleShape({ RACKET_DEFAULT_PIXEL_SIZE_X, RACKET_DEFAULT_PIXEL_SIZE_Y })),
-	PhysicalObject(physics, mass, RACKET_FRICTION, RACKET_ELASTICITY, posX, posY), windowObj(Game::getWindowObj()) {
-
-	this->dObject->setOrigin({ RACKET_DEFAULT_PIXEL_SIZE_X / 2.0f, RACKET_DEFAULT_PIXEL_SIZE_Y / 2.0f });
+Racket::Racket(float posX, float posY) : 
+	MovingObject(RACKET_DEFAULT_MASS), 
+	Rect(RACKET_DEFAULT_PIXEL_SIZE_X, RACKET_DEFAULT_PIXEL_SIZE_Y, 0.0f, RACKET_FRICTION, RACKET_ELASTICITY, posX, posY),
+	windowObj(Game::getWindowObj()) {
 	this->firstFrame = true;
-}
-
-void Racket::setPixelSize(const float &sizeX, const float &sizeY) {
-	dObject->setSize({ sizeX, sizeY });
 }
 
 void Racket::rotation() {
@@ -29,13 +23,13 @@ void Racket::rotation() {
 void Racket::update() {
 	calcElapsedTime();
 
-	lastRealPos = newRealPos;
-	newRealPos = swapY(calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
+	oldRealPos = realPos;
+	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
 
 	if (firstFrame) {
 		firstFrame = false;
 	} else {
-		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
+		velocityVector = calcVelocityVector(oldRealPos, realPos, elapsedTime);
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		if (velocity != 0.0f) {
 			unitVector = calcUnitVector(velocityVector, velocity);
@@ -46,7 +40,7 @@ void Racket::update() {
 		kineticEnergy = calcKineticEnergy(mass, velocity);
 	}
 
-	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
+	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 	rotation();
 	
 	

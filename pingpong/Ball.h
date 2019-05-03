@@ -2,7 +2,8 @@
 
 #include "DrawnObject.h"
 #include "PhysicalObject.h"
-#include "UpdateObject.h"
+#include "MovingObject.h"
+#include "Physics.h"
 
 #define BALL_DEFAULT_PIXEL_RADIUS 4.0f
 #define BALL_DEFAULT_DRAG 0.47f;
@@ -10,8 +11,12 @@
 #define BALL_FRICTION 1.0f
 #define BALL_ELASTICITY 1.0f
 
-class Ball : public UpdateObject, public PhysicalObject, public DrawnObject<sf::CircleShape> {
+class Ball : public PhysicalObject, public MovingObject, public DrawnObject<sf::CircleShape> {
+	
+	friend class Collision;
+
 private:
+	Physics *physics;
 	float realRaidus;
 	float drag;
 	float dragK;
@@ -27,7 +32,6 @@ public:
 	Ball(Physics* physics, float posX, float posY);
 
 	void setPixelSize(const float &pixelRaidus);
-	void checkCollision(CollisionData *collisionData);
 	void update();
 
 	void test();

@@ -63,6 +63,15 @@
     <ClInclude Include="ObjectsVector.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingObject.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -97,6 +106,15 @@
     </ClCompile>
     <ClCompile Include="ObjectsVector.cpp">
       <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingObject.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,15 +1,16 @@
 #include "pch.h"
 #include "Ball.h"
 
-Ball::Ball(Physics* physics, float posX, float posY) :
-	UpdateObject(),
+Ball::Ball(Physics* physics, float posX, float posY) : 
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
-	PhysicalObject(physics, BALL_DEFAULT_MASS, BALL_FRICTION, BALL_ELASTICITY, posX, posY) {
-	this->realRaidus = calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
+	PhysicalObject(BALL_FRICTION, BALL_ELASTICITY, posX, posY),
+	MovingObject(BALL_DEFAULT_MASS) {
+	this->physics = physics;
+	this->realRaidus = Physics::calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
 	this->drag = BALL_DEFAULT_DRAG;
 	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
 	this->acc = { 0.0f, 0.0f };
-	this->dObject->setPosition(swapY({ posX, posY }));
+	this->dObject->setPosition(Physics::swapY({ posX, posY }));
 }
 
 void Ball::applyGravity() {
@@ -35,11 +36,7 @@ sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lV, const sf::Vector2f &vV
 
 void Ball::setPixelSize(const float &pR) {
 	dObject->setRadius(pR);
-	realRaidus = calcRealValue(pR);
-}
-
-void Ball::checkCollision(CollisionData *cD) {
-	
+	realRaidus = Physics::calcRealValue(pR);
 }
 
 void Ball::update()
@@ -49,14 +46,14 @@ void Ball::update()
 	
 	if (!_pause) {
 
-		lastRealPos = newRealPos;
-		newRealPos = calcNewRealPos(lastRealPos, velocityVector, acc, elapsedTime);
+		oldRealPos = realPos;
+		realPos = calcNewRealPos(oldRealPos, velocityVector, acc, elapsedTime);
 
-		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
+		velocityVector = calcVelocityVector(oldRealPos, realPos, elapsedTime);
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		unitVector = calcUnitVector(velocityVector, velocity);
 
-		dObject->setPosition(swapY(calcPixelVector(newRealPos)));
+		dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 	}
 
 }

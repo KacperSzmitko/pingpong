@@ -2,7 +2,6 @@
 #include "Game.h"
 
 sf::RenderWindow Game::windowObj;
-ObjectsVector<PhysicalObject*> Game::collisionVector;
 ObjectsVector<UpdateObject*> Game::updateVector;
 ObjectsVector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
@@ -27,16 +26,12 @@ float Game::getTime() {
 	return clock.getElapsedTime().asSeconds();
 }
 
-ObjectsVector<PhysicalObject*>* Game::getCollisionVector() {
-	return &collisionVector;
+ObjectsVector<UpdateObject*> &Game::getUpdateVector() {
+	return updateVector;
 }
 
-ObjectsVector<UpdateObject*>* Game::getUpdateVector() {
-	return &updateVector;
-}
-
-ObjectsVector<sf::Drawable*>* Game::getDrawVector() {
-	return &drawVector;
+ObjectsVector<sf::Drawable*> &Game::getDrawVector() {
+	return drawVector;
 }
 
 void Game::startGameplay() {

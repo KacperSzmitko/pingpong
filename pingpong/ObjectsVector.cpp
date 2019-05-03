@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "ObjectsVector.h"
-#include "PhysicalObject.h"
+#include "Rect.h"
 #include "UpdateObject.h"
 
 template <typename T> void ObjectsVector<T>::_add(T obj) {
@@ -14,6 +14,13 @@ template <typename T> void ObjectsVector<T>::_delete(T obj) {
 			break;
 		}
 	}
+}
+
+template <typename T> void ObjectsVector<T>::clear() {
+	forEach([](T &obj) {
+		delete obj;
+	});
+	vec.clear();
 }
 
 template <typename T> void ObjectsVector<T>::forEach(std::function<void(T &obj)> f) {
@@ -30,6 +37,6 @@ template <typename T> ObjectsVector<T>::~ObjectsVector() {
 	});
 }
 
-template class ObjectsVector<PhysicalObject*>;
+template class ObjectsVector<Rect*>;
 template class ObjectsVector<UpdateObject*>;
 template class ObjectsVector<sf::Drawable*>;

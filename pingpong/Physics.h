@@ -7,7 +7,8 @@
 #define PI 3.141592f
 
 struct Physics {
-	float viscosity, pressure, grav, wind, pixelToRealRatio;
+	float viscosity, pressure, grav, wind;
+	static const float pixelToRealRatio;
 
 	Physics(float viscosity, float grav, float wind);
 	Physics();
@@ -16,4 +17,11 @@ struct Physics {
 	void setPressure(const float &pressure);
 	void setGrav(const float &grav);
 	void setWind(const float &win);
+
+	static sf::Vector2f calcRealVector(const sf::Vector2f &pixelVector);
+	static sf::Vector2f calcRealVector(const sf::Vector2i &pixelVector);
+	static sf::Vector2f calcPixelVector(const sf::Vector2f &realVector);
+	static float calcRealValue(const float &pixelValue);
+	static float calcPixelValue(const float &realValue);
+	static sf::Vector2f swapY(const sf::Vector2f &pos);
 };

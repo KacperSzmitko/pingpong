@@ -2,15 +2,16 @@
 #include "DrawnObject.h"
 #include "Game.h"
 
-template <typename T> DrawnObject<T>::DrawnObject(T* obj) : dObject(obj) {
+template <typename T> DrawnObject<T>::DrawnObject(T* obj) {
+	this->dObject = obj;
 	sendDrawObject();
 }
 
 template <typename T> void DrawnObject<T>::sendDrawObject() {
-	Game::getDrawVector()->_add(dObject);
+	Game::getDrawVector()._add(dObject);
 }
 template <typename T> void DrawnObject<T>::deleteDrawObject() {
-	Game::getDrawVector()->_delete(dObject);
+	Game::getDrawVector()._delete(dObject);
 }
 
 template <typename T> DrawnObject<T>::~DrawnObject() {

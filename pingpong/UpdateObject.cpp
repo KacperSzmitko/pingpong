@@ -14,11 +14,11 @@ void UpdateObject::calcElapsedTime() {
 }
 
 void UpdateObject::sendUpdateObject() {
-	Game::getUpdateVector()->_add(this);
+	Game::getUpdateVector()._add(this);
 }
 
 void UpdateObject::deleteUpdateObject() {
-	Game::getUpdateVector()->_delete(this);
+	Game::getUpdateVector()._delete(this);
 }
 
 void UpdateObject::pause() {
