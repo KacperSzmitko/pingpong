@@ -51,7 +51,7 @@ void Ball::ColisinWithGround()
 
 
 void Ball::applyGravity() {
-	
+	if(lastPixelPos.y!=0)
 	acc += {0, -physics->grav};
 }
 
@@ -104,22 +104,29 @@ void Ball::update()
 	{
 		newPixelPos.x = dObject->getRadius();
 		velocityVector.x *= (-1.0f);
+		newRealPos = calcNewRealPos(newRealPos, velocityVector, acc, elapsedTime);
 	}
 	if (lastPixelPos.x <=  dObject->getRadius())
 	{
 		newPixelPos.x =  dObject->getRadius();
 		velocityVector.x *= (-1.0f);
+		newRealPos = calcNewRealPos(newRealPos, velocityVector, acc, elapsedTime);
 	}
 	if (lastPixelPos.y <=  dObject->getRadius())
 	{
 		newPixelPos.y =  2*dObject->getRadius();
 		velocityVector.y = velocityVector.y *(-1.0f);
+		if (velocityVector.y < 0) velocityVector.y = abs(velocityVector.y);
+		newRealPos = calcNewRealPos(newRealPos, velocityVector, acc, elapsedTime);
 
 	}
 	newPixelPos.x = abs(newPixelPos.x);
 	newPixelPos.y = abs(newPixelPos.y);
 	std::cout << "x: " << lastPixelPos.x << "\n";
 	std::cout << "y: " << lastPixelPos.y << "\n";
+
+	
+	newPixelPos = calcPixelVector(newRealPos);
 
 	dObject->setPosition(swapY(newPixelPos));
 	
