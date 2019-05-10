@@ -9,6 +9,7 @@ Gameplay::Gameplay() {
 	this->player1 = new Racket(100.0f, 100.0f);
 
 	this->ball->setVelocityVector({ 3.0f, 3.0f });
+	this->wall = new Wall(500, 50, 0, Physics::Materials::wood, 500, 100);
 
 
 }

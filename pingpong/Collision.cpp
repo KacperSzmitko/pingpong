@@ -44,7 +44,7 @@ unsigned short Collision::ballRectCheck(Ball *ball, Rect *rect) {
 	sf::Vector2f vSE = EP - SP;
 	sf::Vector2f vBS = BP - SP;
 
-	float lineLenghtPow = vSE.x * vSE.y + vSE.y * vSE.y;
+	float lineLenghtPow = vSE.x * vSE.x + vSE.y * vSE.y;
 
 	float t = std::max(0.0f, std::min(lineLenghtPow, vSE.x * vBS.x + vSE.y * vBS.y)) / lineLenghtPow;
 
@@ -62,6 +62,7 @@ unsigned short Collision::ballRectCheck(Ball *ball, Rect *rect) {
 	if (distance <= ball->pixelRaidus + rect->pixelRadius) {
 		if (t == 0 || t == 1) return 2;
 		return 1;
+		
 	} else {
 		return 0;
 	}

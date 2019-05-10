@@ -12,8 +12,10 @@ Rect::Rect(float pixelSizeX, float pixelSizeY, float angle, Physics::Material ma
 	this->angle = angle;
 	this->dObject->setRotation(angle);
 	this->dObject->setPosition(Physics::swapY({ pixelPosX, pixelPosY }));
-	this->localSP = { pixelSizeX / 2.0f, 0.0f };
-	this->localEP = { pixelSizeX / 2.0f, pixelSizeY };
+	if (pixelSizeX <= pixelSizeY) this->localSP = { pixelSizeX / 2.0f, 0.0f };
+	else this->localSP = { 0.0f, pixelSizeY / 2.0f };
+	if (pixelSizeX <= pixelSizeY) this->localEP = { pixelSizeX / 2.0f, pixelSizeY };
+	else this->localEP = { pixelSizeX, pixelSizeY / 2.0f };
 	if (pixelSizeX <= pixelSizeY) this->pixelRadius = pixelSizeX / 2.0f;
 	else this->pixelRadius = pixelSizeY / 2.0f;
 }
