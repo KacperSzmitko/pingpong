@@ -12,8 +12,8 @@ Racket::Racket(float posX, float posY) :
 }
 
 void Racket::rotation() {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= 0.625f;
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += 0.625f;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= 0.0625f;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += 0.0625f;
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) angle = 0.0f;
 	
 	if (angle >= 180.0f) angle -= 180.0f;

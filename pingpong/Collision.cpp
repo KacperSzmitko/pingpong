@@ -35,7 +35,7 @@ void Collision::checkCollisions() {
 	});
 }
 
-bool Collision::ballRectCheck(Ball *ball, Rect *rect) {
+unsigned short Collision::ballRectCheck(Ball *ball, Rect *rect) {
 	sf::Vector2f BP = ball->dObject->getPosition();
 	sf::Transform trans = rect->dObject->getTransform();
 	sf::Vector2f EP = trans * rect->localEP;
@@ -60,21 +60,23 @@ bool Collision::ballRectCheck(Ball *ball, Rect *rect) {
 	//TEST
 
 	if (distance <= ball->pixelRaidus + rect->pixelRadius) {
-		std::cout << "Kolizja" << std::endl; //TEST
-		return true;
+		if (t == 0 || t == 1) return 2;
+		return 1;
 	} else {
-		return false;
+		return 0;
 	}
 }
 
 void Collision::ballWallCol(Ball *ball, Wall *wall) {
-	if (!ballRectCheck(ball, wall)) return;
-	//TUTAJ
+	unsigned short side = ballRectCheck(ball, wall);
+	if (side == 0) return;
+	//Tutaj
 
 }
 
 void Collision::ballRacketCol(Ball *ball, Racket *racket) {
-	if (!ballRectCheck(ball, racket)) return;
+	unsigned short side = ballRectCheck(ball, racket);
+	if (side == 0) return;
 	//TUTAJ
 }
 

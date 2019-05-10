@@ -11,7 +11,7 @@ private:
 	static ObjectsVector<Racket*> rackets;
 	static ObjectsVector<Ball*> balls;
 
-	bool ballRectCheck(Ball *ball, Rect *rect);
+	unsigned short ballRectCheck(Ball *ball, Rect *rect);
 	void ballWallCol(Ball *ball, Wall *wall);
 	void ballRacketCol(Ball *ball, Racket *racket);
 
