@@ -44,7 +44,29 @@ Ball::Ball(Physics *physics, float posX, float posY, sf::Vector2f velocityVector
 
 void Ball::ColisinWithGround()
 {
-	;
+	if (lastPixelPos.x >= 1275.0f)
+	{
+		newPixelPos.x = dObject->getRadius();
+		velocityVector.x *= (-1.0f);
+		velocityVector.y = velocityVector.y*0.8;
+		newRealPos = calcNewRealPos(newRealPos, velocityVector, acc, elapsedTime);
+	}
+	if (lastPixelPos.x <= dObject->getRadius())
+	{
+		newPixelPos.x = dObject->getRadius();
+		velocityVector.x *= (-1.0f);
+		velocityVector.y = velocityVector.y*0.8;
+		newRealPos = calcNewRealPos(newRealPos, velocityVector, acc, elapsedTime);
+	}
+	if (lastPixelPos.y <= dObject->getRadius())
+	{
+		newPixelPos.y = 2 * dObject->getRadius();
+		velocityVector.y = velocityVector.y *(-1.0f);
+		velocityVector.y = velocityVector.y*0.8;
+		if (velocityVector.y < 0) velocityVector.y = abs(velocityVector.y);
+		newRealPos = calcNewRealPos(newRealPos, velocityVector, acc, elapsedTime);
+
+	}
 }
 
 
@@ -100,34 +122,13 @@ void Ball::update()
 	lastRealPos = newRealPos;
 	lastPixelPos = calcPixelVector(newRealPos);
 	newPixelPos = lastPixelPos;
-	if (lastPixelPos.x >= 1275.0f)
-	{
-		newPixelPos.x = dObject->getRadius();
-		velocityVector.x *= (-1.0f);
-		newRealPos = calcNewRealPos(newRealPos, velocityVector, acc, elapsedTime);
-	}
-	if (lastPixelPos.x <=  dObject->getRadius())
-	{
-		newPixelPos.x =  dObject->getRadius();
-		velocityVector.x *= (-1.0f);
-		newRealPos = calcNewRealPos(newRealPos, velocityVector, acc, elapsedTime);
-	}
-	if (lastPixelPos.y <=  dObject->getRadius())
-	{
-		newPixelPos.y =  2*dObject->getRadius();
-		velocityVector.y = velocityVector.y *(-1.0f);
-		if (velocityVector.y < 0) velocityVector.y = abs(velocityVector.y);
-		newRealPos = calcNewRealPos(newRealPos, velocityVector, acc, elapsedTime);
 
-	}
-	newPixelPos.x = abs(newPixelPos.x);
-	newPixelPos.y = abs(newPixelPos.y);
-	std::cout << "x: " << lastPixelPos.x << "\n";
-	std::cout << "y: " << lastPixelPos.y << "\n";
+	ColisinWithGround();
+	
+
 
 	
 	newPixelPos = calcPixelVector(newRealPos);
-
 	dObject->setPosition(swapY(newPixelPos));
 	
 	
