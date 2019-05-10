@@ -18,10 +18,11 @@ private:
 	float pixelRaidus, realRaidus;
 	float drag;
 	float dragK;
-
+	bool isballmove;
 	sf::Vector2f acc;
 
 	void applyGravity();
+	void applyWind();
 	void applyAirResistance(const float &velocity, const sf::Vector2f &unitVector);
 	void applyForces();
 	sf::Vector2f calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const sf::Vector2f &acc, const float &time);

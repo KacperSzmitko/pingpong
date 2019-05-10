@@ -13,7 +13,7 @@ class Gameplay {
 private:
 
 	Physics physics;
-
+	Wall *wallL,*wallR,*wallD;
 	Racket *player1;
 	//Racket player2;
 	Ball *ball;

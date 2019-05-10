@@ -14,12 +14,17 @@ Ball::Ball(Physics* physics, float posX, float posY) :
 	this->acc = { 0.0f, 0.0f };
 	this->dObject->setOrigin(BALL_DEFAULT_PIXEL_RADIUS, BALL_DEFAULT_PIXEL_RADIUS);
 	this->dObject->setPosition(Physics::swapY({ posX, posY }));
-
+	isballmove = true;
 	Collision::getBallCollisionVector()._add(this);
 }
-
+   
 void Ball::applyGravity() {
 	acc += {0, -physics->grav};
+}
+
+void Ball::applyWind()
+{
+	acc += {-physics->wind, 0};
 }
 
 void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {
@@ -30,12 +35,13 @@ void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {
 
 void Ball::applyForces() {
 	applyGravity();
+	applyWind();
 	applyAirResistance(velocity, unitVector);
 }
 
 sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lV, const sf::Vector2f &vV, const sf::Vector2f &acc, const float &t) {
 
-	applyForces();
+	if(isballmove)applyForces();
 	return lV + (((2.0f * vV) + (acc * t)) * t) * 0.5f;
 }
 
@@ -50,15 +56,21 @@ void Ball::update()
 	acc = { 0.0f, 0.0f };
 	
 	if (!_pause) {
-
+		if (isballmove)
+		{
+			std::cout << oldRealPos.x << "\n";
 		oldRealPos = realPos;
 		realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
-
-		velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
-		velocity = calcVelocityFromVelocityVector(velocityVector);
-		unitVector = calcUnitVector(velocityVector, velocity);
-
-		dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
+		
+		
+			velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
+			
+			velocity = calcVelocityFromVelocityVector(velocityVector);
+			unitVector = calcUnitVector(velocityVector, velocity);
+			
+			dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
+		}
+		//std::cout << dObject->getPosition().x << " " << dObject->getPosition().y << "\n";
 	}
 
 }

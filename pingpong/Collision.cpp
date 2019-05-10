@@ -44,7 +44,7 @@ unsigned short Collision::ballRectCheck(Ball *ball, Rect *rect) {
 	sf::Vector2f vSE = EP - SP;
 	sf::Vector2f vBS = BP - SP;
 
-	float lineLenghtPow = vSE.x * vSE.y + vSE.y * vSE.y;
+	float lineLenghtPow = vSE.x * vSE.x + vSE.y * vSE.y;
 
 	float t = std::max(0.0f, std::min(lineLenghtPow, vSE.x * vBS.x + vSE.y * vBS.y)) / lineLenghtPow;
 
@@ -70,13 +70,36 @@ unsigned short Collision::ballRectCheck(Ball *ball, Rect *rect) {
 void Collision::ballWallCol(Ball *ball, Wall *wall) {
 	unsigned short side = ballRectCheck(ball, wall);
 	if (side == 0) return;
-	//Tutaj
-
+	else
+	{
+		ball->dObject->setPosition(300, -300);
+		ball->velocityVector = { 0,0 };
+		ball->realPos = { ball->physics->calcRealValue(ball->dObject->getPosition().x),
+			-ball->physics->calcRealValue(ball->dObject->getPosition().y) };
+		ball->isballmove = false;
+	}
 }
 
 void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 	unsigned short side = ballRectCheck(ball, racket);
 	if (side == 0) return;
+	else if(side==1)
+	{
+		if (!ball->isballmove)
+		{
+			ball->isballmove = true;
+			ball->velocityVector = racket->velocityVector;
+		}
+		else
+		{
+			ball->velocityVector -= racket->velocityVector;
+		}
+	}
+	else if (side == 2)
+	{
+		ball->velocityVector.y *= (-1);
+		
+	}
 	//TUTAJ
 }
 

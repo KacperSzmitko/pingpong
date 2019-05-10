@@ -14,7 +14,7 @@ Physics::Physics(float viscosity, float grav, float wind) {
 };
 
 Physics::Physics() {
-	this->friction = PHYSICS_DEFAULT_FRICTION;
+	
 	this->viscosity = PHYSICS_DEFAULT_VISCOSITY;
 	this->grav = PHYSICS_DEFAULT_GRAV;
 	this->wind = 0.0f;
