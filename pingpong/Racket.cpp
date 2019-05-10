@@ -4,9 +4,11 @@
 
 Racket::Racket(float posX, float posY) : 
 	MovingObject(RACKET_DEFAULT_MASS), 
-	Rect(RACKET_DEFAULT_PIXEL_SIZE_X, RACKET_DEFAULT_PIXEL_SIZE_Y, 0.0f, RACKET_FRICTION, RACKET_ELASTICITY, posX, posY),
+	Rect(RACKET_DEFAULT_PIXEL_SIZE_X, RACKET_DEFAULT_PIXEL_SIZE_Y, 0.0f, Physics::Materials::racket, posX, posY),
 	windowObj(Game::getWindowObj()) {
 	this->firstFrame = true;
+
+	Collision::getRacketCollisionVector()._add(this);
 }
 
 void Racket::rotation() {
@@ -21,7 +23,7 @@ void Racket::rotation() {
 }
 
 void Racket::update() {
-	calcElapsedTime();
+	getSimTime();
 
 	oldRealPos = realPos;
 	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
@@ -29,7 +31,7 @@ void Racket::update() {
 	if (firstFrame) {
 		firstFrame = false;
 	} else {
-		velocityVector = calcVelocityVector(oldRealPos, realPos, elapsedTime);
+		velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		if (velocity != 0.0f) {
 			unitVector = calcUnitVector(velocityVector, velocity);
@@ -48,9 +50,9 @@ void Racket::update() {
 }
 
 Racket::~Racket() {
-
+	Collision::getRacketCollisionVector()._delete(this);
 }
 
 void Racket::test() {
-	std::cout << angle << std::endl;
+	
 }

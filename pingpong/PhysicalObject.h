@@ -1,12 +1,14 @@
 #pragma once
 
-class PhysicalObject {
-protected:
+#include "Physics.h"
 
-	float friction, elasticity;
+class PhysicalObject {
+
+protected:
+	Physics::Material material;
 	sf::Vector2f realPos;
 
 public:
-	PhysicalObject(float friction, float elasticity, float pixelPosX, float pixelPosY);
+	PhysicalObject(Physics::Material material, float pixelPosX, float pixelPosY);
 };
 

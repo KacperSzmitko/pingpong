@@ -7,6 +7,10 @@ ObjectsVector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
 Gameplay *Game::gameplay;
+const int Game::simPerFrame = 10;
+float Game::lastTime = 0.0f;
+float Game::elapsedTime = Game::getTime();
+float Game::simTime = Game::elapsedTime / (float)Game::simPerFrame;
 
 Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : 
 	view({ (float)xSize / 2.0f, (float)ySize / -2.0f }, { (float)xSize, (float)ySize }) {
@@ -18,12 +22,22 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 	this->windowObj.setView(view);
 }
 
-const sf::RenderWindow &Game::getWindowObj() {
+sf::RenderWindow &Game::getWindowObj() {
 	return windowObj;
 }
 
 float Game::getTime() {
 	return clock.getElapsedTime().asSeconds();
+}
+
+void Game::calcSimTime() {
+	elapsedTime = Game::getTime() - lastTime;
+	lastTime = Game::getTime();
+	simTime = elapsedTime / (float)simPerFrame;
+}
+
+float Game::getSimTime() {
+	return simTime;
 }
 
 ObjectsVector<UpdateObject*> &Game::getUpdateVector() {
@@ -62,8 +76,11 @@ void Game::run() {
 	while (windowObj.isOpen()) {
 		windowObj.clear();
 		manageWindowEvents();
-		updateObjects();
-		if (gameplay != nullptr) gameplay->checkCollisions();
+		calcSimTime();
+		for (int i = 0; i < simPerFrame; i++) {
+			updateObjects();
+			if (gameplay != nullptr) gameplay->checkCollisions();
+		}
 		drawObjects();
 		windowObj.display();
 

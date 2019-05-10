@@ -31,6 +31,12 @@
     <Filter Include="Pliki źródłowe\test">
       <UniqueIdentifier>{5aece0b5-1e76-4139-9a62-7d6522f11acb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\gameplay\Objects">
+      <UniqueIdentifier>{8d839775-d16a-4c08-aa3c-777142ea325f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\gameplay\Objects">
+      <UniqueIdentifier>{b1b2932a-9f73-4d0f-b5ae-1b5305d96795}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -39,12 +45,6 @@
     <ClInclude Include="Game.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Racket.h">
-      <Filter>Pliki nagłówkowe\gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicalObject.h">
-      <Filter>Pliki nagłówkowe\gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="UpdateObject.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
@@ -52,9 +52,6 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Physics.h">
-      <Filter>Pliki nagłówkowe\gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="Ball.h">
       <Filter>Pliki nagłówkowe\gameplay</Filter>
     </ClInclude>
     <ClInclude Include="Gameplay.h">
@@ -66,11 +63,26 @@
     <ClInclude Include="Collision.h">
       <Filter>Pliki nagłówkowe\gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
     <ClInclude Include="MovingObject.h">
-      <Filter>Pliki nagłówkowe\gameplay</Filter>
+      <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalObject.h">
+      <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Racket.h">
+      <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Rect.h">
-      <Filter>Pliki nagłówkowe\gameplay</Filter>
+      <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,17 +95,8 @@
     <ClCompile Include="Game.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Racket.cpp">
-      <Filter>Pliki źródłowe\gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicalObject.cpp">
-      <Filter>Pliki źródłowe\gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="UpdateObject.cpp">
       <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>Pliki źródłowe\gameplay</Filter>
     </ClCompile>
     <ClCompile Include="Physics.cpp">
       <Filter>Pliki źródłowe\gameplay</Filter>
@@ -110,11 +113,23 @@
     <ClCompile Include="Collision.cpp">
       <Filter>Pliki źródłowe\gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Pliki źródłowe\gameplay\Objects</Filter>
+    </ClCompile>
     <ClCompile Include="MovingObject.cpp">
-      <Filter>Pliki źródłowe\gameplay</Filter>
+      <Filter>Pliki źródłowe\gameplay\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalObject.cpp">
+      <Filter>Pliki źródłowe\gameplay\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Rect.cpp">
-      <Filter>Pliki źródłowe\gameplay</Filter>
+      <Filter>Pliki źródłowe\gameplay\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Pliki źródłowe\gameplay\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Racket.cpp">
+      <Filter>Pliki źródłowe\gameplay\Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

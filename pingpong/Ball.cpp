@@ -1,16 +1,21 @@
 #include "pch.h"
 #include "Ball.h"
+#include "Game.h"
 
 Ball::Ball(Physics* physics, float posX, float posY) : 
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
-	PhysicalObject(BALL_FRICTION, BALL_ELASTICITY, posX, posY),
+	PhysicalObject(Physics::Materials::wood, posX, posY),
 	MovingObject(BALL_DEFAULT_MASS) {
 	this->physics = physics;
+	this->pixelRaidus = BALL_DEFAULT_PIXEL_RADIUS;
 	this->realRaidus = Physics::calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
 	this->drag = BALL_DEFAULT_DRAG;
 	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
 	this->acc = { 0.0f, 0.0f };
+	this->dObject->setOrigin(BALL_DEFAULT_PIXEL_RADIUS, BALL_DEFAULT_PIXEL_RADIUS);
 	this->dObject->setPosition(Physics::swapY({ posX, posY }));
+
+	Collision::getBallCollisionVector()._add(this);
 }
 
 void Ball::applyGravity() {
@@ -41,21 +46,25 @@ void Ball::setPixelSize(const float &pR) {
 
 void Ball::update()
 {
-	calcElapsedTime();
+	getSimTime();
 	acc = { 0.0f, 0.0f };
 	
 	if (!_pause) {
 
 		oldRealPos = realPos;
-		realPos = calcNewRealPos(oldRealPos, velocityVector, acc, elapsedTime);
+		realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
 
-		velocityVector = calcVelocityVector(oldRealPos, realPos, elapsedTime);
+		velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		unitVector = calcUnitVector(velocityVector, velocity);
 
 		dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 	}
 
+}
+
+Ball::~Ball() {
+	Collision::getBallCollisionVector()._delete(this);
 }
 
 void Ball::test() {

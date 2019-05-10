@@ -4,13 +4,11 @@
 
 UpdateObject::UpdateObject() {
 	sendUpdateObject();
-	this->lastTime = Game::getTime();
 	this->_pause = false;
 }
 
-void UpdateObject::calcElapsedTime() {
-	elapsedTime = Game::getTime() - lastTime;
-	lastTime = Game::getTime();
+void UpdateObject::getSimTime() {
+	simTime = Game::getSimTime();
 }
 
 void UpdateObject::sendUpdateObject() {

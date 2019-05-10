@@ -2,11 +2,10 @@
 
 class UpdateObject {
 protected:
-	float lastTime;
-	float elapsedTime;
+	float simTime;
 	bool _pause;
 
-	void calcElapsedTime();
+	void getSimTime();
 
 public:
 	UpdateObject();

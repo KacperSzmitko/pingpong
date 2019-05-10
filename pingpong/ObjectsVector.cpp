@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "ObjectsVector.h"
-#include "Rect.h"
+#include "Wall.h"
+#include "Racket.h"
+#include "Ball.h"
 #include "UpdateObject.h"
 
 template <typename T> void ObjectsVector<T>::_add(T obj) {
@@ -37,6 +39,8 @@ template <typename T> ObjectsVector<T>::~ObjectsVector() {
 	});
 }
 
-template class ObjectsVector<Rect*>;
+template class ObjectsVector<Racket*>;
+template class ObjectsVector<Ball*>;
+template class ObjectsVector<Wall*>;
 template class ObjectsVector<UpdateObject*>;
 template class ObjectsVector<sf::Drawable*>;

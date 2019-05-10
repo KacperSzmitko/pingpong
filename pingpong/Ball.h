@@ -8,8 +8,6 @@
 #define BALL_DEFAULT_PIXEL_RADIUS 4.0f
 #define BALL_DEFAULT_DRAG 0.47f;
 #define BALL_DEFAULT_MASS 0.0025f
-#define BALL_FRICTION 1.0f
-#define BALL_ELASTICITY 1.0f
 
 class Ball : public PhysicalObject, public MovingObject, public DrawnObject<sf::CircleShape> {
 	
@@ -17,7 +15,7 @@ class Ball : public PhysicalObject, public MovingObject, public DrawnObject<sf::
 
 private:
 	Physics *physics;
-	float realRaidus;
+	float pixelRaidus, realRaidus;
 	float drag;
 	float dragK;
 
@@ -33,6 +31,8 @@ public:
 
 	void setPixelSize(const float &pixelRaidus);
 	void update();
+
+	~Ball();
 
 	void test();
 	

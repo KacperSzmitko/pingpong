@@ -2,23 +2,19 @@
 #include "Gameplay.h"
 #include "Game.h"
 
-ObjectsVector<Rect*> Gameplay::rectCollisionVector;
+Collision Gameplay::collision;
 
 Gameplay::Gameplay() {
 	this->ball = new Ball(&physics, 100.0f, 100.0f);
 	this->player1 = new Racket(100.0f, 100.0f);
-	
 
 	this->ball->setVelocityVector({ 3.0f, 3.0f });
 
-}
 
-ObjectsVector<Rect*> &Gameplay::getRectCollisionVector() {
-	return rectCollisionVector;
 }
 
 void Gameplay::checkCollisions() {
-	
+	collision.checkCollisions();
 }
 
 void Gameplay::pause() {
@@ -34,7 +30,6 @@ void Gameplay::unpause() {
 Gameplay::~Gameplay() {
 	delete player1;
 	delete ball;
-	rectCollisionVector.clear();
 }
 
 void Gameplay::objectsTest() {

@@ -3,6 +3,10 @@
 
 const float Physics::pixelToRealRatio = PHYSICS_DEFAULT_PIXEL_TO_REAL_RATIO;
 
+const Physics::Material Physics::Materials::wood = { 1.0f, 1.0f };
+const Physics::Material Physics::Materials::ball = { 1.0f, 1.0f };
+const Physics::Material Physics::Materials::racket = { 1.0f, 1.0f };
+
 Physics::Physics(float viscosity, float grav, float wind) {
 	this->viscosity = viscosity;
 	this->grav = grav;
@@ -57,4 +61,8 @@ float Physics::calcPixelValue(const float &realValue) {
 
 sf::Vector2f Physics::swapY(const sf::Vector2f &pos) {
 	return { pos.x, -pos.y };
+}
+
+float Physics::calcDistanceBetweenTwoPoints(const sf::Vector2f &v1, const sf::Vector2f &v2) {
+	return sqrt(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2));
 }

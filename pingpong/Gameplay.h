@@ -7,10 +7,12 @@
 #include "ObjectsVector.h"
 
 class Gameplay {
+
+	friend class Collision;
+
 private:
 
 	Physics physics;
-	Collision collision;
 
 	Racket *player1;
 	//Racket player2;
@@ -18,12 +20,11 @@ private:
 
 	Rect *table;
 
-	static ObjectsVector<Rect*> rectCollisionVector;
 
 public:
 	Gameplay();
 
-	ObjectsVector<Rect*>& getRectCollisionVector();
+	static Collision collision;
 
 	void checkCollisions();
 
