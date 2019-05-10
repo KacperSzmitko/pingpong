@@ -2,34 +2,36 @@
 #include "Racket.h"
 #include "Game.h"
 
-Racket::Racket(Physics *physics, float sizeX, float sizeY, float mass, float posX, float posY) :
-	UpdateObject(), 
-	DrawnObject(new sf::RectangleShape({ sizeX, sizeY })),
-	PhysicalObject(physics, mass, posX, posY), windowObj(Game::getWindowObj()) {
-
-	this->dObject->setOrigin({ sizeX / 2.0f, sizeY / 2.0f });
+Racket::Racket(float posX, float posY) : 
+	MovingObject(RACKET_DEFAULT_MASS), 
+	Rect(RACKET_DEFAULT_PIXEL_SIZE_X, RACKET_DEFAULT_PIXEL_SIZE_Y, 0.0f, Physics::Materials::racket, posX, posY),
+	windowObj(Game::getWindowObj()) {
 	this->firstFrame = true;
+
+	Collision::getRacketCollisionVector()._add(this);
 }
 
-Racket::Racket(Physics *physics, float posX, float posY) :
-	UpdateObject(),
-	DrawnObject(new sf::RectangleShape({ RACKET_DEFAULT_PIXEL_SIZE_X, RACKET_DEFAULT_PIXEL_SIZE_Y })),
-	PhysicalObject(physics, posX, posY, RACKET_DEFAULT_MASS), windowObj(Game::getWindowObj()) {
+void Racket::rotation() {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= 0.0625f;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += 0.0625f;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) angle = 0.0f;
+	
+	if (angle >= 180.0f) angle -= 180.0f;
+	if (angle <= -180.0f) angle += 180.0f;
 
-	this->dObject->setOrigin({ RACKET_DEFAULT_PIXEL_SIZE_X / 2.0f, RACKET_DEFAULT_PIXEL_SIZE_Y / 2.0f });
-	this->firstFrame = true;
+	dObject->setRotation(angle);
 }
-
 
 void Racket::update() {
-	calcElapsedTime();
+	getSimTime();
 
-	newRealPos = swapY(calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
+	oldRealPos = realPos;
+	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
 
 	if (firstFrame) {
 		firstFrame = false;
 	} else {
-		velocityVector = calcVelocityVector(lastRealPos, newRealPos, elapsedTime);
+		velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		if (velocity != 0.0f) {
 			unitVector = calcUnitVector(velocityVector, velocity);
@@ -40,13 +42,17 @@ void Racket::update() {
 		kineticEnergy = calcKineticEnergy(mass, velocity);
 	}
 
-	dObject->setPosition(swapY(calcPixelVector(newRealPos)));
-	lastRealPos = newRealPos;
-
+	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
+	rotation();
+	
 	
 
-	//Testy
-	
 }
 
-Racket::~Racket() {}
+Racket::~Racket() {
+	Collision::getRacketCollisionVector()._delete(this);
+}
+
+void Racket::test() {
+	
+}

@@ -2,10 +2,10 @@
 
 class UpdateObject {
 protected:
-	float lastTime;
-	float elapsedTime;
+	float simTime;
+	bool _pause;
 
-	void calcElapsedTime();
+	void getSimTime();
 
 public:
 	UpdateObject();
@@ -13,6 +13,9 @@ public:
 	virtual void update() = 0;
 	virtual void sendUpdateObject();
 	virtual void deleteUpdateObject();
+
+	void pause();
+	void unpause();
 
 	virtual ~UpdateObject();
 };

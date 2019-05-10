@@ -1,21 +1,38 @@
 #pragma once
 
+#include "Collision.h"
+#include "Rect.h"
 #include "Racket.h"
 #include "Ball.h"
-#include "Table.h"
-#include "Colision.h"
+#include "ObjectsVector.h"
 
 class Gameplay {
 
-	Physics *physics;
+	friend class Collision;
+
+private:
+
+	Physics physics;
+
 	Racket *player1;
 	//Racket player2;
 	Ball *ball;
-	Table *table;
+
+	Rect *table;
 
 
 public:
 	Gameplay();
+
+	static Collision collision;
+
+	void checkCollisions();
+
+	void pause();
+	void unpause();
+
 	~Gameplay();
+
+	void objectsTest();
 };
 

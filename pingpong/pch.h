@@ -9,6 +9,8 @@
 #include <memory>
 #include <vector>
 #include <iterator>
+#include <functional>
+#include <algorithm>
 
 #include <iostream>
 

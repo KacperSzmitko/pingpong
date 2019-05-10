@@ -4,23 +4,27 @@
 
 UpdateObject::UpdateObject() {
 	sendUpdateObject();
-	lastTime = Game::getTime();
+	this->_pause = false;
 }
 
-void UpdateObject::calcElapsedTime() {
-	elapsedTime = Game::getTime() - lastTime;
-	lastTime = Game::getTime();
+void UpdateObject::getSimTime() {
+	simTime = Game::getSimTime();
 }
 
 void UpdateObject::sendUpdateObject() {
-	Game::addUpdateObjectToUpdateVector(this);
+	Game::getUpdateVector()._add(this);
 }
 
 void UpdateObject::deleteUpdateObject() {
-	Game::deleteUpdateObjectFromUpdateVector(this);
+	Game::getUpdateVector()._delete(this);
 }
 
-
+void UpdateObject::pause() {
+	_pause = true;
+}
+void UpdateObject::unpause() {
+	_pause = false;
+}
 
 UpdateObject::~UpdateObject() {
 	deleteUpdateObject();

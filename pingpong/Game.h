@@ -1,6 +1,6 @@
 #pragma once
 
-#include "UpdateObject.h"
+#include "ObjectsVector.h"
 #include "Gameplay.h"
 
 class Game {
@@ -9,29 +9,35 @@ private:
 	static sf::RenderWindow windowObj;
 	static sf::Clock clock;
 	static sf::Clock frameClock;
-	static std::vector<UpdateObject*> updateVector;
-	static std::vector<sf::Drawable*> drawVector;
-	static Gameplay *gameplay;
+	static ObjectsVector<UpdateObject*> updateVector;
+	static ObjectsVector<sf::Drawable*> drawVector;
+	
+	static const int simPerFrame;
+	static float lastTime;
+	static float elapsedTime;
+	static float simTime;
 
 	sf::View view;
 	sf::Event _event;
+
+	static void calcSimTime();
 
 public:
 
 	Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);
 
-	const static sf::RenderWindow &getWindowObj();
+	static Gameplay *gameplay;
+	static sf::RenderWindow &getWindowObj();
 	static float getTime();
-	static void addUpdateObjectToUpdateVector(UpdateObject* obj);
-	static void deleteUpdateObjectFromUpdateVector(UpdateObject* obj);
-	static void addDrawableObjectToDrawVector(sf::Drawable* obj);
-	static void deleteDrawableObjectFromDrawVector(sf::Drawable* obj);
+	static float getSimTime();
+	static ObjectsVector<UpdateObject*>& getUpdateVector();
+	static ObjectsVector<sf::Drawable*>& getDrawVector();
 	static void startGameplay();
 	void manageWindowEvents();
 	void updateObjects();
 	void drawObjects();
 	void run();
-	void test();
+	void tests();
 
 	~Game();
 };

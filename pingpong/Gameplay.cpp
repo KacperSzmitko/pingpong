@@ -1,17 +1,38 @@
 #include "pch.h"
 #include "Gameplay.h"
+#include "Game.h"
+
+Collision Gameplay::collision;
 
 Gameplay::Gameplay() {
-	this->physics = new Physics(1.225f,10,0);
-	this->ball = new Ball(physics, 100.0f, 100.0f, { 5.0f, 7.0f });
-	this->player1 = new Racket(physics, 100.0f, 100.0f);
-	this->table = new Table(550, 10);
+	this->ball = new Ball(&physics, 100.0f, 100.0f);
+	this->player1 = new Racket(100.0f, 100.0f);
+
+	this->ball->setVelocityVector({ 3.0f, 3.0f });
+
+
+}
+
+void Gameplay::checkCollisions() {
+	collision.checkCollisions();
+}
+
+void Gameplay::pause() {
+	ball->pause();
+	player1->pause();
+}
+
+void Gameplay::unpause() {
+	ball->unpause();
+	player1->unpause();
 }
 
 Gameplay::~Gameplay() {
-	delete physics;
-	delete ball;
 	delete player1;
-	delete table;
+	delete ball;
+}
 
+void Gameplay::objectsTest() {
+	ball->test();
+	player1->test();
 }
