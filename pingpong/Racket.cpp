@@ -54,5 +54,5 @@ Racket::~Racket() {
 }
 
 void Racket::test() {
-	
+	std::cout << velocity << std::endl;
 }
