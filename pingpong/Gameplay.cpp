@@ -7,9 +7,9 @@ Collision Gameplay::collision;
 Gameplay::Gameplay() {
 	this->ball = new Ball(&physics, 100.0f, 100.0f);
 	this->player1 = new Racket(100.0f, 100.0f);
-	this->wallD = new Wall(3, Game::getWindowObj().getSize().x, 90, Physics::Materials::wood,
-		640, 0);
-	this->ball->setVelocityVector({ 4.0f, 3.0f });
+
+	this->ball->setVelocityVector({ 3.0f, 3.0f });
+	this->wall = new Wall(500, 50, 0, Physics::Materials::wood, 500, 100);
 
 
 }

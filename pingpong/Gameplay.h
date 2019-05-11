@@ -19,6 +19,7 @@ private:
 	Ball *ball;
 
 	Rect *table;
+	Wall *wall;
 
 
 public:

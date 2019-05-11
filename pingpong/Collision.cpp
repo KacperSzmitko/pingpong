@@ -62,6 +62,7 @@ unsigned short Collision::ballRectCheck(Ball *ball, Rect *rect) {
 	if (distance <= ball->pixelRaidus + rect->pixelRadius) {
 		if (t == 0 || t == 1) return 2;
 		return 1;
+		
 	} else {
 		return 0;
 	}
