@@ -7,7 +7,7 @@ ObjectsVector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
 Gameplay *Game::gameplay;
-const int Game::simPerFrame = 10;
+const int Game::simPerFrame = 40;
 float Game::lastTime = 0.0f;
 float Game::elapsedTime = Game::getTime();
 float Game::simTime = Game::elapsedTime / (float)Game::simPerFrame;
