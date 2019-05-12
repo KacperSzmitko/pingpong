@@ -30,7 +30,15 @@ float Game::getTime() {
 	return clock.getElapsedTime().asSeconds();
 }
 
-void Game::calcSimTime() {
+int Game::getSimPerFrame() {
+	return simPerFrame;
+}
+
+float Game::getElapsedTime() {
+	return elapsedTime;
+}
+
+void Game::calcTimes() {
 	elapsedTime = Game::getTime() - lastTime;
 	lastTime = Game::getTime();
 	simTime = elapsedTime / (float)simPerFrame;
@@ -76,11 +84,9 @@ void Game::run() {
 	while (windowObj.isOpen()) {
 		windowObj.clear();
 		manageWindowEvents();
-		calcSimTime();
-		for (int i = 0; i < simPerFrame; i++) {
-			updateObjects();
-			if (gameplay != nullptr) gameplay->checkCollisions();
-		}
+		calcTimes();
+		updateObjects();
+		for (int i = 0; i < simPerFrame; i++) gameplay->simulate();
 		drawObjects();
 		windowObj.display();
 

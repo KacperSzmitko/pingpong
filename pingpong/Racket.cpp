@@ -11,8 +11,8 @@ Racket::Racket(float posX, float posY) :
 }
 
 void Racket::rotation() {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= 0.0625f;
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += 0.0625f;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= 225.0f * elapsedTime;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += 225.0f * elapsedTime;
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) angle = 0.0f;
 	
 	if (angle >= 180.0f) angle -= 180.0f;
@@ -22,15 +22,14 @@ void Racket::rotation() {
 }
 
 void Racket::update() {
+	getElapsedTime();
 	getSimTime();
 	
-	oldRealPos = realPos;
-	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
-
 	if (firstFrame) {
 		firstFrame = false;
 	} else {
-		velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
+		velocityVector = quickVelocityVector / (float)Game::getSimPerFrame();
+		quickVelocityVector = { 0, 0 };
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		if (velocity != 0.0f) {
 			unitVector = calcUnitVector(velocityVector, velocity);
@@ -40,12 +39,14 @@ void Racket::update() {
 		}
 		kineticEnergy = calcKineticEnergy(mass, velocity);
 	}
-
 	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 	rotation();
-	
-	
+}
 
+void Racket::simulation() {
+	oldRealPos = realPos;
+	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
+	quickVelocityVector += calcVelocityVector(oldRealPos, realPos, simTime);
 }
 
 Racket::~Racket() {

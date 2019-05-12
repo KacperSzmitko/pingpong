@@ -84,6 +84,9 @@
     <ClInclude Include="Ball.h">
       <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="SimObject.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -130,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="Racket.cpp">
       <Filter>Pliki źródłowe\gameplay\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SimObject.cpp">
+      <Filter>Pliki źródłowe\gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

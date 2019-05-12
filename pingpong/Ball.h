@@ -32,6 +32,7 @@ public:
 
 	void setPixelSize(const float &pixelRaidus);
 	void update();
+	void simulation();
 
 	~Ball();
 

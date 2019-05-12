@@ -4,7 +4,8 @@
 
 
 MovingObject::MovingObject(float mass) : 
-	UpdateObject() {
+	UpdateObject(),
+	SimObject() {
 	this->mass = mass;
 	this->velocityVector = { 0.0f, 0.0f };
 	this->velocity = 0.0f;
