@@ -13,6 +13,7 @@ Physics::Physics(float viscosity, float grav, float wind) {
 	this->wind = wind;
 };
 
+
 Physics::Physics() {
 	
 	this->viscosity = PHYSICS_DEFAULT_VISCOSITY;
@@ -51,6 +52,8 @@ sf::Vector2f Physics::calcPixelVector(const sf::Vector2f &realVector) {
 	float ptrr = pixelToRealRatio;
 	return { (float)realVector.x / ptrr, (float)realVector.y / ptrr };
 }
+
+
 
 float Physics::calcRealValue(const float &pixelValue) {
 	return pixelValue * pixelToRealRatio;

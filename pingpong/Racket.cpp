@@ -7,7 +7,6 @@ Racket::Racket(float posX, float posY) :
 	Rect(RACKET_DEFAULT_PIXEL_SIZE_X, RACKET_DEFAULT_PIXEL_SIZE_Y, 0.0f, Physics::Materials::racket, posX, posY),
 	windowObj(Game::getWindowObj()) {
 	this->firstFrame = true;
-
 	Collision::getRacketCollisionVector()._add(this);
 }
 
@@ -24,7 +23,7 @@ void Racket::rotation() {
 
 void Racket::update() {
 	getSimTime();
-
+	
 	oldRealPos = realPos;
 	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
 

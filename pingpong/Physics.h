@@ -31,6 +31,11 @@ struct Physics {
 	void setGrav(const float &grav);
 	void setWind(const float &win);
 
+	static sf::Vector2f calcNormalizeVector(const sf::Vector2f &realVector);
+	
+
+
+
 	static sf::Vector2f calcRealVector(const sf::Vector2f &pixelVector);
 	static sf::Vector2f calcRealVector(const sf::Vector2i &pixelVector);
 	static sf::Vector2f calcPixelVector(const sf::Vector2f &realVector);

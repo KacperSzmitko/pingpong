@@ -73,34 +73,63 @@ void Collision::ballWallCol(Ball *ball, Wall *wall) {
 	if (side == 0) return;
 	else
 	{
+		
 		ball->dObject->setPosition(300, -300);
 		ball->velocityVector = { 0,0 };
 		ball->realPos = { ball->physics->calcRealValue(ball->dObject->getPosition().x),
-			-ball->physics->calcRealValue(ball->dObject->getPosition().y) };
+		-ball->physics->calcRealValue(ball->dObject->getPosition().y) };
 		ball->isballmove = false;
+		p1 = !p1;
+		p2 = !p2;
+		
 	}
 }
 
 void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 	unsigned short side = ballRectCheck(ball, racket);
 	if (side == 0) return;
-	else if(side==1)
+	else 
 	{
+		
 		if (!ball->isballmove)
 		{
 			ball->isballmove = true;
-			ball->velocityVector = racket->velocityVector;
+			ball->velocityVector = racket->velocityVector; 
+			p1 = !p1;
+			p2 = !p2;
 		}
-		else
+
+		else if (side == 1 && p1)
 		{
-			ball->velocityVector -= racket->velocityVector;
+			ball->isballmove = true;
+			if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
+			{
+				ball->velocityVector.x = -ball->velocityVector.x;
+			}
+			else
+			ball->velocityVector = racket->velocityVector;
+			p1 = !p1;
+			p2 = !p2;
 		}
+
+		else if(p1)
+		{
+			ball->isballmove = true;
+			if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
+			{
+				ball->velocityVector.y = -ball->velocityVector.y;
+			}
+			else
+			{
+				ball->velocityVector = racket->velocityVector;
+				p1 = !p1;
+				p2 = !p2;
+			}
+		}
+
+
 	}
-	else if (side == 2)
-	{
-		ball->velocityVector.y *= (-1);
-		
-	}
+
 	//TUTAJ
 }
 
