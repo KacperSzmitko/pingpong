@@ -50,10 +50,8 @@ void Ball::setPixelSize(const float &pR) {
 	realRaidus = Physics::calcRealValue(pR);
 }
 
-void Ball::update()
-{
+void Ball::update() {
 	getSimTime();
-	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 
 }
 
@@ -62,12 +60,12 @@ void Ball::simulation() {
 	if (!_pause) {
 		if (isballmove)
 		{
-			//std::cout << velocityVector.x << "  " << velocityVector.y << "\n";
 			oldRealPos = realPos;
 			realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
 			velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
 			velocity = calcVelocityFromVelocityVector(velocityVector);
 			unitVector = calcUnitVector(velocityVector, velocity);
+			dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 		}
 	}
 }
@@ -77,6 +75,6 @@ Ball::~Ball() {
 }
 
 void Ball::test() {
-	;
+	std::cout << velocity << std::endl;
 }
 

@@ -53,10 +53,10 @@ unsigned short Collision::ballRectCheck(Ball *ball, Rect *rect) {
 	float distance = Physics::calcDistanceBetweenTwoPoints(TP, BP);
 	
 	//TEST
-	sf::Vertex line[] = { sf::Vertex(TP), sf::Vertex(BP) };
-	line[0].color = sf::Color::Red;
-	line[1].color = sf::Color::Red;
-	Game::getWindowObj().draw(line, 2, sf::Lines);
+	//sf::Vertex line[] = { sf::Vertex(TP), sf::Vertex(BP) };
+	//line[0].color = sf::Color::Red;
+	//line[1].color = sf::Color::Red;
+	//Game::getWindowObj().draw(line, 2, sf::Lines);
 	//TEST
 
 	if (distance <= ball->pixelRaidus + rect->pixelRadius) {
@@ -75,7 +75,7 @@ void Collision::ballWallCol(Ball *ball, Wall *wall) {
 	{
 		
 		ball->dObject->setPosition(300, -300);
-		ball->velocityVector = { 0,0 };
+		ball->velocityVector = { 0.0f, 0.0f };
 		ball->realPos = { ball->physics->calcRealValue(ball->dObject->getPosition().x),
 		-ball->physics->calcRealValue(ball->dObject->getPosition().y) };
 		ball->isballmove = false;
@@ -99,11 +99,12 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 			p2 = !p2;
 		}
 
-		else if (side == 1 && p1)
+		else if (side == 1)
 		{
 			ball->isballmove = true;
 			if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
 			{
+				std::cout << "test" << std::endl;
 				ball->velocityVector.x = -ball->velocityVector.x;
 			}
 			else
@@ -112,7 +113,7 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 			p2 = !p2;
 		}
 
-		else if(p1)
+		else
 		{
 			ball->isballmove = true;
 			if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)

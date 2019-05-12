@@ -29,17 +29,17 @@ void Racket::update() {
 		firstFrame = false;
 	} else {
 		velocityVector = quickVelocityVector / (float)Game::getSimPerFrame();
-		quickVelocityVector = { 0, 0 };
+		if (velocityVector.x > RACKET_DEFAULT_MAX_VELOCITY) velocityVector.x = RACKET_DEFAULT_MAX_VELOCITY;
+		if (velocityVector.x < -RACKET_DEFAULT_MAX_VELOCITY) velocityVector.x = -RACKET_DEFAULT_MAX_VELOCITY;
+		if (velocityVector.y > RACKET_DEFAULT_MAX_VELOCITY) velocityVector.y = RACKET_DEFAULT_MAX_VELOCITY;
+		if (velocityVector.y < -RACKET_DEFAULT_MAX_VELOCITY) velocityVector.y = -RACKET_DEFAULT_MAX_VELOCITY;
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		if (velocity != 0.0f) {
 			unitVector = calcUnitVector(velocityVector, velocity);
 		}
-		if (velocity > RACKET_DEFAULT_MAX_VELOCITY) {
-			velocity = RACKET_DEFAULT_MAX_VELOCITY;
-		}
 		kineticEnergy = calcKineticEnergy(mass, velocity);
 	}
-	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
+	quickVelocityVector = { 0, 0 };
 	rotation();
 }
 
@@ -47,6 +47,7 @@ void Racket::simulation() {
 	oldRealPos = realPos;
 	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
 	quickVelocityVector += calcVelocityVector(oldRealPos, realPos, simTime);
+	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 }
 
 Racket::~Racket() {
