@@ -63,11 +63,12 @@ void Ball::simulation() {
 		if (isballmove)
 		{
 			//std::cout << velocityVector.x << "  " << velocityVector.y << "\n";
-		oldRealPos = realPos;
-		realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
-		velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
-		velocity = calcVelocityFromVelocityVector(velocityVector);
-		unitVector = calcUnitVector(velocityVector, velocity);
+			oldRealPos = realPos;
+			realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
+			velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
+			velocity = calcVelocityFromVelocityVector(velocityVector);
+			unitVector = calcUnitVector(velocityVector, velocity);
+		}
 	}
 }
 
@@ -76,6 +77,6 @@ Ball::~Ball() {
 }
 
 void Ball::test() {
-	
+	;
 }
 

@@ -6,7 +6,7 @@ Collision Gameplay::collision;
 ObjectsVector<SimObject*> Gameplay::simVector;
 
 Gameplay::Gameplay() {
-	this->ball = new Ball(&physics, 100.0f, 100.0f);
+	this->ball = new Ball(&physics, 100.0f, -100.0f);
 	this->player1 = new Racket(100.0f, 100.0f);
 
 	this->ball->setVelocityVector({ 3.0f, 6.0f });
