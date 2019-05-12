@@ -47,20 +47,19 @@ void Ball::setPixelSize(const float &pR) {
 void Ball::update()
 {
 	getSimTime();
-	acc = { 0.0f, 0.0f };
-	
-	if (!_pause) {
+	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 
+}
+
+void Ball::simulation() {
+	acc = { 0.0f, 0.0f };
+	if (!_pause) {
 		oldRealPos = realPos;
 		realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
-
 		velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		unitVector = calcUnitVector(velocityVector, velocity);
-
-		dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 	}
-
 }
 
 Ball::~Ball() {

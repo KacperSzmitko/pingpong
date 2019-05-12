@@ -24,14 +24,12 @@ void Racket::rotation() {
 
 void Racket::update() {
 	getSimTime();
-
-	oldRealPos = realPos;
-	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
-
+	
 	if (firstFrame) {
 		firstFrame = false;
 	} else {
-		velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
+		velocityVector = quickVelocityVector / (float)Game::simPerFrame;
+		quickVelocityVector = { 0, 0 };
 		velocity = calcVelocityFromVelocityVector(velocityVector);
 		if (velocity != 0.0f) {
 			unitVector = calcUnitVector(velocityVector, velocity);
@@ -41,12 +39,15 @@ void Racket::update() {
 		}
 		kineticEnergy = calcKineticEnergy(mass, velocity);
 	}
-
 	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 	rotation();
-	
-	
+}
 
+void Racket::simulation() {
+	oldRealPos = realPos;
+	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
+	std::cout << realPos.x << " " << realPos.y;
+	quickVelocityVector += calcVelocityVector(oldRealPos, realPos, simTime);
 }
 
 Racket::~Racket() {

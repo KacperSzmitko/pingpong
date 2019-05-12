@@ -3,6 +3,7 @@
 #include "Game.h"
 
 Collision Gameplay::collision;
+ObjectsVector<SimObject*> Gameplay::simVector;
 
 Gameplay::Gameplay() {
 	this->ball = new Ball(&physics, 100.0f, 100.0f);
@@ -14,7 +15,18 @@ Gameplay::Gameplay() {
 
 }
 
-void Gameplay::checkCollisions() {
+ObjectsVector<SimObject*> &Gameplay::getSimVector() {
+	return simVector;
+}
+
+void Gameplay::simulateObjects() {
+	simVector.forEach([](SimObject* &obj) {
+		obj->simulation();
+	});
+}
+
+void Gameplay::simulate() {
+	simulateObjects();
 	collision.checkCollisions();
 }
 

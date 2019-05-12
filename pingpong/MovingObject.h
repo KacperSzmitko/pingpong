@@ -1,8 +1,9 @@
 #pragma once
 
 #include "UpdateObject.h"
+#include "SimObject.h"
 
-class MovingObject : public UpdateObject {
+class MovingObject : public UpdateObject, public SimObject {
 protected:
 
 	float mass, velocity, kineticEnergy;

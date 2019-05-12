@@ -4,11 +4,6 @@
 
 UpdateObject::UpdateObject() {
 	sendUpdateObject();
-	this->_pause = false;
-}
-
-void UpdateObject::getSimTime() {
-	simTime = Game::getSimTime();
 }
 
 void UpdateObject::sendUpdateObject() {
@@ -17,13 +12,6 @@ void UpdateObject::sendUpdateObject() {
 
 void UpdateObject::deleteUpdateObject() {
 	Game::getUpdateVector()._delete(this);
-}
-
-void UpdateObject::pause() {
-	_pause = true;
-}
-void UpdateObject::unpause() {
-	_pause = false;
 }
 
 UpdateObject::~UpdateObject() {

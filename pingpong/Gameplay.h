@@ -5,6 +5,7 @@
 #include "Racket.h"
 #include "Ball.h"
 #include "ObjectsVector.h"
+#include "SimObject.h"
 
 class Gameplay {
 
@@ -12,12 +13,12 @@ class Gameplay {
 
 private:
 
-	Physics physics;
+	static ObjectsVector<SimObject*> simVector;
 
+	Physics physics;
 	Racket *player1;
 	//Racket player2;
 	Ball *ball;
-
 	Rect *table;
 	Wall *wall;
 
@@ -27,7 +28,9 @@ public:
 
 	static Collision collision;
 
-	void checkCollisions();
+	static ObjectsVector<SimObject*>& getSimVector();
+	void simulateObjects();
+	void simulate();
 
 	void pause();
 	void unpause();

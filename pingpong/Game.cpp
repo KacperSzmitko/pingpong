@@ -7,7 +7,7 @@ ObjectsVector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
 sf::Clock Game::frameClock;
 Gameplay *Game::gameplay;
-const int Game::simPerFrame = 1;
+const int Game::simPerFrame = 10;
 float Game::lastTime = 0.0f;
 float Game::elapsedTime = Game::getTime();
 float Game::simTime = Game::elapsedTime / (float)Game::simPerFrame;
@@ -77,10 +77,8 @@ void Game::run() {
 		windowObj.clear();
 		manageWindowEvents();
 		calcSimTime();
-		for (int i = 0; i < simPerFrame; i++) {
-			updateObjects();
-			if (gameplay != nullptr) gameplay->checkCollisions();
-		}
+		updateObjects();
+		for (int i = 0; i < simPerFrame; i++) gameplay->simulate();
 		drawObjects();
 		windowObj.display();
 
