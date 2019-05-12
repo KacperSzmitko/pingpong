@@ -6,6 +6,10 @@ UpdateObject::UpdateObject() {
 	sendUpdateObject();
 }
 
+void UpdateObject::getElapsedTime() {
+	elapsedTime = Game::getElapsedTime();
+}
+
 void UpdateObject::sendUpdateObject() {
 	Game::getUpdateVector()._add(this);
 }

@@ -6,6 +6,7 @@ private:
 
 protected:
 	float simTime;
+	int simPerFrame;
 	bool _pause;
 
 	void getSimTime();

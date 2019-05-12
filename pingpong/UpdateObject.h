@@ -1,6 +1,9 @@
 #pragma once
 
 class UpdateObject {
+protected:
+	float elapsedTime;
+	void getElapsedTime();
 
 public:
 	UpdateObject();

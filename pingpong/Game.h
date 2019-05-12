@@ -12,6 +12,7 @@ private:
 	static ObjectsVector<UpdateObject*> updateVector;
 	static ObjectsVector<sf::Drawable*> drawVector;
 	
+	static const int simPerFrame;
 	static float lastTime;
 	static float elapsedTime;
 	static float simTime;
@@ -19,16 +20,17 @@ private:
 	sf::View view;
 	sf::Event _event;
 
-	static void calcSimTime();
+	static void calcTimes();
 
 public:
 
 	Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);
 
-	static const int simPerFrame;
 	static Gameplay *gameplay;
 	static sf::RenderWindow &getWindowObj();
 	static float getTime();
+	static int getSimPerFrame();
+	static float getElapsedTime();
 	static float getSimTime();
 	static ObjectsVector<UpdateObject*>& getUpdateVector();
 	static ObjectsVector<sf::Drawable*>& getDrawVector();

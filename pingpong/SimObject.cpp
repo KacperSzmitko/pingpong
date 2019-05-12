@@ -5,6 +5,7 @@
 SimObject::SimObject() {
 	sendSimObject();
 	this->_pause = false;
+	this->simPerFrame = Game::getSimPerFrame();
 }
 
 void SimObject::getSimTime() {
