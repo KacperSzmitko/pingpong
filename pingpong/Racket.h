@@ -13,7 +13,6 @@ class Racket : public MovingObject, public Rect {
 	friend class Collision;
 
 private:
-	bool firstFrame;
 	const sf::RenderWindow &windowObj;
 	sf::Vector2f quickVelocityVector;
 
