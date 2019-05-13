@@ -5,6 +5,7 @@
 #include "Wall.h"
 #include "ObjectsVector.h"
 
+
 class Collision {
 private:
 	static ObjectsVector<Wall*> walls;

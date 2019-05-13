@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Collision.h"
 #include "Game.h"
+#include <cmath>
 
 ObjectsVector<Wall*> Collision::walls;
 ObjectsVector<Racket*> Collision::rackets;
@@ -87,88 +88,58 @@ void Collision::ballWallCol(Ball *ball, Wall *wall) {
 
 void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 	unsigned short side = ballRectCheck(ball, racket);
+	sf::Transform trans = racket->dObject->getTransform();
+	sf::Vector2f SP = trans * racket->localSP;
+	sf::Vector2f EP = trans * racket->localEP;
 	if (side == 0) return;
-	else 
+	else if (p1)
 	{
+		ball->isballmove = true;
+		float a2;
+		if (ball->velocityVector.x == 0 && ball->velocityVector.y == 0)
+			a2 = 1;
+		else
+		{
+			sf::Vector2f oldBallPosPix = Physics::calcPixelVector(ball->oldRealPos);
+			sf::Vector2f BallPosPix = Physics::calcPixelVector(ball->realPos);
+			a2 = Physics::calcDirectionFactor(oldBallPosPix.x, oldBallPosPix.y, BallPosPix.x, BallPosPix.y);
+		}
+		float a1 = Physics::calcDirectionFactor(SP.x, SP.y, EP.x, EP.y);
+		if (SP.x == EP.x) a1 = 0;
+		else if (SP.y == EP.y) a1 = 0;
 		
-		if (!ball->isballmove)
+		
+		float tgalfa = abs(((a2 - a1) / (1 + a1 * a2)));
+		float angle = 1.570796 - atan(tgalfa);
+		std::cout << angle << "\n";
+		float racketangle = atan2(racket->dObject->getPosition().y, racket->dObject->getPosition().x);
+		float ballangle = atan2(ball->dObject->getPosition().y, ball->dObject->getPosition().x);
+		if ((ball->unitVector.x < 0 && racket->unitVector.x >0) || ((ball->unitVector.x > 0 && racket->unitVector.x < 0)))
 		{
-			ball->isballmove = true;
-			ball->velocityVector.x = 2*racket->velocityVector.x; 
-			ball->velocityVector.y = 2*racket->velocityVector.y; 
-			BallVelocityAfterColision = ball->velocityVector;
-			p1 = !p1;
-			p2 = !p2;
+			ball->velocityVector = { Physics::calcRealValue((((racket->mass*racket->velocityVector.x) - (ball->mass*ball->velocityVector.x) - (racket->mass*racket->velocityVector.x)/2) / (ball->mass*cos(angle)))),
+			Physics::calcRealValue((((racket->mass*racket->velocityVector.y) - (ball->mass*ball->velocityVector.y) + (racket->mass*racket->velocityVector.y)) / (ball->mass*sin(angle)))) };
 		}
-
-		else if (side == 1)
+		else
 		{
-			ball->isballmove = true;
-			if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
-			{
-
-				ball->velocityVector.y = -ball->velocityVector.y;
-				BallVelocityAfterColision = ball->velocityVector;
-			}
-			else
-			{
-				ball->velocityVector.x = 2 * racket->velocityVector.x;
-				ball->velocityVector.y = 2 * racket->velocityVector.y;
-				BallVelocityAfterColision = ball->velocityVector;
-			}
-			p1 = !p1;
-			p2 = !p2;
+			ball->velocityVector = { Physics::calcRealValue((((racket->mass*racket->velocityVector.x) + (ball->mass*ball->velocityVector.x) - (racket->mass*racket->velocityVector.x)/2) / (ball->mass*cos(angle)))),
+			Physics::calcRealValue((((racket->mass*racket->velocityVector.y) + (ball->mass*ball->velocityVector.y) + (racket->mass*racket->velocityVector.y)) / (ball->mass*sin(angle)))) };
 		}
-
-		else if (p1)
-		{
-			ball->isballmove = true;
-			if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
-			{
-				ball->velocityVector.y = -ball->velocityVector.y;
-				BallVelocityAfterColision = ball->velocityVector;
-			}
-			else
-			{
-				
-				ball->velocityVector.x = 2 * racket->velocityVector.x;
-				ball->velocityVector.y = 2 * racket->velocityVector.y;
-				BallVelocityAfterColision = ball->velocityVector;
-				p1 = !p1;
-				p2 = !p2;
-			}
-		}
-		else if (!p1)
-		{
 			/*
-			if (racket->dObject->getPosition().x <= ball->dObject->getPosition().x)
-			{
-				racket->dObject->setPosition(racket->dObject->getPosition().x - racket->dObject->getSize().x, racket->dObject->getPosition().y);
+		ball->velocityVector = { Physics::calcRealValue(((((racket->velocity * cos( angle)) * (racket->mass - ball->mass)) + (2 * (ball->mass) * ball->velocity
+			* cos( angle))) / (ball->mass + racket->mass)) * cos(angle) + (racket->velocity * sin( angle)*sin(angle))),
+			Physics::calcRealValue(((((racket->velocity * cos( angle)) * (racket->mass - ball->mass)) + (2 * (ball->mass) * ball->velocity
+			* cos( angle))) / (ball->mass + racket->mass)) * sin(angle) + (racket->velocity * sin( angle)*cos(angle)))
 
-			}
-			else
-			{
-				racket->dObject->setPosition(racket->dObject->getPosition().x + racket->dObject->getSize().x, racket->dObject->getPosition().y);
-			}
-			*/
-			if (racket->dObject->getPosition().x <= ball->dObject->getPosition().x)
-			{
-				ball->realPos = { ball->realPos.x + Physics::calcRealValue(0.1),ball->realPos.y };
-				ball->velocityVector = BallVelocityAfterColision;
-			}
-			else
-			{
-				ball->realPos = { ball->realPos.x - Physics::calcRealValue(0.1),ball->realPos.y };
-				ball->velocityVector = BallVelocityAfterColision;
-			}
-		}
-		
+		};
+		*/
 
+		p1 = !p1;
+		p2 = !p2;
 
 	}
-
-	//TUTAJ
 }
+
+
 
 Collision::~Collision() {
 	walls.clear();

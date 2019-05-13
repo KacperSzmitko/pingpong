@@ -77,6 +77,6 @@ Ball::~Ball() {
 }
 
 void Ball::test() {
-	std::cout << velocity << std::endl;
+	
 }
 

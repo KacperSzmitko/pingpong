@@ -70,3 +70,8 @@ sf::Vector2f Physics::swapY(const sf::Vector2f &pos) {
 float Physics::calcDistanceBetweenTwoPoints(const sf::Vector2f &v1, const sf::Vector2f &v2) {
 	return sqrt(pow(v2.x - v1.x, 2) + pow(v2.y - v1.y, 2));
 }
+
+float Physics::calcDirectionFactor(float x1, float y1, float x2, float y2)
+{
+	return (y2 - y1) / (x2 - x1);
+}
