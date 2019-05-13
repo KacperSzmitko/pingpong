@@ -22,6 +22,7 @@ void Racket::rotation() {
 
 void Racket::update() {
 	getSimTime();
+	getElapsedTime();
 
 	velocityVector = quickVelocityVector / (float)Game::getSimPerFrame();
 	quickVelocityVector = { 0.0f, 0.0f };
