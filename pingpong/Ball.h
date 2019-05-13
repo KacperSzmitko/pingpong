@@ -20,7 +20,7 @@ private:
 	float dragK;
 	bool isballmove;
 	sf::Vector2f acc;
-
+	sf::Vector2f oldVelocityVector;
 	void applyGravity();
 	void applyWind();
 	void applyAirResistance(const float &velocity, const sf::Vector2f &unitVector);

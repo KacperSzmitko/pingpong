@@ -11,6 +11,7 @@ private:
 	static ObjectsVector<Racket*> rackets;
 	static ObjectsVector<Ball*> balls;
 	bool p1=true, p2=false; //Gracze, mowi ktory gracz ma w danym momencie prawo do odbicia pilki
+	sf::Vector2f BallVelocityAfterColision;
 	unsigned short ballRectCheck(Ball *ball, Rect *rect);
 	void ballWallCol(Ball *ball, Wall *wall);
 	void ballRacketCol(Ball *ball, Racket *racket);

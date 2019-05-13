@@ -94,7 +94,9 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 		if (!ball->isballmove)
 		{
 			ball->isballmove = true;
-			ball->velocityVector = racket->velocityVector; 
+			ball->velocityVector.x = 2*racket->velocityVector.x; 
+			ball->velocityVector.y = 2*racket->velocityVector.y; 
+			BallVelocityAfterColision = ball->velocityVector;
 			p1 = !p1;
 			p2 = !p2;
 		}
@@ -104,28 +106,63 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 			ball->isballmove = true;
 			if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
 			{
-				ball->velocityVector.x = -ball->velocityVector.x;
+
+				ball->velocityVector.x = ball->velocityVector.x;
+				BallVelocityAfterColision = ball->velocityVector;
 			}
 			else
-			ball->velocityVector = racket->velocityVector;
+			{
+				ball->velocityVector.x = 2 * racket->velocityVector.x;
+				ball->velocityVector.y = 2 * racket->velocityVector.y;
+				BallVelocityAfterColision = ball->velocityVector;
+			}
 			p1 = !p1;
 			p2 = !p2;
 		}
 
-		else if(p1)
+		else if (p1)
 		{
 			ball->isballmove = true;
 			if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
 			{
 				ball->velocityVector.y = -ball->velocityVector.y;
+				BallVelocityAfterColision = ball->velocityVector;
 			}
 			else
 			{
-				ball->velocityVector = racket->velocityVector;
+				
+				ball->velocityVector.x = 2 * racket->velocityVector.x;
+				ball->velocityVector.y = 2 * racket->velocityVector.y;
+				BallVelocityAfterColision = ball->velocityVector;
 				p1 = !p1;
 				p2 = !p2;
 			}
 		}
+		else if (!p1)
+		{
+			/*
+			if (racket->dObject->getPosition().x <= ball->dObject->getPosition().x)
+			{
+				racket->dObject->setPosition(racket->dObject->getPosition().x - racket->dObject->getSize().x, racket->dObject->getPosition().y);
+
+			}
+			else
+			{
+				racket->dObject->setPosition(racket->dObject->getPosition().x + racket->dObject->getSize().x, racket->dObject->getPosition().y);
+			}
+			*/
+			if (racket->dObject->getPosition().x <= ball->dObject->getPosition().x)
+			{
+				ball->realPos = { ball->realPos.x + Physics::calcRealValue(0.1),ball->realPos.y };
+				ball->velocityVector = BallVelocityAfterColision;
+			}
+			else
+			{
+				ball->realPos = { ball->realPos.x - Physics::calcRealValue(0.1),ball->realPos.y };
+				ball->velocityVector = BallVelocityAfterColision;
+			}
+		}
+		
 
 
 	}

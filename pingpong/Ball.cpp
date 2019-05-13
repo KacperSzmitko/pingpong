@@ -62,6 +62,7 @@ void Ball::simulation() {
 	if (!_pause) {
 		if (isballmove)
 		{
+			oldVelocityVector = velocityVector;
 			//std::cout << velocityVector.x << "  " << velocityVector.y << "\n";
 			oldRealPos = realPos;
 			realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);

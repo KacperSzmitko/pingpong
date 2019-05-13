@@ -27,6 +27,7 @@ void Gameplay::simulateObjects() {
 }
 
 void Gameplay::simulate() {
+	
 	simulateObjects();
 	collision.checkCollisions();
 }
