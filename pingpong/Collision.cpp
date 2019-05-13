@@ -107,7 +107,7 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 			if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
 			{
 
-				ball->velocityVector.x = ball->velocityVector.x;
+				ball->velocityVector.y = -ball->velocityVector.y;
 				BallVelocityAfterColision = ball->velocityVector;
 			}
 			else
