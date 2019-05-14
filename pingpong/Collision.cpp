@@ -91,9 +91,12 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 	sf::Transform trans = racket->dObject->getTransform();
 	sf::Vector2f SP = trans * racket->localSP;
 	sf::Vector2f EP = trans * racket->localEP;
+	float angle;
+	float tgalfa;
 	if (side == 0) return;
-	else if (p1)
+	else if (p1 && side==1)
 	{
+		//Jesli pileczka spada pionowo w dol a2 = 0 
 		ball->isballmove = true;
 		float a2;
 		if (ball->velocityVector.x == 0 && ball->velocityVector.y == 0)
@@ -102,17 +105,36 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 		{
 			sf::Vector2f oldBallPosPix = Physics::calcPixelVector(ball->oldRealPos);
 			sf::Vector2f BallPosPix = Physics::calcPixelVector(ball->realPos);
+			if (oldBallPosPix.x == BallPosPix.x || oldBallPosPix.y == BallPosPix.y)
+			{
+				a2 = 0;
+			}
+			else
 			a2 = Physics::calcDirectionFactor(oldBallPosPix.x, oldBallPosPix.y, BallPosPix.x, BallPosPix.y);
 		}
-		float a1 = Physics::calcDirectionFactor(SP.x, SP.y, EP.x, EP.y);
-		if (SP.x == EP.x) a1 = 0;
-		else if (SP.y == EP.y) a1 = 0;
-
-
-		float tgalfa = abs(((a2 - a1) / (1 + a1 * a2)));
-		float angle =  1.570796 - atan(tgalfa) ;
-		std::cout << angle * (180/3.1415) << "\n";
-
+		
+		
+		if (SP.y == EP.y)
+		{
+			tgalfa = atan2(ball->dObject->getPosition().y, ball->dObject->getPosition().x);
+			tgalfa -= 1.57079;
+		}
+		else if (SP.x == EP.x)
+		{
+			tgalfa = atan2(ball->dObject->getPosition().y, ball->dObject->getPosition().x);
+		}
+		else
+		{
+			float a1 = Physics::calcDirectionFactor(SP.x, SP.y, EP.x, EP.y);
+			tgalfa = abs(((a2 - a1) / (1 + a1 * a2)));
+			tgalfa = atan(tgalfa);
+			tgalfa -= 1.570796;
+		}
+		
+		angle = tgalfa;
+		if (angle > 1.4) angle = 1.3;
+		else if (angle < -1.4) angle = -1.3;
+		
 		/*
 		if ((ball->unitVector.x < 0 && racket->unitVector.x >0) || ((ball->unitVector.x > 0 && racket->unitVector.x < 0)))
 		{
@@ -120,32 +142,34 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 			Physics::calcRealValue((((racket->mass*racket->velocityVector.y) - (ball->mass*ball->velocityVector.y) + (racket->mass*racket->velocityVector.y)) / (ball->mass*sin(angle)))) };
 		}
 		*/
-		if ((ball->unitVector.x < 0 && racket->unitVector.x >0) || ((ball->unitVector.x > 0 && racket->unitVector.x < 0)))
+		if ((ball->unitVector.x <= 0 && racket->unitVector.x >=0) || ((ball->unitVector.x >= 0 && racket->unitVector.x <= 0)))
 		{
-			ball->velocityVector = { ((ball->velocityVector.x + racket->velocityVector.x)*racket->mass*cos(angle)
-				+ (racket->velocityVector.x*racket->mass) - (ball->mass*ball->velocityVector.x)) / (racket->mass + ball->mass)*cos(angle),
-				((ball->velocityVector.y + racket->velocityVector.y)*racket->mass*sin(angle)
-				+ (racket->velocityVector.y*racket->mass) - (ball->mass*ball->velocityVector.y)) / (racket->mass + ball->mass)*sin(angle)
+			ball->velocityVector = { ((racket->velocityVector.x -ball->velocityVector.x )*racket->mass*cos(angle)
+				+ (racket->velocityVector.x*racket->mass) + (ball->mass*ball->velocityVector.x)) / ((racket->mass + ball->mass)*cos(angle)),
+				((racket->velocityVector.y - ball->velocityVector.y)*racket->mass*sin(angle)
+				+ (racket->velocityVector.y*racket->mass) + (ball->mass*ball->velocityVector.y)) / ((racket->mass + ball->mass)*sin(angle))
 
 			};
-			std::cout << ball->velocityVector.x << "  " << ball->velocityVector.y << "\n";
+			
 		}
 		else if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
 		{
-			ball->velocityVector = { -ball->velocityVector.x / cos(angle),ball->velocityVector.y / sin(angle) };
-			std::cout << ball->velocityVector.x << "  " << ball->velocityVector.y << "\n";
+			ball->velocityVector = { ball->velocityVector.x/cos(angle) , ball->velocityVector.y/sin(angle)  };
+			
 		}
 		else if (ball->velocityVector.x == 0 && ball->velocityVector.y == 0)
 		{
-			ball->velocityVector = { ((racket->velocityVector.x - ball->velocityVector.x)*racket->mass*cos(angle)
-				+ (racket->velocityVector.x*racket->mass) + (ball->mass*ball->velocityVector.x)) / (racket->mass + ball->mass)*cos(angle),
-			((racket->velocityVector.y - ball->velocityVector.y)*racket->mass*sin(angle)
-				+ (racket->velocityVector.y*racket->mass) + (ball->mass*ball->velocityVector.y)) / (racket->mass + ball->mass)*sin(angle) };
+			ball->velocityVector = { (racket->velocityVector.x*racket->mass*cos(angle)
+				+ (racket->velocityVector.x*racket->mass)) / ((racket->mass + ball->mass)*cos(angle)),
+			(racket->velocityVector.y*racket->mass*sin(angle)
+				+ (racket->velocityVector.y*racket->mass)) / -((racket->mass + ball->mass)*sin(angle)) };
 
 		}
+		std::cout << angle << "\n";
 		p1 = !p1;
 		p2 = !p2;
 	}
+
 
 }
 
