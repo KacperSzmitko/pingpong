@@ -97,7 +97,7 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 		ball->isballmove = true;
 		float a2;
 		if (ball->velocityVector.x == 0 && ball->velocityVector.y == 0)
-			a2 = 1;
+			a2 = 0;
 		else
 		{
 			sf::Vector2f oldBallPosPix = Physics::calcPixelVector(ball->oldRealPos);
@@ -107,39 +107,47 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 		float a1 = Physics::calcDirectionFactor(SP.x, SP.y, EP.x, EP.y);
 		if (SP.x == EP.x) a1 = 0;
 		else if (SP.y == EP.y) a1 = 0;
-		
-		
+
+
 		float tgalfa = abs(((a2 - a1) / (1 + a1 * a2)));
-		float angle = 1.570796 - atan(tgalfa);
-		std::cout << angle << "\n";
-		float racketangle = atan2(racket->dObject->getPosition().y, racket->dObject->getPosition().x);
-		float ballangle = atan2(ball->dObject->getPosition().y, ball->dObject->getPosition().x);
+		float angle = atan(tgalfa)- 1.570796 ;
+		std::cout << angle * (180/3.1415) << "\n";
+
+		/*
 		if ((ball->unitVector.x < 0 && racket->unitVector.x >0) || ((ball->unitVector.x > 0 && racket->unitVector.x < 0)))
 		{
-			ball->velocityVector = { Physics::calcRealValue((((racket->mass*racket->velocityVector.x) - (ball->mass*ball->velocityVector.x) - (racket->mass*racket->velocityVector.x)/2) / (ball->mass*cos(angle)))),
+			ball->velocityVector = { Physics::calcRealValue((((racket->mass*racket->velocityVector.x) - (ball->mass*ball->velocityVector.x) + (racket->mass*racket->velocityVector.x)) / (ball->mass*cos(angle)))),
 			Physics::calcRealValue((((racket->mass*racket->velocityVector.y) - (ball->mass*ball->velocityVector.y) + (racket->mass*racket->velocityVector.y)) / (ball->mass*sin(angle)))) };
 		}
-		else
-		{
-			ball->velocityVector = { Physics::calcRealValue((((racket->mass*racket->velocityVector.x) + (ball->mass*ball->velocityVector.x) - (racket->mass*racket->velocityVector.x)/2) / (ball->mass*cos(angle)))),
-			Physics::calcRealValue((((racket->mass*racket->velocityVector.y) + (ball->mass*ball->velocityVector.y) + (racket->mass*racket->velocityVector.y)) / (ball->mass*sin(angle)))) };
-		}
-			/*
-		ball->velocityVector = { Physics::calcRealValue(((((racket->velocity * cos( angle)) * (racket->mass - ball->mass)) + (2 * (ball->mass) * ball->velocity
-			* cos( angle))) / (ball->mass + racket->mass)) * cos(angle) + (racket->velocity * sin( angle)*sin(angle))),
-			Physics::calcRealValue(((((racket->velocity * cos( angle)) * (racket->mass - ball->mass)) + (2 * (ball->mass) * ball->velocity
-			* cos( angle))) / (ball->mass + racket->mass)) * sin(angle) + (racket->velocity * sin( angle)*cos(angle)))
-
-		};
 		*/
+		if ((ball->unitVector.x < 0 && racket->unitVector.x >0) || ((ball->unitVector.x > 0 && racket->unitVector.x < 0)))
+		{
+			ball->velocityVector = { ((ball->velocityVector.x + racket->velocityVector.x)*racket->mass*cos(angle)
+				+ (racket->velocityVector.x*racket->mass) - (ball->mass*ball->velocityVector.x)) / (racket->mass + ball->mass)*cos(angle),
+				((ball->velocityVector.y + racket->velocityVector.y)*racket->mass*sin(angle)
+				+ (racket->velocityVector.y*racket->mass) - (ball->mass*ball->velocityVector.y)) / (racket->mass + ball->mass)*sin(angle)
 
+			};
+			std::cout << ball->velocityVector.x << "  " << ball->velocityVector.y << "\n";
+		}
+		else if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
+		{
+			ball->velocityVector = { -ball->velocityVector.x / cos(angle),ball->velocityVector.y / sin(angle) };
+			std::cout << ball->velocityVector.x << "  " << ball->velocityVector.y << "\n";
+		}
+		else if (ball->velocityVector.x == 0 && ball->velocityVector.y == 0)
+		{
+			ball->velocityVector = { ((racket->velocityVector.x - ball->velocityVector.x)*racket->mass*cos(angle)
+				+ (racket->velocityVector.x*racket->mass) + (ball->mass*ball->velocityVector.x)) / (racket->mass + ball->mass)*cos(angle),
+			((racket->velocityVector.y - ball->velocityVector.y)*racket->mass*sin(angle)
+				+ (racket->velocityVector.y*racket->mass) + (ball->mass*ball->velocityVector.y)) / (racket->mass + ball->mass)*sin(angle) };
+
+		}
 		p1 = !p1;
 		p2 = !p2;
-
 	}
+
 }
-
-
 
 Collision::~Collision() {
 	walls.clear();
