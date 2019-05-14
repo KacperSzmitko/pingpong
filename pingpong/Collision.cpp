@@ -110,7 +110,7 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 
 
 		float tgalfa = abs(((a2 - a1) / (1 + a1 * a2)));
-		float angle = atan(tgalfa)- 1.570796 ;
+		float angle =  1.570796 - atan(tgalfa) ;
 		std::cout << angle * (180/3.1415) << "\n";
 
 		/*
