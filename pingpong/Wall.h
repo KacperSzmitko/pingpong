@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Rect.h"
 
 class Wall : public Rect {

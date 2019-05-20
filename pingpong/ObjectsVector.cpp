@@ -5,6 +5,7 @@
 #include "Ball.h"
 #include "UpdateObject.h"
 #include "SimObject.h"
+#include "Table.h"
 
 template <typename T> void ObjectsVector<T>::_add(T obj) {
 	vec.push_back(obj);
@@ -40,6 +41,7 @@ template <typename T> ObjectsVector<T>::~ObjectsVector() {
 	});
 }
 
+template class ObjectsVector<Table*>;
 template class ObjectsVector<Racket*>;
 template class ObjectsVector<Ball*>;
 template class ObjectsVector<Wall*>;

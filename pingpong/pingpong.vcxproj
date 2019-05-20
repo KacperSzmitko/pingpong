@@ -178,6 +178,7 @@
     <ClInclude Include="Rect.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SimObject.h" />
+    <ClInclude Include="Table.h" />
     <ClInclude Include="UpdateObject.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
@@ -201,6 +202,7 @@
     <ClCompile Include="Racket.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="SimObject.cpp" />
+    <ClCompile Include="Table.cpp" />
     <ClCompile Include="UpdateObject.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>

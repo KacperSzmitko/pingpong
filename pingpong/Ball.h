@@ -18,7 +18,10 @@ private:
 	float pixelRaidus, realRaidus;
 	float drag;
 	float dragK;
-	bool isballmove;
+	bool p1 , p2; //Gracze, mowi ktory gracz ma w danym momencie prawo do odbicia pilki
+	int p1Serv, p2Serv; //0 - nie serwowal, 1 - serwowal, 2 - bedzie serwowal
+	bool isballmove; // mowi czy pilka sie porusza
+	int Colision; //Aby zapobiec zmultiplikowanemu wykrywaniu kolizji
 	sf::Vector2f acc;
 	sf::Vector2f oldVelocityVector;
 	void applyGravity();

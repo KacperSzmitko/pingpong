@@ -14,7 +14,11 @@ Ball::Ball(Physics* physics, float posX, float posY) :
 	this->acc = { 0.0f, 0.0f };
 	this->dObject->setOrigin(BALL_DEFAULT_PIXEL_RADIUS, BALL_DEFAULT_PIXEL_RADIUS);
 	this->dObject->setPosition(Physics::swapY({ posX, posY }));
-	isballmove = true;
+	isballmove = false;
+	p1Serv = 2; 
+	p2Serv = 0; 
+	p1 = false;
+	p2 = false;
 	Collision::getBallCollisionVector()._add(this);
 }
    
@@ -41,7 +45,7 @@ void Ball::applyForces() {
 
 sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lV, const sf::Vector2f &vV, const sf::Vector2f &acc, const float &t) {
 
-	if(isballmove)applyForces();
+	if(isballmove && (p1Serv!=2 || p2Serv!=2))applyForces();
 	return lV + (((2.0f * vV) + (acc * t)) * t) * 0.5f;
 }
 
@@ -52,7 +56,7 @@ void Ball::setPixelSize(const float &pR) {
 
 void Ball::update() {
 	getSimTime();
-
+	
 }
 
 void Ball::simulation() {
@@ -60,14 +64,26 @@ void Ball::simulation() {
 	if (!_pause) {
 		if (isballmove)
 		{
+			
 			oldVelocityVector = velocityVector;
-			//std::cout << velocityVector.x << "  " << velocityVector.y << "\n";
+			
 			oldRealPos = realPos;
 			realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
 			velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
 			velocity = calcVelocityFromVelocityVector(velocityVector);
 			unitVector = calcUnitVector(velocityVector, velocity);
 			dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
+		}
+		else
+		{
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			{
+				isballmove = true;
+				velocityVector.y = -2.0;
+				p1 = !p1;
+				p2 = !p2;
+				Colision = 3;
+			}
 		}
 	}
 }

@@ -87,6 +87,9 @@
     <ClInclude Include="UpdateObject.h">
       <Filter>Pliki zasobów</Filter>
     </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -136,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="SimObject.cpp">
       <Filter>Pliki źródłowe\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.cpp">
+      <Filter>Pliki źródłowe\gameplay\Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

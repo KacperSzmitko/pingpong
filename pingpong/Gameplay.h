@@ -6,6 +6,7 @@
 #include "Ball.h"
 #include "ObjectsVector.h"
 #include "SimObject.h"
+#include "Table.h"
 
 class Gameplay {
 
@@ -21,7 +22,7 @@ private:
 	Racket *player1;
 	//Racket player2;
 	Ball *ball;
-	Rect *table;
+	Table *table1,*table2;
 	
 
 
