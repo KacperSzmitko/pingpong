@@ -5,9 +5,10 @@
 
 class Game {
 private:
-
+	float licz;
 	static sf::RenderWindow windowObj;
-	static sf::Clock clock;
+	static sf::Clock clock,clock1;
+	
 	static sf::Clock frameClock;
 	static ObjectsVector<UpdateObject*> updateVector;
 	static ObjectsVector<sf::Drawable*> drawVector;
@@ -23,7 +24,7 @@ private:
 	static void calcTimes();
 
 public:
-
+	static float timeForBall;
 	Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);
 
 	static Gameplay *gameplay;
@@ -32,6 +33,7 @@ public:
 	static int getSimPerFrame();
 	static float getElapsedTime();
 	static float getSimTime();
+	static float getTimeForBall();
 	static ObjectsVector<UpdateObject*>& getUpdateVector();
 	static ObjectsVector<sf::Drawable*>& getDrawVector();
 	static void startGameplay();

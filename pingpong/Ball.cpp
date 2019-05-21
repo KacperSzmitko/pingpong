@@ -62,7 +62,10 @@ void Ball::update() {
 
 void Ball::simulation() {
 	acc = { 0.0f, 0.0f };
+	
+	
 	if (!_pause) {
+		
 		if (isballmove)
 		{
 			
@@ -77,28 +80,18 @@ void Ball::simulation() {
 		}
 		else
 		{
-			
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) pomoc = 1;
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || pomoc!=0)
-			{
-				float czas = ck.getElapsedTime().asSeconds();
-				ck.restart();
-				if (pomoc == 1)
+			float pomoc = Game::getTimeForBall();
+				if (pomoc !=0)
 				{
-					
 					isballmove = true;
-					velocityVector.y = 3.0 * czas;
+					velocityVector.y = 3.0 * pomoc;
 					if (velocityVector.y > 5) velocityVector.y = 5;
 					p1 = !p1;
 					p2 = !p2;
 					Colision = 3;
 					pomoc = 0;
 				}
-			}
-		
-
-			
-
+				
 		}
 	}
 }

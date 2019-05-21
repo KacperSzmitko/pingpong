@@ -289,6 +289,7 @@ void Collision::p1Point(Ball *ball)
 	ball->p2Serv = 0;
 	ball->p1 = false;
 	ball->p2 = true;
+	Game::timeForBall = 0;
 }
 
 void Collision::p2Point(Ball *ball)
@@ -303,6 +304,7 @@ void Collision::p2Point(Ball *ball)
 	ball->p1Serv = 0;
 	ball->p1 = true;
 	ball->p2 = false;
+	Game::timeForBall = 0;
 }
 
 

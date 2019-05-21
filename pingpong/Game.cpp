@@ -5,10 +5,12 @@ sf::RenderWindow Game::windowObj;
 ObjectsVector<UpdateObject*> Game::updateVector;
 ObjectsVector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
+sf::Clock Game::clock1;
 sf::Clock Game::frameClock;
 Gameplay *Game::gameplay;
 const int Game::simPerFrame = 15;
 float Game::lastTime = 0.0f;
+float Game::timeForBall = 0.0f;
 float Game::elapsedTime = Game::getTime();
 float Game::simTime = Game::elapsedTime / (float)Game::simPerFrame;
 
@@ -20,6 +22,8 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 	this->windowObj.setVerticalSyncEnabled(verticalSync);
 	this->windowObj.setMouseCursorVisible(false);
 	this->windowObj.setView(view);
+	this->licz = 0;
+	
 }
 
 sf::RenderWindow &Game::getWindowObj() {
@@ -36,6 +40,11 @@ int Game::getSimPerFrame() {
 
 float Game::getElapsedTime() {
 	return elapsedTime;
+}
+
+float Game::getTimeForBall()
+{
+	return timeForBall;
 }
 
 void Game::calcTimes() {
@@ -60,12 +69,33 @@ void Game::startGameplay() {
 	gameplay = new Gameplay;
 }
 
+
+
 void Game::manageWindowEvents() {
+	
 	while (windowObj.pollEvent(_event)) {
 		if (_event.type == sf::Event::Closed) {
 			windowObj.close();
 		}
+		if (_event.type == sf::Event::KeyPressed && licz==0)
+		{
+			clock1.restart();
+			licz = 1;
+			clock1.restart();
+			break;
+		}
+		else timeForBall = 0;
+		if (_event.type == sf::Event::KeyReleased)
+		{
+			timeForBall = clock1.getElapsedTime().asSeconds();
+			clock1.restart();
+			licz = 0;
+			break;
+		}
+		else timeForBall = 0;
+		
 	}
+	
 }
 
 void Game::updateObjects() {
