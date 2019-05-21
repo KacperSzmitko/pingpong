@@ -7,7 +7,7 @@ ObjectsVector<SimObject*> Gameplay::simVector;
 
 Gameplay::Gameplay() {
 	
-	this->ball = new Ball(&physics, 200.0f, 500.0f);
+	this->ball = new Ball(&physics, 200.0f, 300.0f);
 	this->player1 = new Racket(100.0f, 100.0f);
 
 	this->table1 = new Table(300,15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 - 155), Game::getWindowObj().getSize().y / 4, 1);

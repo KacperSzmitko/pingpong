@@ -279,7 +279,7 @@ void Collision::ballTableCol(Ball *ball, Table *table)
 
 void Collision::p1Point(Ball *ball)
 {
-	ball->dObject->setPosition(200, -500);
+	ball->dObject->setPosition(200, -300);
 	ball->velocityVector = { 0.0f, 0.0f };
 	ball->realPos = { ball->physics->calcRealValue(ball->dObject->getPosition().x),
 	-ball->physics->calcRealValue(ball->dObject->getPosition().y) };
@@ -293,7 +293,7 @@ void Collision::p1Point(Ball *ball)
 
 void Collision::p2Point(Ball *ball)
 {
-	ball->dObject->setPosition(1100, -500);
+	ball->dObject->setPosition(1100, -300);
 	ball->velocityVector = { 0.0f, 0.0f };
 	ball->realPos = { ball->physics->calcRealValue(ball->dObject->getPosition().x),
 	-ball->physics->calcRealValue(ball->dObject->getPosition().y) };
@@ -344,7 +344,7 @@ void Collision::calcballRacketCol(Ball *ball, Racket *racket)
 	if (SP.y == EP.y)
 	{
 		tgalfa = atan2(ball->dObject->getPosition().y, ball->dObject->getPosition().x);
-		tgalfa -= 1.57079;
+		tgalfa = 1.57079- tgalfa;
 	}
 	else if (SP.x == EP.x)
 	{
@@ -360,13 +360,19 @@ void Collision::calcballRacketCol(Ball *ball, Racket *racket)
 
 
 	angle = tgalfa;
-	std::cout << angle * 180 / 3.1415 << "\n";
+	
 
 	
 	if (angle > 1.4) angle = 1.3;
 	else if (angle < -1.4) angle = -1.3;
+	if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
+	{
 
-	if ((ball->unitVector.x <= 0 && racket->unitVector.x >= 0) || ((ball->unitVector.x >= 0 && racket->unitVector.x <= 0)))
+
+		ball->velocityVector = { ball->velocity*cos(angle) , ball->velocity*sin(angle) };
+
+	}
+	else if ((ball->unitVector.x <= 0 && racket->unitVector.x >= 0) || ((ball->unitVector.x >= 0 && racket->unitVector.x <= 0)))
 	{
 		
 		
@@ -389,11 +395,7 @@ void Collision::calcballRacketCol(Ball *ball, Racket *racket)
 		
 
 	}
-	else if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
-	{
-		ball->velocityVector = { ball->velocityVector.x*cos(angle) , ball->velocityVector.y*sin(angle) };
 
-	}
 
 }
 

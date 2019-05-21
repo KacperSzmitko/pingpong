@@ -22,6 +22,8 @@ private:
 	int p1Serv, p2Serv; //0 - nie serwowal, 1 - serwowal, 2 - bedzie serwowal
 	bool isballmove; // mowi czy pilka sie porusza
 	int Colision; //Aby zapobiec zmultiplikowanemu wykrywaniu kolizji
+	sf::Clock ck;
+	int pomoc; //To regulacji mocy porzucenia
 	sf::Vector2f acc;
 	sf::Vector2f oldVelocityVector;
 	void applyGravity();

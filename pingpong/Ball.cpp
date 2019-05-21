@@ -19,6 +19,7 @@ Ball::Ball(Physics* physics, float posX, float posY) :
 	p2Serv = 0; 
 	p1 = false;
 	p2 = false;
+	pomoc = 0;
 	Collision::getBallCollisionVector()._add(this);
 }
    
@@ -76,14 +77,28 @@ void Ball::simulation() {
 		}
 		else
 		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) pomoc = 1;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || pomoc!=0)
 			{
-				isballmove = true;
-				velocityVector.y = -2.0;
-				p1 = !p1;
-				p2 = !p2;
-				Colision = 3;
+				float czas = ck.getElapsedTime().asSeconds();
+				ck.restart();
+				if (pomoc == 1)
+				{
+					
+					isballmove = true;
+					velocityVector.y = 3.0 * czas;
+					if (velocityVector.y > 5) velocityVector.y = 5;
+					p1 = !p1;
+					p2 = !p2;
+					Colision = 3;
+					pomoc = 0;
+				}
 			}
+		
+
+			
+
 		}
 	}
 }
