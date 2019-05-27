@@ -369,9 +369,17 @@ void Collision::calcballRacketCol(Ball *ball, Racket *racket)
 	else if (angle < -1.4) angle = -1.3;
 	if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
 	{
-
-
+		if (racket->angle>0 && racket->angle<90 && ball->p1)
+		{
+			ball->velocityVector = { -ball->velocity*cos(angle) , ball->velocity*sin(angle) };
+		}
+		else if(ball->p1)
 		ball->velocityVector = { ball->velocity*cos(angle) , ball->velocity*sin(angle) };
+		else if (racket->angle < 0 && racket->angle >-90  && ball->p2)
+		ball->velocityVector = { -ball->velocity*cos(angle) , ball->velocity*sin(angle) };
+		else if(ball->p2)
+		ball->velocityVector = { ball->velocity*cos(angle) , ball->velocity*sin(angle) };
+
 
 	}
 	else if ((ball->unitVector.x <= 0 && racket->unitVector.x >= 0) || ((ball->unitVector.x >= 0 && racket->unitVector.x <= 0)))
