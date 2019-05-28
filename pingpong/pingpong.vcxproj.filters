@@ -45,9 +45,6 @@
     <ClInclude Include="Game.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="UpdateObject.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="DrawnObject.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
@@ -86,6 +83,12 @@
     </ClInclude>
     <ClInclude Include="SimObject.h">
       <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateObject.h">
+      <Filter>Pliki zasobów</Filter>
+    </ClInclude>
+    <ClInclude Include="Table.h">
+      <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="SimObject.cpp">
       <Filter>Pliki źródłowe\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Table.cpp">
+      <Filter>Pliki źródłowe\gameplay\Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

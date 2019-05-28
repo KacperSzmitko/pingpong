@@ -14,12 +14,22 @@ Ball::Ball(Physics* physics, float posX, float posY) :
 	this->acc = { 0.0f, 0.0f };
 	this->dObject->setOrigin(BALL_DEFAULT_PIXEL_RADIUS, BALL_DEFAULT_PIXEL_RADIUS);
 	this->dObject->setPosition(Physics::swapY({ posX, posY }));
-
+	isballmove = false;
+	p1Serv = 2; 
+	p2Serv = 0; 
+	p1 = false;
+	p2 = false;
+	pomoc = 0;
 	Collision::getBallCollisionVector()._add(this);
 }
-
+   
 void Ball::applyGravity() {
 	acc += {0, -physics->grav};
+}
+
+void Ball::applyWind()
+{
+	acc += {-physics->wind, 0};
 }
 
 void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {
@@ -30,12 +40,13 @@ void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {
 
 void Ball::applyForces() {
 	applyGravity();
+	applyWind();
 	applyAirResistance(velocity, unitVector);
 }
 
 sf::Vector2f Ball::calcNewRealPos(const sf::Vector2f &lV, const sf::Vector2f &vV, const sf::Vector2f &acc, const float &t) {
 
-	applyForces();
+	if(isballmove && (p1Serv!=2 || p2Serv!=2))applyForces();
 	return lV + (((2.0f * vV) + (acc * t)) * t) * 0.5f;
 }
 
@@ -44,21 +55,44 @@ void Ball::setPixelSize(const float &pR) {
 	realRaidus = Physics::calcRealValue(pR);
 }
 
-void Ball::update()
-{
+void Ball::update() {
 	getSimTime();
-	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
-
+	
 }
 
 void Ball::simulation() {
 	acc = { 0.0f, 0.0f };
+	
+	
 	if (!_pause) {
-		oldRealPos = realPos;
-		realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
-		velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
-		velocity = calcVelocityFromVelocityVector(velocityVector);
-		unitVector = calcUnitVector(velocityVector, velocity);
+		
+		if (isballmove)
+		{
+			
+			oldVelocityVector = velocityVector;
+			
+			oldRealPos = realPos;
+			realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
+			velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
+			velocity = calcVelocityFromVelocityVector(velocityVector);
+			unitVector = calcUnitVector(velocityVector, velocity);
+			dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
+		}
+		else
+		{
+			float pomoc = Game::getTimeForBall();
+				if (pomoc !=0)
+				{
+					isballmove = true;
+					velocityVector.y = 3.0 * pomoc;
+					if (velocityVector.y > 5) velocityVector.y = 5;
+					p1 = !p1;
+					p2 = !p2;
+					Colision = 3;
+					pomoc = 0;
+				}
+				
+		}
 	}
 }
 
