@@ -7,7 +7,7 @@
 #define PI 3.14159265359f
 
 struct Physics {
-	float viscosity, pressure, grav, wind;
+	static float viscosity, grav, wind;
 
 	static const float pixelToRealRatio;
 
@@ -22,9 +22,6 @@ struct Physics {
 		static const Material ball;
 		static const Material racket;
 	};
-
-	Physics(float viscosity, float grav, float wind);
-	Physics();
 
 	void setViscosity(const float &viscosity);
 	void setPressure(const float &pressure);

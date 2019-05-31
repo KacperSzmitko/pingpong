@@ -2,6 +2,8 @@
 
 #include "ObjectsVector.h"
 #include "Gameplay.h"
+#include "MainMenu.h"
+#include "ModeSelectMenu.h"
 
 class Game {
 private:
@@ -12,6 +14,9 @@ private:
 	static sf::Clock frameClock;
 	static ObjectsVector<UpdateObject*> updateVector;
 	static ObjectsVector<sf::Drawable*> drawVector;
+
+	static MainMenu *mainMenu;
+	static ModeSelectMenu *modeSelectMenu;
 	
 	static const int simPerFrame;
 	static float lastTime;
@@ -19,16 +24,20 @@ private:
 	static float simTime;
 
 	sf::View view;
-	sf::Event _event;
+	static sf::Event _event;
 
 	static void calcTimes();
 
 public:
+	static bool mousePress;
 	static float timeForBall;
+	static sf::Font font;
+
 	Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);
 
 	static Gameplay *gameplay;
 	static sf::RenderWindow &getWindowObj();
+	static sf::Event &getEvent();
 	static float getTime();
 	static int getSimPerFrame();
 	static float getElapsedTime();
@@ -36,8 +45,10 @@ public:
 	static float getTimeForBall();
 	static ObjectsVector<UpdateObject*>& getUpdateVector();
 	static ObjectsVector<sf::Drawable*>& getDrawVector();
-	static void startGameplay();
-	void manageWindowEvents();
+	static void startMainMenu();
+	static void startModeSelectMenu();
+	static void startGameplay(int mode);
+	void manageEvents();
 	void updateObjects();
 	void drawObjects();
 	void run();

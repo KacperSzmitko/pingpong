@@ -2,9 +2,10 @@
 template <typename T> class ObjectsVector {
 private:
 	std::vector<T> vec;
-	typename std::vector<T>::iterator i;
+	bool forEachReset;
 
 public:
+	ObjectsVector();
 	void _add(T object);
 	void _delete(T object);
 	void clear();

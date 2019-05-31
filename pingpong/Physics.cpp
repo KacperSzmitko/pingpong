@@ -2,31 +2,17 @@
 #include "Physics.h"
 
 const float Physics::pixelToRealRatio = PHYSICS_DEFAULT_PIXEL_TO_REAL_RATIO;
+float Physics::viscosity = PHYSICS_DEFAULT_VISCOSITY;
+float Physics::grav = PHYSICS_DEFAULT_GRAV;
+float Physics::wind = 0.0f;
 
 const Physics::Material Physics::Materials::wood = { 1.0f, 1.0f };
 const Physics::Material Physics::Materials::ball = { 1.0f, 1.0f };
 const Physics::Material Physics::Materials::racket = { 1.0f, 1.0f };
 
-Physics::Physics(float viscosity, float grav, float wind) {
-	this->viscosity = viscosity;
-	this->grav = grav;
-	this->wind = wind;
-};
-
-
-Physics::Physics() {
-	
-	this->viscosity = PHYSICS_DEFAULT_VISCOSITY;
-	this->grav = PHYSICS_DEFAULT_GRAV;
-	this->wind = 0.0f;
-}
 
 void Physics::setViscosity(const float &v) {
 	viscosity = v;
-}
-
-void Physics::setPressure(const float &p) {
-	pressure = p;
 }
 
 void Physics::setGrav(const float &g) {
@@ -52,8 +38,6 @@ sf::Vector2f Physics::calcPixelVector(const sf::Vector2f &realVector) {
 	float ptrr = pixelToRealRatio;
 	return { (float)realVector.x / ptrr, (float)realVector.y / ptrr };
 }
-
-
 
 float Physics::calcRealValue(const float &pixelValue) {
 	return pixelValue * pixelToRealRatio;

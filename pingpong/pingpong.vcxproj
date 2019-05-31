@@ -169,14 +169,17 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="DrawnObject.h" />
     <ClInclude Include="Gameplay.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MenuBar.h" />
+    <ClInclude Include="ModeSelectMenu.h" />
     <ClInclude Include="MovingObject.h" />
     <ClInclude Include="ObjectsVector.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicalObject.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Racket.h" />
     <ClInclude Include="Rect.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="SimObject.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="UpdateObject.h" />
@@ -188,6 +191,9 @@
     <ClCompile Include="DrawnObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameplay.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MenuBar.cpp" />
+    <ClCompile Include="ModeSelectMenu.cpp" />
     <ClCompile Include="MovingObject.cpp" />
     <ClCompile Include="ObjectsVector.cpp" />
     <ClCompile Include="pch.cpp">
@@ -199,12 +205,16 @@
     <ClCompile Include="PhysicalObject.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="pingpong.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Racket.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="SimObject.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="UpdateObject.cpp" />
     <ClCompile Include="Wall.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="opensans.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

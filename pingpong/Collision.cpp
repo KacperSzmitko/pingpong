@@ -281,8 +281,8 @@ void Collision::p1Point(Ball *ball)
 {
 	ball->dObject->setPosition(200, -300);
 	ball->velocityVector = { 0.0f, 0.0f };
-	ball->realPos = { ball->physics->calcRealValue(ball->dObject->getPosition().x),
-	-ball->physics->calcRealValue(ball->dObject->getPosition().y) };
+	ball->realPos = { Physics::calcRealValue(ball->dObject->getPosition().x),
+	-Physics::calcRealValue(ball->dObject->getPosition().y) };
 	ball->isballmove = false;
 	ball->Colision = 0;
 	ball->p1Serv = 2;
@@ -296,8 +296,8 @@ void Collision::p2Point(Ball *ball)
 {
 	ball->dObject->setPosition(1100, -300);
 	ball->velocityVector = { 0.0f, 0.0f };
-	ball->realPos = { ball->physics->calcRealValue(ball->dObject->getPosition().x),
-	-ball->physics->calcRealValue(ball->dObject->getPosition().y) };
+	ball->realPos = { Physics::calcRealValue(ball->dObject->getPosition().x),
+	-Physics::calcRealValue(ball->dObject->getPosition().y) };
 	ball->isballmove = false;
 	ball->Colision = 0;
 	ball->p2Serv = 2;

@@ -2,15 +2,14 @@
 #include "Ball.h"
 #include "Game.h"
 
-Ball::Ball(Physics* physics, float posX, float posY) : 
+Ball::Ball(float posX, float posY) : 
 	DrawnObject(new sf::CircleShape(BALL_DEFAULT_PIXEL_RADIUS)),
 	PhysicalObject(Physics::Materials::wood, posX, posY),
 	MovingObject(BALL_DEFAULT_MASS) {
-	this->physics = physics;
 	this->pixelRaidus = BALL_DEFAULT_PIXEL_RADIUS;
 	this->realRaidus = Physics::calcRealValue(BALL_DEFAULT_PIXEL_RADIUS);
 	this->drag = BALL_DEFAULT_DRAG;
-	this->dragK = (-0.5f * physics->viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
+	this->dragK = (-0.5f * Physics::viscosity * 2.0f * PI * pow(this->realRaidus, 2) * this->drag) / this->mass;
 	this->acc = { 0.0f, 0.0f };
 	this->dObject->setOrigin(BALL_DEFAULT_PIXEL_RADIUS, BALL_DEFAULT_PIXEL_RADIUS);
 	this->dObject->setPosition(Physics::swapY({ posX, posY }));
@@ -24,12 +23,12 @@ Ball::Ball(Physics* physics, float posX, float posY) :
 }
    
 void Ball::applyGravity() {
-	acc += {0, -physics->grav};
+	acc += {0, -Physics::grav};
 }
 
 void Ball::applyWind()
 {
-	acc += {-physics->wind, 0};
+	acc += {-Physics::wind, 0};
 }
 
 void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {
