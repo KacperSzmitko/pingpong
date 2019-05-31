@@ -19,7 +19,7 @@ private:
 	static ObjectsVector<SimObject*> simVector;
 
 	
-	Racket *player1;
+	Racket *player1,*player2;
 	//Racket player2;
 	Ball *ball;
 	Table *table1,*table2;
