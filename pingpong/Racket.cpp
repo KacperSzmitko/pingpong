@@ -10,8 +10,8 @@ Racket::Racket(float posX, float posY) :
 }
 
 void Racket::rotation() {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= 225.0f * elapsedTime;
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += 225.0f * elapsedTime;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= 247.5f * elapsedTime;
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += 247.5f * elapsedTime;
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) angle = 0.0f;
 	
 	if (angle >= 180.0f) angle -= 180.0f;
@@ -38,14 +38,13 @@ void Racket::update() {
 
 void Racket::simulation() {
 	
-	oldRealPos = realPos;
-	realPos = Physics::swapY(Physics::calcRealVector(windowObj.mapPixelToCoords(sf::Mouse::getPosition(windowObj))));
 	if ((realPos.x - oldRealPos.x) > (RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.x = oldRealPos.x + (RACKET_DEFAULT_MAX_VELOCITY * simTime);
 	if ((realPos.x - oldRealPos.x) < (-RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.x = oldRealPos.x - (RACKET_DEFAULT_MAX_VELOCITY * simTime);
 	if ((realPos.y - oldRealPos.y) > (RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.y = oldRealPos.y + (RACKET_DEFAULT_MAX_VELOCITY * simTime);
 	if ((realPos.y - oldRealPos.y) < (-RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.y = oldRealPos.y - (RACKET_DEFAULT_MAX_VELOCITY * simTime);
 	quickVelocityVector += calcVelocityVector(oldRealPos, realPos, simTime);
 	dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
+	oldRealPos = realPos;
 	
 }
 

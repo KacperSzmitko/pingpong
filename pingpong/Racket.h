@@ -11,6 +11,7 @@
 class Racket : public MovingObject, public Rect {
 
 	friend class Collision;
+	friend class Player;
 
 private:
 	const sf::RenderWindow &windowObj;

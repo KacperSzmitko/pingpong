@@ -5,7 +5,8 @@ int main() {
 
 	Game game(1280, 720, 0, true, "Ping-Pong");
 	
-	game.startGameplay();
+	//game.startGameplay();
+	game.startMainMenu();
 
 	game.run();
 

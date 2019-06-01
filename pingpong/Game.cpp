@@ -2,6 +2,7 @@
 #include "Game.h"
 
 sf::RenderWindow Game::windowObj;
+sf::Event Game::_event;
 ObjectsVector<UpdateObject*> Game::updateVector;
 ObjectsVector<sf::Drawable*> Game::drawVector;
 sf::Clock Game::clock;
@@ -13,6 +14,10 @@ float Game::lastTime = 0.0f;
 float Game::timeForBall = 0.0f;
 float Game::elapsedTime = Game::getTime();
 float Game::simTime = Game::elapsedTime / (float)Game::simPerFrame;
+sf::Font Game::font;
+MainMenu *Game::mainMenu;
+ModeSelectMenu *Game::modeSelectMenu;
+bool Game::mousePress = false;
 
 Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : 
 	view({ (float)xSize / 2.0f, (float)ySize / -2.0f }, { (float)xSize, (float)ySize }) {
@@ -20,14 +25,18 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 	this->windowObj.create(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
 	this->windowObj.setFramerateLimit(refreshRate);
 	this->windowObj.setVerticalSyncEnabled(verticalSync);
-	this->windowObj.setMouseCursorVisible(false);
+	
 	this->windowObj.setView(view);
 	this->licz = 0;
-	
+	font.loadFromFile("opensans.ttf");
 }
 
 sf::RenderWindow &Game::getWindowObj() {
 	return windowObj;
+}
+
+sf::Event &Game::getEvent() {
+	return _event;
 }
 
 float Game::getTime() {
@@ -65,14 +74,23 @@ ObjectsVector<sf::Drawable*> &Game::getDrawVector() {
 	return drawVector;
 }
 
-void Game::startGameplay() {
-	gameplay = new Gameplay;
+void Game::startMainMenu() {
+	mainMenu = new MainMenu;
+}
+
+void Game::startModeSelectMenu() {
+	modeSelectMenu = new ModeSelectMenu;
+}
+
+void Game::startGameplay(int mode) {
+	gameplay = new Gameplay(mode);
 }
 
 
 
-void Game::manageWindowEvents() {
+void Game::manageEvents() {
 	
+	mousePress = false;
 	while (windowObj.pollEvent(_event)) {
 		if (_event.type == sf::Event::Closed) {
 			windowObj.close();
@@ -93,6 +111,12 @@ void Game::manageWindowEvents() {
 			break;
 		}
 		else timeForBall = 0;
+		if (_event.type == sf::Event::MouseButtonPressed) {
+			mousePress = true;
+		}
+
+		
+		
 		
 	}
 	
@@ -113,7 +137,7 @@ void Game::drawObjects() {
 void Game::run() {
 	while (windowObj.isOpen()) {
 		windowObj.clear();
-		manageWindowEvents();
+		manageEvents();
 		calcTimes();
 		updateObjects();
 		for (int i = 0; i < simPerFrame; i++) gameplay->simulate();
@@ -129,10 +153,10 @@ void Game::run() {
 }
 
 void Game::tests() {
-	gameplay->objectsTest();
+	if (gameplay != nullptr) gameplay->objectsTest();
+	
 }
 
 Game::~Game() {
 	windowObj.close();
-	delete gameplay;
 }

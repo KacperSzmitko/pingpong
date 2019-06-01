@@ -14,7 +14,6 @@ class Ball : public PhysicalObject, public MovingObject, public DrawnObject<sf::
 	friend class Collision;
 
 private:
-	Physics *physics;
 	float pixelRaidus, realRaidus;
 	float drag;
 	float dragK;
@@ -33,7 +32,7 @@ private:
 	sf::Vector2f calcNewRealPos(const sf::Vector2f &lastRealPos, const sf::Vector2f &velocityVector, const sf::Vector2f &acc, const float &time);
 
 public:
-	Ball(Physics* physics, float posX, float posY);
+	Ball(float posX, float posY);
 
 	void setPixelSize(const float &pixelRaidus);
 	void update();

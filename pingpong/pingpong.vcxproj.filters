@@ -60,9 +60,6 @@
     <ClInclude Include="Collision.h">
       <Filter>Pliki nagłówkowe\gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="MovingObject.h">
       <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
     </ClInclude>
@@ -84,11 +81,23 @@
     <ClInclude Include="SimObject.h">
       <Filter>Pliki nagłówkowe\gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="UpdateObject.h">
-      <Filter>Pliki zasobów</Filter>
-    </ClInclude>
     <ClInclude Include="Table.h">
       <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Pliki nagłówkowe\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuBar.h">
+      <Filter>Pliki nagłówkowe\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Pliki nagłówkowe\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateObject.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeSelectMenu.h">
+      <Filter>Pliki nagłówkowe\ui</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
@@ -147,7 +156,21 @@
       <Filter>Pliki źródłowe\gameplay\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Pliki źródłowe\gameplay\Objects</Filter>
+      <Filter>Pliki źródłowe\gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Pliki źródłowe\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuBar.cpp">
+      <Filter>Pliki źródłowe\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeSelectMenu.cpp">
+      <Filter>Pliki źródłowe\ui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="opensans.ttf">
+      <Filter>Pliki zasobów</Filter>
+    </Font>
   </ItemGroup>
 </Project>

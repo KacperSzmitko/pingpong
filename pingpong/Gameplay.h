@@ -7,6 +7,7 @@
 #include "ObjectsVector.h"
 #include "SimObject.h"
 #include "Table.h"
+#include "Player.h"
 
 class Gameplay {
 
@@ -14,20 +15,17 @@ class Gameplay {
 
 private:
 
-	Physics physics;
+	int mode;
 	Wall *wallL,*wallR,*wallD;
 	static ObjectsVector<SimObject*> simVector;
-
-	
-	Racket *player1,*player2;
-	//Racket player2;
+	Racket *racket1, *racket2;
 	Ball *ball;
 	Table *table1,*table2;
-	
-
+	Player *player1;
+	Player *player2;
 
 public:
-	Gameplay();
+	Gameplay(int mode);
 
 	static Collision collision;
 
