@@ -20,13 +20,13 @@ private:
 	static ObjectsVector<SimObject*> simVector;
 	Racket *racket1, *racket2;
 	Ball *ball;
-	Table *table1,*table2;
+	Table *table1,*table2,*net;
 	Player *player1;
 	Player *player2;
 
 public:
 	Gameplay(int mode);
-
+	static sf::Vector2f default_ballLPos, default_ballRPos, default_racketLPos, default_racketRPos;
 	static Collision collision;
 
 	static ObjectsVector<SimObject*>& getSimVector();

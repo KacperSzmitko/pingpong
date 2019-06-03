@@ -16,14 +16,15 @@ class Racket : public MovingObject, public Rect {
 private:
 	const sf::RenderWindow &windowObj;
 	sf::Vector2f quickVelocityVector;
+	bool isAI;
+	int whichPlayer;
 
 public:
-	Racket(float posX, float posY);
+	Racket(float posX, float posY,bool isAI, int whichPlayer);
 
 	void rotation();
 	void update();
 	void simulation();
-
 	~Racket();
 
 	void test();

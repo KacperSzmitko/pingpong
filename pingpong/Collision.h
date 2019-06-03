@@ -5,6 +5,7 @@
 #include "Wall.h"
 #include "Table.h"
 #include "ObjectsVector.h"
+#include "Player.h"
 
 
 class Collision {
@@ -22,11 +23,12 @@ private:
 	void calcballRacketCol(Ball *ball, Racket *racket);
 	void calcballTableCol(Ball *ball, Table *table);
 
-	void p1Point(Ball *ball);
-	void p2Point(Ball *ball);
-
+	void p1Point(Ball *ball,Player *p);
+	void p2Point(Ball *ball,Player *p);
+	int who; // Kto odbil 1-gracz pierwszy, 2- gracz drugi
+	sf::Clock ck;
 public:
-	
+	Player *p1, *p2;
 	static ObjectsVector<Wall*> &getWallCollisionVector();
 	static ObjectsVector<Racket*> &getRacketCollisionVector();
 	static ObjectsVector<Ball*> &getBallCollisionVector();

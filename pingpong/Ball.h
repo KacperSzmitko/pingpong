@@ -12,6 +12,7 @@
 class Ball : public PhysicalObject, public MovingObject, public DrawnObject<sf::CircleShape> {
 	
 	friend class Collision;
+	friend class Player;
 
 private:
 	float pixelRaidus, realRaidus;

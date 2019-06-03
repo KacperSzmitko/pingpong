@@ -17,7 +17,7 @@ protected:
 public:
 
 	MovingObject(float mass);
-
+	
 	void setMass(const float &mass);
 	void setVelocityVector(const sf::Vector2f &velocityVector);
 	void setOldRealPos(const sf::Vector2f &oRP);
