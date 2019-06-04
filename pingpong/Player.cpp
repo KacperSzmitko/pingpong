@@ -2,6 +2,9 @@
 #include "Player.h"
 #include "Game.h"
 
+bool Player::TPMousePlayer1 = false;
+bool Player::TPMousePlayer2 = false;
+
 Player::Player(int mode, Racket* racket, Table* table,Ball* ball, int playerNumber) {
 	this->mode = mode;
 	this->racket = racket;
@@ -10,27 +13,40 @@ Player::Player(int mode, Racket* racket, Table* table,Ball* ball, int playerNumb
 	this->ball = ball;
 	this->playerNumber = playerNumber;
 	licz = 0;
+	this->TPMousePlayer1 = false;
+	this->TPMousePlayer2 = false;
 	if (racket->isAI) srand(time(NULL));
 }
 
 void Player::move() {
 
-	{
-		
 	
 		if (mode == 0 && playerNumber == 1) {
-			if (ball->p1Serv == 2 || ball->p1) {
-				//if (ball->p1) sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
+			if (ball->p1Serv == 2 || ball->p2Serv == 1 || (ball->p2Serv == 0 && ball->p1)) {
+				if (TPMousePlayer1) {
+					sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
+					TPMousePlayer1 = false;
+					
+				}
+				racket->rotation();
 				racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
+				TPMousePlayer2 = true;
 			}
 
 		} else if (mode == 0 && playerNumber == 2) {
-			if (ball->p2Serv == 2 || ball->p2) {
-				//if (ball->p2) sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
+			if (ball->p2Serv == 2 || ball->p1Serv == 1 || (ball->p1Serv == 0 && ball->p2)) {
+				if (TPMousePlayer2) {
+					sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
+					TPMousePlayer2 = false;
+					
+				}
+				racket->rotation();
 				racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
+				TPMousePlayer1 = true;
 			}
 		} else if (mode == 1 && !racket->isAI) {
-			//racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
+			racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
+			racket->rotation();
 		}
 		else if (mode == 1 && racket->isAI) {
 			
@@ -155,7 +171,7 @@ void Player::move() {
 			racket->realPos = Physics::swapY(Physics::calcRealVector(racket->dObject->getPosition()));
 			
 		}
-	}
+	
 }
 
 void Player::moveTowardsPoint(sf::Vector2f point,float speed1,float speed2)

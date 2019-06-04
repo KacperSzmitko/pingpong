@@ -17,8 +17,8 @@ Gameplay::Gameplay(int mode) {
 	Game::getWindowObj().setMouseCursorVisible(false);
 	
 	this->ball = new Ball(200.0f, 300.0f);
-	this->racket1 = new Racket(200.0f, 360.0f,0,1);
-	this->racket2 = new Racket(1200.0f, 360.0f,mode,2);
+	this->racket1 = new Racket(150.0f, 360.0f,0,1);
+	this->racket2 = new Racket(1130.0f, 360.0f,mode,2);
 
 	this->table1 = new Table(300,15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 - 155), Game::getWindowObj().getSize().y / 4, 1);
 	this->table2 = new Table(300, 15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 + 150), Game::getWindowObj().getSize().y / 4, 2);
@@ -36,11 +36,13 @@ Gameplay::Gameplay(int mode) {
 	
 	this->default_ballLPos = { 200,-360 };
 	this->default_ballRPos = { 1080,-360 };
-	this->default_racketLPos = { 100,-360 };
-	this->default_racketRPos = { 1200,-360 };
+	this->default_racketLPos = { 150,-360 };
+	this->default_racketRPos = { 1130,-360 };
 
 	this->player1Score = 0;
 	this->player2Score = 0;
+
+	sf::Mouse::setPosition(Game::getWindowObj().mapCoordsToPixel({ 200.0f, -360.0f }), Game::getWindowObj());
 }
 
 ObjectsVector<SimObject*> &Gameplay::getSimVector() {

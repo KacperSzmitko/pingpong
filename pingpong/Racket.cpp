@@ -9,13 +9,17 @@ Racket::Racket(float posX, float posY,bool isAI, int whichPlayer) :
 	Collision::getRacketCollisionVector()._add(this);
 	this->isAI = isAI;
 	this->whichPlayer = whichPlayer;
+	this->oldRealPos = this->realPos;
 
+	
+
+	
 }
 
 void Racket::rotation() {
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= 247.5f * elapsedTime;
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += 247.5f * elapsedTime;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= (247.5f / Game::getSimPerFrame()) * elapsedTime;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += (247.5f / Game::getSimPerFrame()) * elapsedTime;
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) angle = 0.0f;
 
 		if (angle >= 180.0f) angle -= 180.0f;
@@ -25,6 +29,7 @@ void Racket::rotation() {
 }
 
 void Racket::update() {
+
 		getSimTime();
 		getElapsedTime();
 		velocityVector = quickVelocityVector / (float)Game::getSimPerFrame();
@@ -34,23 +39,29 @@ void Racket::update() {
 		if (velocity != 0.0f) {
 			unitVector = calcUnitVector(velocityVector, velocity);
 		}
-		if(!isAI)
-		rotation();
+		
+		
+		
 }
 
 void Racket::simulation() {
-	
 
-	if ((realPos.x - oldRealPos.x) > (RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.x = oldRealPos.x + (RACKET_DEFAULT_MAX_VELOCITY * simTime);
-	if ((realPos.x - oldRealPos.x) < (-RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.x = oldRealPos.x - (RACKET_DEFAULT_MAX_VELOCITY * simTime);
-	if ((realPos.y - oldRealPos.y) > (RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.y = oldRealPos.y + (RACKET_DEFAULT_MAX_VELOCITY * simTime);
-	if ((realPos.y - oldRealPos.y) < (-RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.y = oldRealPos.y - (RACKET_DEFAULT_MAX_VELOCITY * simTime);
 	
+	if (realPos != oldRealPos) {
+		if ((realPos.x - oldRealPos.x) > (RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.x = oldRealPos.x + (RACKET_DEFAULT_MAX_VELOCITY * simTime);
+		if ((realPos.x - oldRealPos.x) < (-RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.x = oldRealPos.x - (RACKET_DEFAULT_MAX_VELOCITY * simTime);
+		if ((realPos.y - oldRealPos.y) > (RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.y = oldRealPos.y + (RACKET_DEFAULT_MAX_VELOCITY * simTime);
+		if ((realPos.y - oldRealPos.y) < (-RACKET_DEFAULT_MAX_VELOCITY * simTime)) realPos.y = oldRealPos.y - (RACKET_DEFAULT_MAX_VELOCITY * simTime);
+	}
+
 	if (!isAI)
 	{
+		
+	
 		quickVelocityVector += calcVelocityVector(oldRealPos, realPos, simTime);
 		dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
 		oldRealPos = realPos;
+		
 	}
 	else
 	{

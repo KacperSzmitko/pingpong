@@ -18,6 +18,7 @@ private:
 	float licz=0;
 	float pom;
 	int playerNumber;
+	static bool TPMousePlayer1, TPMousePlayer2;
 	
 public:
 	Player(int mode, Racket* racket, Table* table, Ball* ball, int playerNumber);
