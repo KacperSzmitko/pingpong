@@ -17,8 +17,8 @@ Gameplay::Gameplay(int mode) {
 	this->racket1 = new Racket(200.0f, 360.0f,0,1);
 	this->racket2 = new Racket(1200.0f, 360.0f,mode,2);
 
-	this->table1 = new Table(300,15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 - 155), Game::getWindowObj().getSize().y / 4, 1);
-	this->table2 = new Table(300, 15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 + 150), Game::getWindowObj().getSize().y / 4, 2);
+	this->table1 = new Table(340,15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 - 175), Game::getWindowObj().getSize().y / 4, 1);
+	this->table2 = new Table(340, 15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 + 170), Game::getWindowObj().getSize().y / 4, 2);
 	this->net = new Table(5, 40, 0, Physics::Materials::wood, ((Game::getWindowObj().getSize().x / 2)-2.5f), (Game::getWindowObj().getSize().y / 4)+13.0f, 3);
 	
 	this->wallD = new Wall( Game::getWindowObj().getSize().x*10,10,0, Physics::Materials::wood,0,0);

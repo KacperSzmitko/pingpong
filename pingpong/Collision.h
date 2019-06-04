@@ -27,6 +27,7 @@ private:
 	void p2Point(Ball *ball,Player *p);
 	int who; // Kto odbil 1-gracz pierwszy, 2- gracz drugi
 	sf::Clock ck;
+	sf::Clock ck1;
 public:
 	Player *p1, *p2;
 	static ObjectsVector<Wall*> &getWallCollisionVector();

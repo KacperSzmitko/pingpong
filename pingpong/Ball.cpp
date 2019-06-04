@@ -73,6 +73,7 @@ void Ball::simulation() {
 			oldRealPos = realPos;
 			realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
 			velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
+			if (velocityVector.y > 3) velocityVector.y = 3;
 			velocity = calcVelocityFromVelocityVector(velocityVector);
 			unitVector = calcUnitVector(velocityVector, velocity);
 			dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));

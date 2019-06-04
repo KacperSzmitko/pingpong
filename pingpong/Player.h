@@ -15,7 +15,7 @@ private:
 	Table* table;
 	Ball* ball;
 	int points;
-	float licz=0;
+	float licz;
 	float pom;
 	
 public:
