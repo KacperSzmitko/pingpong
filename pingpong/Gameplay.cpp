@@ -57,6 +57,7 @@ void Gameplay::simulate() {
 	
 	simulateObjects();
 	collision.checkCollisions();
+
 }
 
 void Gameplay::pause() {
@@ -70,6 +71,7 @@ void Gameplay::unpause() {
 }
 
 void Gameplay::update() {
+	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		Game::startMainMenu();
 		Game::getWindowObj().setMouseCursorVisible(true);

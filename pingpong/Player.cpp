@@ -19,18 +19,18 @@ void Player::move() {
 		
 	
 		if (mode == 0 && playerNumber == 1) {
-			if (ball->p1) {
+			if (ball->p1Serv == 2 || ball->p1) {
 				//if (ball->p1) sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
 				racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
 			}
 
 		} else if (mode == 0 && playerNumber == 2) {
-			if (ball->p2) {
+			if (ball->p2Serv == 2 || ball->p2) {
 				//if (ball->p2) sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
 				racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
 			}
 		} else if (mode == 1 && !racket->isAI) {
-			racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
+			//racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
 		}
 		else if (mode == 1 && racket->isAI) {
 			
