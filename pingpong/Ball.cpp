@@ -28,7 +28,7 @@ void Ball::applyGravity() {
 
 void Ball::applyWind()
 {
-	acc += {-Physics::wind, 0};
+	acc += {Physics::wind, 0};
 }
 
 void Ball::applyAirResistance(const float &v, const sf::Vector2f &uV) {

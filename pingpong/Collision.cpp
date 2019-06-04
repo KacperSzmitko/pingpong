@@ -525,8 +525,6 @@ Collision::~Collision() {
 	rackets.clear();
 	balls.clear();
 	tables.clear();
-	delete p1;
-	delete p2;
 }
 
 

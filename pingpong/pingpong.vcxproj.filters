@@ -117,6 +117,9 @@
     <ClInclude Include="Score.h">
       <Filter>Pliki nagłówkowe\ui</Filter>
     </ClInclude>
+    <ClInclude Include="DisplayWind.h">
+      <Filter>Pliki nagłówkowe\ui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -189,6 +192,9 @@
       <Filter>Pliki źródłowe\ui</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
+      <Filter>Pliki źródłowe\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayWind.cpp">
       <Filter>Pliki źródłowe\ui</Filter>
     </ClCompile>
   </ItemGroup>

@@ -9,6 +9,7 @@
 #include "Table.h"
 #include "Player.h"
 #include "Score.h"
+#include "DisplayWind.h"
 
 class Gameplay : public UpdateObject {
 
@@ -25,6 +26,7 @@ private:
 	Player *player1;
 	Player *player2;
 	Score score;
+	DisplayWind displayWind;
 
 public:
 	Gameplay(int mode);
