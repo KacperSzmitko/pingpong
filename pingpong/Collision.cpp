@@ -7,6 +7,7 @@ ObjectsVector<Wall*> Collision::walls;
 ObjectsVector<Racket*> Collision::rackets;
 ObjectsVector<Ball*> Collision::balls;
 ObjectsVector<Table*> Collision::tables;
+int Collision::who = 0;
 
 ObjectsVector<Table*> &Collision::getTableCollisionVector()
 {

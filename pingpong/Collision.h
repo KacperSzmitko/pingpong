@@ -25,9 +25,10 @@ private:
 
 	void p1Point(Ball *ball,Player *p);
 	void p2Point(Ball *ball,Player *p);
-	int who; // Kto odbil 1-gracz pierwszy, 2- gracz drugi
+	
 	sf::Clock ck;
 public:
+	static int who; // Kto odbil 1-gracz pierwszy, 2- gracz drugi
 	Player *p1, *p2;
 	static ObjectsVector<Wall*> &getWallCollisionVector();
 	static ObjectsVector<Racket*> &getRacketCollisionVector();

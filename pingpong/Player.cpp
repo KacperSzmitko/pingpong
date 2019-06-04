@@ -22,7 +22,7 @@ void Player::move() {
 
 	
 		if (mode == 0 && playerNumber == 1) {
-			if (ball->p1Serv == 2 || ball->p2Serv == 1 || (ball->p2Serv == 0 && ball->p1)) {
+			if (ball->p1Serv == 2 || Collision::who == 2) {
 				if (TPMousePlayer1) {
 					sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
 					TPMousePlayer1 = false;
@@ -34,7 +34,7 @@ void Player::move() {
 			}
 
 		} else if (mode == 0 && playerNumber == 2) {
-			if (ball->p2Serv == 2 || ball->p1Serv == 1 || (ball->p1Serv == 0 && ball->p2)) {
+			if (ball->p2Serv == 2 || Collision::who == 1) {
 				if (TPMousePlayer2) {
 					sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
 					TPMousePlayer2 = false;
