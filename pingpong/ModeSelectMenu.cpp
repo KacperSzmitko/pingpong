@@ -12,7 +12,7 @@ ModeSelectMenu::ModeSelectMenu() {
 		Game::startGameplay(1);
 		delete this;
 	});
-	this->back = new MenuBar(200, 100, 540, 400, "Powrot", [this]() {
+	this->back = new MenuBar(200, 100, 540, 400, L"Powrót", [this]() {
 		Game::startMainMenu();
 		delete this;
 	});

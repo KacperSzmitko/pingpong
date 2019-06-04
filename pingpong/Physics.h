@@ -21,17 +21,12 @@ struct Physics {
 		static const Material wood;
 		static const Material ball;
 		static const Material racket;
-	};
+		static const Material net;
+	};	
 
-	void setViscosity(const float &viscosity);
-	void setPressure(const float &pressure);
-	void setGrav(const float &grav);
-	void setWind(const float &win);
+	static void resetValues();
 
-	
-	
-
-
+	static sf::Vector2i floatVectorToIntVector(const sf::Vector2f &floatVector);
 	static float calcDirectionFactor(float x1, float y1, float x2, float y2);
 	static sf::Vector2f calcRealVector(const sf::Vector2f &pixelVector);
 	static sf::Vector2f calcRealVector(const sf::Vector2i &pixelVector);

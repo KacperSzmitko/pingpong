@@ -8,11 +8,12 @@ MainMenu::MainMenu() {
 		Game::startModeSelectMenu();
 		delete this;
 	});
-	this->options = new MenuBar(200, 100, 540, 250, "Opcje", []() {
-
+	this->options = new MenuBar(200, 100, 540, 250, "Opcje", [this]() {
+		Game::startPhysicsSettingsMenu();
+		delete this;
 	});
 	this->close = new MenuBar(200, 100, 540, 400, "Zamknij", []() {
-
+		Game::getWindowObj().close();
 	});
 }
 

@@ -11,6 +11,8 @@
 #include <iterator>
 #include <functional>
 #include <algorithm>
+#include <iomanip>
+#include <sstream>
 
 #include <iostream>
 

@@ -17,9 +17,10 @@ private:
 	int points;
 	float licz=0;
 	float pom;
+	int playerNumber;
 	
 public:
-	Player(int mode, Racket* racket, Table* table, Ball* ball);
+	Player(int mode, Racket* racket, Table* table, Ball* ball, int playerNumber);
 
 	void move();
 	void moveTowardsPoint(sf::Vector2f point,float speed1,float speed2);

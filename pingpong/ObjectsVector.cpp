@@ -13,6 +13,7 @@ template <typename T> ObjectsVector<T>::ObjectsVector() {
 
 template <typename T> void ObjectsVector<T>::_add(T obj) {
 	vec.push_back(obj);
+	forEachReset = true;
 }
 
 template <typename T> void ObjectsVector<T>::_delete(T obj) {

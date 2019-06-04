@@ -177,11 +177,14 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicalObject.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="PhysicsSettingsMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Racket.h" />
     <ClInclude Include="Rect.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="SimObject.h" />
     <ClInclude Include="Table.h" />
+    <ClInclude Include="TextOption.h" />
     <ClInclude Include="UpdateObject.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
@@ -204,17 +207,24 @@
     </ClCompile>
     <ClCompile Include="PhysicalObject.cpp" />
     <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="PhysicsSettingsMenu.cpp" />
     <ClCompile Include="pingpong.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Racket.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="SimObject.cpp" />
     <ClCompile Include="Table.cpp" />
+    <ClCompile Include="TextOption.cpp" />
     <ClCompile Include="UpdateObject.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="opensans.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="arrow_down.png" />
+    <Image Include="arrow_up.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

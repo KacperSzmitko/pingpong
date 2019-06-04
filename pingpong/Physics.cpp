@@ -9,18 +9,16 @@ float Physics::wind = 0.0f;
 const Physics::Material Physics::Materials::wood = { 1.0f, 1.0f };
 const Physics::Material Physics::Materials::ball = { 1.0f, 1.0f };
 const Physics::Material Physics::Materials::racket = { 1.0f, 1.0f };
+const Physics::Material Physics::Materials::net = { 0.2f, 0.2f };
 
-
-void Physics::setViscosity(const float &v) {
-	viscosity = v;
+void Physics::resetValues() {
+	viscosity = PHYSICS_DEFAULT_VISCOSITY;
+	grav = PHYSICS_DEFAULT_GRAV;
+	wind = 0.0f;
 }
 
-void Physics::setGrav(const float &g) {
-	grav = g;
-}
-
-void Physics::setWind(const float &w) {
-	wind = w;
+sf::Vector2i Physics::floatVectorToIntVector(const sf::Vector2f &floatVector) {
+	return { (int)floatVector.x, (int)floatVector.y };
 }
 
 sf::Vector2f Physics::calcRealVector(const sf::Vector2f &pixelVector) {

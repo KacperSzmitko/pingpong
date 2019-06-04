@@ -8,8 +8,9 @@
 #include "SimObject.h"
 #include "Table.h"
 #include "Player.h"
+#include "Score.h"
 
-class Gameplay {
+class Gameplay : public UpdateObject {
 
 	friend class Collision;
 
@@ -23,15 +24,18 @@ private:
 	Table *table1,*table2,*net;
 	Player *player1;
 	Player *player2;
+	Score score;
 
 public:
 	Gameplay(int mode);
 	static sf::Vector2f default_ballLPos, default_ballRPos, default_racketLPos, default_racketRPos;
+	static int player1Score, player2Score;
 	static Collision collision;
 
 	static ObjectsVector<SimObject*>& getSimVector();
 	void simulateObjects();
 	void simulate();
+	void update();
 
 	void pause();
 	void unpause();

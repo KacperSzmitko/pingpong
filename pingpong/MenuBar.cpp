@@ -3,13 +3,13 @@
 #include "Game.h"
 #include "Physics.h"
 
-MenuBar::MenuBar(float xSize, float ySize, float xPos, float yPos, std::string text, std::function<void()> functionOnClick) :
-	DrawnObject(new sf::RectangleShape({ xSize, ySize })), backgroundColor(64, 64, 64) {
+MenuBar::MenuBar(float xSize, float ySize, float xPos, float yPos, sf::String text, std::function<void()> functionOnClick) :
+	DrawnObject(new sf::RectangleShape({ xSize, ySize })), backgroundColor(153, 204, 255) {
 	this->dObject->setPosition(Physics::swapY({ xPos, 720.0f - yPos }));
 	this->dObject->setFillColor(backgroundColor);
 	this->text.setFont(Game::font);
 	this->text.setString(text);
-	this->text.setFillColor(sf::Color::White);
+	this->text.setFillColor(sf::Color(0, 38, 77));
 	this->text.setCharacterSize(30);
 	this->text.setOrigin(this->text.getLocalBounds().left + this->text.getLocalBounds().width / 2.0f, this->text.getLocalBounds().top + this->text.getLocalBounds().height / 2.0f);
 	this->text.setPosition(Physics::swapY({ xPos + (xSize / 2.0f), 720.0f - yPos - (ySize / 2.0f) }));

@@ -37,6 +37,12 @@
     <Filter Include="Pliki źródłowe\gameplay\Objects">
       <UniqueIdentifier>{b1b2932a-9f73-4d0f-b5ae-1b5305d96795}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki zasobów\textures">
+      <UniqueIdentifier>{ef039ea7-9c79-465b-b442-3842d37e24be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki zasobów\textures\arrow">
+      <UniqueIdentifier>{5b6e33fd-c1cc-40d8-8c6e-4467e85f881d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -101,6 +107,15 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Pliki nagłówkowe\gameplay\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSettingsMenu.h">
+      <Filter>Pliki nagłówkowe\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="TextOption.h">
+      <Filter>Pliki nagłówkowe\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Pliki nagłówkowe\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,10 +182,27 @@
     <ClCompile Include="ModeSelectMenu.cpp">
       <Filter>Pliki źródłowe\ui</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsSettingsMenu.cpp">
+      <Filter>Pliki źródłowe\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="TextOption.cpp">
+      <Filter>Pliki źródłowe\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Pliki źródłowe\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Font Include="opensans.ttf">
       <Filter>Pliki zasobów</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="arrow_down.png">
+      <Filter>Pliki zasobów\textures\arrow</Filter>
+    </Image>
+    <Image Include="arrow_up.png">
+      <Filter>Pliki zasobów\textures\arrow</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -2,26 +2,36 @@
 #include "Player.h"
 #include "Game.h"
 
-Player::Player(int mode, Racket* racket, Table* table,Ball* ball) {
+Player::Player(int mode, Racket* racket, Table* table,Ball* ball, int playerNumber) {
 	this->mode = mode;
 	this->racket = racket;
 	this->table = table;
 	this->points = 0;
 	this->ball = ball;
+	this->playerNumber = playerNumber;
 	licz = 0;
-	srand(time(NULL));
+	if (racket->isAI) srand(time(NULL));
 }
 
 void Player::move() {
 
 	{
 		
-		if (mode == 0) {
+	
+		if (mode == 0 && playerNumber == 1) {
+			if (ball->p1) {
+				//if (ball->p1) sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
+				racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
+			}
+
+		} else if (mode == 0 && playerNumber == 2) {
+			if (ball->p2) {
+				//if (ball->p2) sf::Mouse::setPosition(racket->windowObj.mapCoordsToPixel(racket->dObject->getPosition()), racket->windowObj);
+				racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
+			}
+		} else if (mode == 1 && !racket->isAI) {
 			racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
-			//Po zdobyciu punktu myszka bedzie przeskakiwala
 		}
-
-
 		else if (mode == 1 && racket->isAI) {
 			
 				float x = ball->dObject->getPosition().x - racket->dObject->getPosition().x;
@@ -178,8 +188,5 @@ void Player::simulation() {
 }
 
 Player::~Player() {
-	delete table;
-	delete ball;
-	delete racket;
 	licz = 0;
 }

@@ -17,6 +17,7 @@ float Game::simTime = Game::elapsedTime / (float)Game::simPerFrame;
 sf::Font Game::font;
 MainMenu *Game::mainMenu;
 ModeSelectMenu *Game::modeSelectMenu;
+PhysicsSettingsMenu *Game::physicsSettingsMenu;
 bool Game::mousePress = false;
 
 Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : 
@@ -82,6 +83,10 @@ void Game::startModeSelectMenu() {
 	modeSelectMenu = new ModeSelectMenu;
 }
 
+void Game::startPhysicsSettingsMenu() {
+	physicsSettingsMenu = new PhysicsSettingsMenu;
+}
+
 void Game::startGameplay(int mode) {
 	gameplay = new Gameplay(mode);
 }
@@ -136,7 +141,7 @@ void Game::drawObjects() {
 
 void Game::run() {
 	while (windowObj.isOpen()) {
-		windowObj.clear();
+		windowObj.clear(sf::Color(51, 119, 255));
 		manageEvents();
 		calcTimes();
 		updateObjects();

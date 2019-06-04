@@ -8,6 +8,9 @@ sf::Vector2f Gameplay::default_ballLPos;
 sf::Vector2f Gameplay::default_ballRPos;
 sf::Vector2f Gameplay::default_racketLPos;
 sf::Vector2f Gameplay::default_racketRPos;
+int Gameplay::player1Score = 0;
+int Gameplay::player2Score = 0;
+
 Gameplay::Gameplay(int mode) {
 	
 	this->mode = mode;
@@ -19,14 +22,14 @@ Gameplay::Gameplay(int mode) {
 
 	this->table1 = new Table(300,15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 - 155), Game::getWindowObj().getSize().y / 4, 1);
 	this->table2 = new Table(300, 15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 + 150), Game::getWindowObj().getSize().y / 4, 2);
-	this->net = new Table(5, 40, 0, Physics::Materials::wood, ((Game::getWindowObj().getSize().x / 2)-2.5f), (Game::getWindowObj().getSize().y / 4)+13.0f, 3);
+	this->net = new Table(5, 40, 0, Physics::Materials::net, ((Game::getWindowObj().getSize().x / 2)-2.5f), (Game::getWindowObj().getSize().y / 4)+13.0f, 3);
 	
 	this->wallD = new Wall( Game::getWindowObj().getSize().x*10,10,0, Physics::Materials::wood,0,0);
 	this->wallL = new Wall(10, Game::getWindowObj().getSize().y * 10, 0, Physics::Materials::wood,0,0);
 	this->wallR = new Wall(10, Game::getWindowObj().getSize().y * 10, 0, Physics::Materials::wood, Game::getWindowObj().getSize().x, 0);
 	
-	this->player1 = new Player(0, racket1, table1,ball);
-	this->player2 = new Player(mode, racket2, table2,ball);
+	this->player1 = new Player(mode, racket1, table1,ball, 1);
+	this->player2 = new Player(mode, racket2, table2,ball, 2);
 	collision.p1 = player1;
 	collision.p2 = player2;
 	this->ball->setVelocityVector({ 0.0f, 0.0f });
@@ -35,6 +38,9 @@ Gameplay::Gameplay(int mode) {
 	this->default_ballRPos = { 1080,-360 };
 	this->default_racketLPos = { 100,-360 };
 	this->default_racketRPos = { 1200,-360 };
+
+	this->player1Score = 0;
+	this->player2Score = 0;
 }
 
 ObjectsVector<SimObject*> &Gameplay::getSimVector() {
@@ -63,12 +69,26 @@ void Gameplay::unpause() {
 	racket1->unpause();
 }
 
+void Gameplay::update() {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		Game::startMainMenu();
+		Game::getWindowObj().setMouseCursorVisible(true);
+		delete this;
+	}
+}
+
 Gameplay::~Gameplay() {
-	delete player1;
 	delete ball;
-	delete wallD, wallL, wallR;
-	delete table1, table2;
+	delete wallD;
+	delete wallL;
+	delete wallR;
+	delete table1;
+	delete table2;
+	delete net;
+	delete racket1;
+	delete racket2;
 	delete player1;
+	delete player2;
 }
 
 void Gameplay::objectsTest() {

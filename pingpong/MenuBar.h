@@ -10,7 +10,7 @@ private:
 	std::function<void()> functionOnClick;
 
 public:
-	MenuBar(float xSize, float ySize, float xPos, float yPos, std::string text, std::function<void()> functionOnClick);
+	MenuBar(float xSize, float ySize, float xPos, float yPos, sf::String text, std::function<void()> functionOnClick);
 	void update();
 	~MenuBar();
 };

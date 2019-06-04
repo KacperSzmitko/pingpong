@@ -390,6 +390,7 @@ void Collision::p1Point(Ball *ball,Player *p)
 	ball->p1 = false;
 	ball->p2 = true;
 	Game::timeForBall = 0;
+	Gameplay::player1Score++;
 	p->points++;
 	who = 0;
 
@@ -408,6 +409,7 @@ void Collision::p2Point(Ball *ball,Player *p)
 	ball->p1 = true;
 	ball->p2 = false;
 	Game::timeForBall = 0;
+	Gameplay::player2Score++;
 	p->points++;
 	who = 0;
 	

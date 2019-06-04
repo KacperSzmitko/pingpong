@@ -4,6 +4,7 @@
 #include "Gameplay.h"
 #include "MainMenu.h"
 #include "ModeSelectMenu.h"
+#include "PhysicsSettingsMenu.h"
 
 class Game {
 private:
@@ -17,6 +18,7 @@ private:
 
 	static MainMenu *mainMenu;
 	static ModeSelectMenu *modeSelectMenu;
+	static PhysicsSettingsMenu *physicsSettingsMenu;
 	
 	static const int simPerFrame;
 	static float lastTime;
@@ -47,6 +49,7 @@ public:
 	static ObjectsVector<sf::Drawable*>& getDrawVector();
 	static void startMainMenu();
 	static void startModeSelectMenu();
+	static void startPhysicsSettingsMenu();
 	static void startGameplay(int mode);
 	void manageEvents();
 	void updateObjects();
