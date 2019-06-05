@@ -25,10 +25,16 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 	this->windowObj.create(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
 	this->windowObj.setFramerateLimit(refreshRate);
 	this->windowObj.setVerticalSyncEnabled(verticalSync);
-	
+	if (!this->BackgroundTexture.loadFromFile("b.png"))
+	{
+		std::cout << "er";
+	}
+	this->background.setTexture(BackgroundTexture);
+	this->background.setPosition(0, 0);
 	this->windowObj.setView(view);
 	this->licz = 0;
 	font.loadFromFile("opensans.ttf");
+	this->rectangle.setTexture(&BackgroundTexture);
 }
 
 sf::RenderWindow &Game::getWindowObj() {
@@ -114,7 +120,7 @@ void Game::manageEvents() {
 		if (_event.type == sf::Event::MouseButtonPressed) {
 			mousePress = true;
 		}
-
+		windowObj.draw(background);
 		
 		
 		
@@ -132,6 +138,7 @@ void Game::drawObjects() {
 	drawVector.forEach([](sf::Drawable* &obj) {
 		windowObj.draw(*obj);
 	});
+
 }
 
 void Game::run() {
@@ -142,9 +149,8 @@ void Game::run() {
 		updateObjects();
 		for (int i = 0; i < simPerFrame; i++) gameplay->simulate();
 		drawObjects();
+		windowObj.draw(background);
 		windowObj.display();
-
-
 		tests();
 		frameClock.restart();
 

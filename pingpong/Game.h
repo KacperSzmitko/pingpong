@@ -10,7 +10,11 @@ private:
 	float licz;
 	static sf::RenderWindow windowObj;
 	static sf::Clock clock,clock1;
-	
+	sf::Texture BackgroundTexture;
+	sf::Sprite background;
+
+	sf::RectangleShape rectangle;
+
 	static sf::Clock frameClock;
 	static ObjectsVector<UpdateObject*> updateVector;
 	static ObjectsVector<sf::Drawable*> drawVector;
