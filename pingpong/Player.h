@@ -3,9 +3,7 @@
 #include "Racket.h"
 #include "Table.h"
 #include "Ball.h"
-#include <vector>
-#include <cstdlib>
-#include <ctime>
+
 
 class Player : public SimObject {
 	friend class Collision;
