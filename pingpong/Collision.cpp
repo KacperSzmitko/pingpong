@@ -169,8 +169,6 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 	{
 		if (ball->p1 &&ball->Colision==3  && racket->whichPlayer==1)
 		{
-			
-			
 			calcballRacketCol(ball, racket);
 			ball->p1Serv = 1;
 			ball->p2Serv = 0;
@@ -178,6 +176,7 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 			ball->p1 = false;
 			ball->p2 = false;
 			who = 1;
+			ck.restart();
 		}
 		else if (!ball->p2 && who == 1 && ball->Colision == 0 && racket->whichPlayer==2)
 		{
@@ -195,13 +194,14 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 			ball->p1 = false;
 			ball->p2 = false;
 			who = 2;
+			ck.restart();
 		}
 		else if (!ball->p1 && who == 2 && ball->Colision == 0 && racket->whichPlayer == 1)
 		{
 			//std::cout << racket->velocityVector.x << " 8\n";
 			p2Point(ball, p2);
 		}
-		else if (ball->p2 && ball->Colision!=0 && racket->whichPlayer == 2)
+		else if (ball->p2 && ball->Colision!=0 && racket->whichPlayer == 2 && ck.getElapsedTime().asMilliseconds()>200)
 		{
 			//std::cout << racket->velocityVector.x << " 3\n";
 			ball->Colision = 0;
@@ -217,7 +217,7 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 		}
 
 
-		else if (ball->p1 && ball->Colision != 0 && racket->whichPlayer == 1)
+		else if (ball->p1 && ball->Colision != 0 && racket->whichPlayer == 1 && ck.getElapsedTime().asMilliseconds() > 200)
 		{
 			//std::cout << racket->velocityVector.x << " 4\n";
 			ball->Colision = 0;
@@ -282,13 +282,13 @@ void Collision::ballTableCol(Ball *ball, Table *table)
 		}
 
 		//Nieprawidolwe podwojne odbicie p1 od tej samemj strony
-		else if (ball->p1Serv == 1 && ball->p1 == 0 && ball->Colision == 1 &&ck.getElapsedTime().asMilliseconds()>500 && table->player == 1)
+		else if (ball->p1Serv == 1 && ball->p1 == 0 && ball->Colision == 1 &&ck.getElapsedTime().asMilliseconds()>400 && table->player == 1)
 		{
 			p2Point(ball,p2);
 		} 
 
 		//Nieprawidolwe podwojne odbicie p2 od tej samemj strony
-		else if (ball->p2Serv == 1 && ball->p2 == 0 && ball->Colision == 1 && ck.getElapsedTime().asMilliseconds() > 500 && table->player == 2)
+		else if (ball->p2Serv == 1 && ball->p2 == 0 && ball->Colision == 1 && ck.getElapsedTime().asMilliseconds() > 400 && table->player == 2)
 		{
 			p1Point(ball,p1);
 		}
@@ -317,13 +317,13 @@ void Collision::ballTableCol(Ball *ball, Table *table)
 		}
 
 		//Nieodebrana pilka przez p1 
-		else if (ball->p1 && ball->Colision == 2 && table->player == 1 && ck.getElapsedTime().asMilliseconds() > 500)
+		else if (ball->p1 && ball->Colision == 2 && table->player == 1 && ck.getElapsedTime().asMilliseconds() > 400)
 		{
 			p2Point(ball,p2);
 		}
 
 		//Nieodebrana pilka przez p2 
-		else if (ball->p2 && ball->Colision == 2 && table->player == 2 && ck.getElapsedTime().asMilliseconds() > 500)
+		else if (ball->p2 && ball->Colision == 2 && table->player == 2 && ck.getElapsedTime().asMilliseconds() > 400)
 		{
 			p1Point(ball,p1);
 		}
@@ -357,11 +357,11 @@ void Collision::ballTableCol(Ball *ball, Table *table)
 			ball->p1 = true;
 			ball->Colision = 1;
 		}
-		else if (ball->Colision == 1 &&  ck.getElapsedTime().asMilliseconds() > 500 && p1)
+		else if (ball->Colision == 1 &&  ck.getElapsedTime().asMilliseconds() > 400 && p1)
 		{
 		p2Point(ball, p2);
 		}
-		else if (ball->Colision == 1 && ck.getElapsedTime().asMilliseconds() > 500 && p2)
+		else if (ball->Colision == 1 && ck.getElapsedTime().asMilliseconds() > 400 && p2)
 		{
 		p1Point(ball, p1);
 		}
@@ -370,10 +370,15 @@ void Collision::ballTableCol(Ball *ball, Table *table)
 	}
 	else
 	{
-	if (time != ball->simTime)
+	if (ck1.getElapsedTime().asMilliseconds()>400 && side==1)
 	{
-		ball->velocityVector.x = -ball->velocityVector.x * 0.3;
-		time = ball->simTime;
+		ball->velocityVector.x = -ball->velocityVector.x * 0.4;
+		ck1.restart();
+	}
+	if (ck1.getElapsedTime().asMilliseconds() > 400 && side == 2)
+	{
+		ball->velocityVector.y = -ball->velocityVector.y * 0.3;
+		ck1.restart();
 	}
  }
 }

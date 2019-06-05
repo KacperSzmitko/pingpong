@@ -70,17 +70,40 @@ void Player::move() {
 					{
 						x = ball->dObject->getPosition().x - 50 - racket->dObject->getPosition().x;
 						y = ball->dObject->getPosition().y + 50 - racket->dObject->getPosition().y;
+
+						if (ball->velocityVector.x < 1) speed1 = speed1 * 1.4;
+						if (abs(ball->velocityVector.x / ball->velocityVector.y) > 3 || ball->velocityVector.x < 1) speed1 = speed1 * 1.7;
+						if (abs(ball->velocityVector.y) > 3) speed1 = speed1 * 2;
+						if (abs(ball->dObject->getPosition().y) > 310 && ball->Colision!=3)
+						{
+							licz=2;
+							racket->dObject->setRotation(-20);
+						}
+						
+						if (licz == 0)
+						{
+							racket->dObject->setRotation(r1);
+							licz = 1;
+						}
+						if (licz == 2) speed1 = speed1 * 0.6;
 						lenght = sqrt(x*x + y * y);
 						tempx = x / lenght;
 						tempy = y / lenght;
-						if (ball->velocityVector.x < 1) speed1 = speed1 * 1.4;
 						//std::cout << ball->velocity << "\n";
 						racket->dObject->move({ tempx * speed1 * Game::getElapsedTime(),0.0f });
 					}
 					else
 					{
-						if (ball->velocityVector.x / ball->velocityVector.y > 3 || ball->velocityVector.x<1) speed1 = speed1 * 1.7;
-						if (abs(ball->velocityVector.y) > 3) speed1 = speed1 * 0.7;
+						if (abs(ball->velocityVector.x / ball->velocityVector.y) > 3 || ball->velocityVector.x<1) speed1 = speed1 * 1.7;
+						if (abs(ball->velocityVector.y) > 3) speed1 = speed1 * 2;
+						if (abs(ball->dObject->getPosition().y) > 310 && ball->Colision != 3)
+						{
+							float x = ball->dObject->getPosition().x - racket->dObject->getPosition().x + 30;
+							float y = ball->dObject->getPosition().y - racket->dObject->getPosition().y - 40;
+							float lenght = sqrt(x*x + y * y);
+							float tempx = x / lenght; //znormalizowane x pileczka-rakietka
+							float tempy = y / lenght; //znormalizowane y pileczka-rakietka
+						}
 						racket->dObject->move({ tempx * speed1 * Game::getElapsedTime(),tempy * speed2 * Game::getElapsedTime() });
 					}
 					racket->realPos = Physics::swapY(Physics::calcRealVector(racket->dObject->getPosition()));
@@ -95,6 +118,7 @@ void Player::move() {
 					if (racket->dObject->getPosition().x < 1180 && !ball->p2) // ustawienie sie za pilka prze serwisie
 					{
 						moveTowardsPoint({ 1220,300 }, speed1, speed2);
+						licz = 0;
 					}
 					else
 					{
@@ -114,33 +138,33 @@ void Player::move() {
 				}
 				if (ball->Colision == 3)//zaserwowanie
 				{
+					if (licz == 0)
+					{
+						if (pom == 1)
+						{
+							r1 = 30;
+						}
+						if (pom == 2)
+						{
+							r1 = 40;
+						}
+						if (pom == 3)
+						{
+							r1 = 50;
+						}
+						racket->dObject->setRotation(r1);
+						licz = 1;
+
+					}
 					if (lenght < 20 && ball->p2 && ball->p1Serv != 2)
 					{
 						racket->angle = r1 * 3;
 
-						if (licz == 0)
-						{
-							
-							if (pom == 1)
-							{
-								r1 = 30;
-								speed1 = 23;
-							}
-							if (pom == 2)
-							{
-								r1 = 40;
-								speed1 = 32;
-							}
-							if (pom == 3)
-							{
-								r1 = 50;
-								speed1 = 56;
-							}
-							racket->dObject->setRotation(r1);
-							licz = 1;
-
-						}
 						if (ball->p1)licz = 0;
+						if (pom == 1) speed1 = 30;
+						if (pom == 2) speed1 = 32;
+						if (pom == 3) speed1 = 40;
+						std::cout << pom << "  " << speed1 << "\n";
 						x = x - 50;
 						y = y + 40;
 						lenght = sqrt(x*x + y * y);
@@ -151,7 +175,7 @@ void Player::move() {
 					}
 					else if (lenght > 20 && ball->p2&& ball->p1Serv != 2)
 					{
-						licz = 0;
+						
 						lenght = sqrt(x*x + y * y);
 						tempx = x / lenght;
 						tempy = y / lenght;
@@ -163,7 +187,7 @@ void Player::move() {
 				}
 				else if(racket->dObject->getPosition().x <1200)
 				{
-					
+					licz = 0;
 					moveTowardsPoint({ 1220,300 }, speed1, speed2);
 				}
 				

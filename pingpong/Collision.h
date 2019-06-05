@@ -27,6 +27,7 @@ private:
 	void p2Point(Ball *ball,Player *p);
 	
 	sf::Clock ck;
+	sf::Clock ck1;
 public:
 	static int who; // Kto odbil 1-gracz pierwszy, 2- gracz drugi
 	Player *p1, *p2;

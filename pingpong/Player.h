@@ -15,7 +15,7 @@ private:
 	Table* table;
 	Ball* ball;
 	int points;
-	float licz=0;
+	float licz;
 	float pom;
 	int playerNumber;
 	static bool TPMousePlayer1, TPMousePlayer2;
