@@ -473,12 +473,7 @@ void Collision::calcballRacketCol(Ball *ball, Racket *racket)
 		tgalfa = atan(tgalfa);
 		tgalfa = 1.570796 - tgalfa;
 	}
-
-
 	angle = tgalfa;
-	
-
-	
 	if (angle > 1.4) angle = 1.3;
 	else if (angle < -1.4) angle = -1.3;
 	if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
@@ -496,7 +491,6 @@ void Collision::calcballRacketCol(Ball *ball, Racket *racket)
 
 
 	}
-	//else if ((ball->unitVector.x <= 0 && racket->unitVector.x >= 0) || ((ball->unitVector.x >= 0 && racket->unitVector.x <= 0)))
 	else
 	{
 		
@@ -507,21 +501,8 @@ void Collision::calcballRacketCol(Ball *ball, Racket *racket)
 			+ (racket->velocityVector.y*racket->mass) + (ball->mass*ball->velocityVector.y)) / ((racket->mass + ball->mass)*sin(angle))) / 2)
 
 		};
-		
-
-		/*
-		float r = acos(racket->velocityVector.x / racket->velocity);
-		float b = acos(ball->velocityVector.x / ball->velocity);
-		ball->velocityVector = { ((((racket->velocity*cos(r - angle)*(racket->mass - ball->mass) + 2 * ball->mass*ball->velocity*cos(b - angle))*cos(angle))
-		/ (racket->mass + ball->mass)) + racket->velocity*sin(r - angle)*sin(angle)),
-		(((racket->velocity*cos(r - angle)*(racket->mass - ball->mass) + 2 * ball->mass*ball->velocity*cos(b - angle))*sin(angle))
-		/ (racket->mass + ball->mass)) + racket->velocity*sin(r - angle)*cos(angle) };
-		*/
-		
 
 	}
-
-
 }
 
 

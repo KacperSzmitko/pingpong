@@ -21,21 +21,21 @@ PhysicsSettingsMenu *Game::physicsSettingsMenu;
 bool Game::mousePress = false;
 
 Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : 
-	view({ (float)xSize / 2.0f, (float)ySize / -2.0f }, { (float)xSize, (float)ySize }) {
+	view({ (float)xSize / 2.0f, (float)ySize / -2.0f }, { (float)xSize, (float)ySize }),
+	background({ 1280, 720 }) {
 
 	this->windowObj.create(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
 	this->windowObj.setFramerateLimit(refreshRate);
 	this->windowObj.setVerticalSyncEnabled(verticalSync);
-	if (!this->BackgroundTexture.loadFromFile("b.png"))
-	{
-		std::cout << "er";
-	}
-	this->background.setTexture(BackgroundTexture);
-	this->background.setPosition(0, 0);
+	
 	this->windowObj.setView(view);
 	this->licz = 0;
 	font.loadFromFile("opensans.ttf");
-	this->rectangle.setTexture(&BackgroundTexture);
+
+	backgroundTexture.loadFromFile("back.png");
+	background.setTexture(&backgroundTexture);
+	background.setPosition(0, -720);
+
 }
 
 sf::RenderWindow &Game::getWindowObj() {
@@ -125,7 +125,7 @@ void Game::manageEvents() {
 		if (_event.type == sf::Event::MouseButtonPressed) {
 			mousePress = true;
 		}
-		windowObj.draw(background);
+
 		
 		
 		
@@ -147,14 +147,16 @@ void Game::drawObjects() {
 }
 
 void Game::run() {
+
 	while (windowObj.isOpen()) {
 		windowObj.clear(sf::Color(51, 119, 255));
 		manageEvents();
 		calcTimes();
 		updateObjects();
 		for (int i = 0; i < simPerFrame; i++) gameplay->simulate();
+		if (gameplay != nullptr) windowObj.draw(background);
 		drawObjects();
-		windowObj.draw(background);
+		
 		windowObj.display();
 		tests();
 		frameClock.restart();
