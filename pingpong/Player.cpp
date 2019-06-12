@@ -201,6 +201,11 @@ void Player::move() {
 			racket->realPos = Physics::swapY(Physics::calcRealVector(racket->dObject->getPosition()));
 			
 		}
+		else if (mode == 2)
+		{
+		racket->realPos = Physics::swapY(Physics::calcRealVector(racket->windowObj.mapPixelToCoords(sf::Mouse::getPosition(racket->windowObj))));
+		racket->rotation();
+		}
 	
 }
 

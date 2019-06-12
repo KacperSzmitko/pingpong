@@ -17,7 +17,7 @@ class Gameplay : public UpdateObject {
 
 private:
 
-	int mode;
+
 	Wall *wallL,*wallR,*wallD;
 	static ObjectsVector<SimObject*> simVector;
 	Racket *racket1, *racket2;
@@ -30,6 +30,7 @@ private:
 
 
 public:
+	static int mode;
 	Gameplay(int mode);
 	static sf::Vector2f default_ballLPos, default_ballRPos, default_racketLPos, default_racketRPos;
 	static int player1Score, player2Score;

@@ -41,6 +41,7 @@ private:
 public:
 	static bool mousePress;
 	static float timeForBall;
+	static bool reset_ball;
 	static sf::Font font;
 
 	Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);

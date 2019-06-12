@@ -24,6 +24,7 @@ sf::Texture Game::backgroundTexture1;
 sf::Texture Game::backgroundTexture2;
 sf::Texture Game::backgroundTexture3;
 bool Game::mousePress = false;
+bool Game::reset_ball = false;
 
 Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : 
 	view({ (float)xSize / 2.0f, (float)ySize / -2.0f }, { (float)xSize, (float)ySize }) {
@@ -36,8 +37,7 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 	this->licz = 0;
 	font.loadFromFile("opensans.ttf");
 
-	backgroundTexture.loadFromFile("back.png");
-	background.setTexture(&backgroundTexture);
+	backgroundTexture1.loadFromFile("back.png");
 	background.setPosition(2.5, -720);
 
 }
@@ -108,10 +108,10 @@ void Game::startGameplay(int mode, int backgroundNumber) {
 		background.setTexture(&backgroundTexture1);
 		break;
 	case 2:
-		background.setTexture(&backgroundTexture1);
+		background.setTexture(&backgroundTexture2);
 		break;
 	case 3:
-		background.setTexture(&backgroundTexture1);
+		background.setTexture(&backgroundTexture3);
 		break;
 	default:
 		break;
@@ -124,34 +124,45 @@ void Game::manageEvents() {
 	
 	mousePress = false;
 	while (windowObj.pollEvent(_event)) {
+		if (Gameplay::mode == 2)
+		{
+			if (_event.type == sf::Event::KeyPressed)
+			{
+				if (_event.key.code == sf::Keyboard::Tab)
+				{
+					reset_ball = true;
+				}
+			}
+		}
 		if (_event.type == sf::Event::Closed) {
 			windowObj.close();
 		}
 		if (_event.type == sf::Event::KeyPressed && licz==0)
 		{
-			clock1.restart();
-			licz = 1;
-			clock1.restart();
-			break;
+			if (_event.key.code == sf::Keyboard::Space)
+			{
+				clock1.restart();
+				licz = 1;
+				clock1.restart();
+				break;
+			}
 		}
 		else timeForBall = 0;
 		if (_event.type == sf::Event::KeyReleased)
 		{
-			timeForBall = clock1.getElapsedTime().asSeconds();
-			clock1.restart();
-			licz = 0;
-			break;
+			if (_event.key.code == sf::Keyboard::Space)
+			{
+				timeForBall = clock1.getElapsedTime().asSeconds();
+				clock1.restart();
+				licz = 0;
+				break;
+			}
 		}
 		else timeForBall = 0;
 		if (_event.type == sf::Event::MouseButtonPressed) {
 			mousePress = true;
 		}
-
-		
-		
-		
 	}
-	
 }
 
 void Game::updateObjects() {
@@ -162,9 +173,7 @@ void Game::updateObjects() {
 
 void Game::drawObjects() {
 	drawVector.forEach([](sf::Drawable* &obj) {
-	
 		windowObj.draw(*obj);
-		
 	});
 
 }
@@ -180,18 +189,14 @@ void Game::run() {
 		if (gameplay != nullptr) 
 		windowObj.draw(background);
 		drawObjects();
-
 		windowObj.display();
 		tests();
 		frameClock.restart();
-
-
 	}
 }
 
 void Game::tests() {
 	if (gameplay != nullptr) gameplay->objectsTest();
-	
 }
 
 Game::~Game() {

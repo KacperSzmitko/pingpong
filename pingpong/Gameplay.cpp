@@ -10,25 +10,25 @@ sf::Vector2f Gameplay::default_racketLPos;
 sf::Vector2f Gameplay::default_racketRPos;
 int Gameplay::player1Score = 0;
 int Gameplay::player2Score = 0;
-
+int Gameplay::mode = 0;
 Gameplay::Gameplay(int mode) {
 	
 	this->mode = mode;
 	Game::getWindowObj().setMouseCursorVisible(false);
 	this->ball = new Ball(200.0f, 300.0f);
 	this->racket1 = new Racket(150.0f, 360.0f,0,1);
-	this->racket2 = new Racket(1130.0f, 360.0f,mode,2);
+	if(mode!=2)this->racket2 = new Racket(1130.0f, 360.0f,mode,2);
 
-	this->table1 = new Table(340,15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 - 175), Game::getWindowObj().getSize().y / 4, 1);
-	this->table2 = new Table(340, 15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 + 170), Game::getWindowObj().getSize().y / 4, 2);
-	this->net = new Table(5, 30, 0, Physics::Materials::wood, ((Game::getWindowObj().getSize().x / 2)-2.5f), (Game::getWindowObj().getSize().y / 4)+23.0f, 3);
+	this->table1 = new Table(340,15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2.0f - 175.0f), Game::getWindowObj().getSize().y / 4.0f, 1);
+	this->table2 = new Table(340, 15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2.0f + 170.0f), Game::getWindowObj().getSize().y / 4.0f, 2);
+	this->net = new Table(5, 30, 0, Physics::Materials::wood, ((Game::getWindowObj().getSize().x / 2.0f)-2.5f), (Game::getWindowObj().getSize().y / 4.0f)+23.0f, 3);
 	
-	this->wallD = new Wall( Game::getWindowObj().getSize().x*10,10,0, Physics::Materials::wood,0,0);
-	this->wallL = new Wall(10, Game::getWindowObj().getSize().y * 10, 0, Physics::Materials::wood,0,0);
-	this->wallR = new Wall(10, Game::getWindowObj().getSize().y * 10, 0, Physics::Materials::wood, Game::getWindowObj().getSize().x, 0);
+	this->wallD = new Wall( Game::getWindowObj().getSize().x*10.0f,187.0f,0, Physics::Materials::wood,0,0,2);
+	this->wallL = new Wall(10.0f, Game::getWindowObj().getSize().y * 10.0f, 0, Physics::Materials::wood,0,0,1);
+	this->wallR = new Wall(10.0f, Game::getWindowObj().getSize().y * 10.0f, 0, Physics::Materials::wood, (float)Game::getWindowObj().getSize().x,0.0f,3);
 	
 	this->player1 = new Player(mode, racket1, table1,ball, 1);
-	this->player2 = new Player(mode, racket2, table2,ball, 2);
+	if(mode!=2)this->player2 = new Player(mode, racket2, table2,ball, 2);
 	collision.p1 = player1;
 	collision.p2 = player2;
 	this->ball->setVelocityVector({ 0.0f, 0.0f });
@@ -40,7 +40,7 @@ Gameplay::Gameplay(int mode) {
 
 	this->player1Score = 0;
 	this->player2Score = 0;
-
+	if (mode == 2) player2 = nullptr;
 	sf::Mouse::setPosition(Game::getWindowObj().mapCoordsToPixel({ 200.0f, -360.0f }), Game::getWindowObj());
 }
 
@@ -55,10 +55,8 @@ void Gameplay::simulateObjects() {
 }
 
 void Gameplay::simulate() {
-	
 	simulateObjects();
 	collision.checkCollisions();
-
 }
 
 void Gameplay::pause() {
@@ -72,7 +70,6 @@ void Gameplay::unpause() {
 }
 
 void Gameplay::update() {
-	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		Game::startMainMenu();
 		Game::getWindowObj().setMouseCursorVisible(true);

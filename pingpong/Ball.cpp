@@ -64,16 +64,24 @@ void Ball::simulation() {
 	
 	
 	if (!_pause) {
-		
+		if (Game::reset_ball)
+		{
+			isballmove = false;
+			velocityVector = { 0.0f,0.0f };
+			Game::timeForBall = 0;
+			dObject->setPosition(Gameplay::default_ballLPos);
+			realPos = { Physics::calcRealValue(dObject->getPosition().x),
+			-Physics::calcRealValue(dObject->getPosition().y) };
+			Game::reset_ball = false;
+		}
 		if (isballmove)
 		{
-			//std::cout << "vx  " << velocityVector.x << "  vy  " << velocityVector.y << "\n";
 			oldVelocityVector = velocityVector;
-			
 			oldRealPos = realPos;
 			realPos = calcNewRealPos(oldRealPos, velocityVector, acc, simTime);
 			velocityVector = calcVelocityVector(oldRealPos, realPos, simTime);
-			if (velocityVector.y > 3) velocityVector.y = 3;
+			if (velocityVector.y > 7) velocityVector.y = 7;
+			if (velocityVector.x > 10) velocityVector.x = 10;
 			velocity = calcVelocityFromVelocityVector(velocityVector);
 			unitVector = calcUnitVector(velocityVector, velocity);
 			dObject->setPosition(Physics::swapY(Physics::calcPixelVector(realPos)));
@@ -84,7 +92,7 @@ void Ball::simulation() {
 				if (pomoc !=0)
 				{
 					isballmove = true;
-					velocityVector.y = 3.0 * pomoc;
+					velocityVector.y = 3.0f * pomoc;
 					if (velocityVector.y > 5) velocityVector.y = 5;
 					p1 = !p1;
 					p2 = !p2;
