@@ -17,6 +17,10 @@ MenuBar::MenuBar(float xSize, float ySize, float xPos, float yPos, sf::String te
 	Game::getDrawVector()._add(&this->text);
 }
 
+void MenuBar::setBackground(sf::Texture &back) {
+	dObject->setTexture(&back);
+}
+
 void MenuBar::update() {	
 	if (Game::mousePress) {
 		sf::Vector2f mousePos = { (float)sf::Mouse::getPosition(Game::getWindowObj()).x, 720.0f - (float)sf::Mouse::getPosition(Game::getWindowObj()).y };

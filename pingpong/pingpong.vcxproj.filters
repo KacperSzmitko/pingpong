@@ -43,6 +43,9 @@
     <Filter Include="Pliki zasobów\textures\arrow">
       <UniqueIdentifier>{5b6e33fd-c1cc-40d8-8c6e-4467e85f881d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki zasobów\textures\back">
+      <UniqueIdentifier>{750fb948-a398-476b-b8b9-f8c91a8833c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -215,6 +218,24 @@
     </Image>
     <Image Include="arrow_up.png">
       <Filter>Pliki zasobów\textures\arrow</Filter>
+    </Image>
+    <Image Include="back1.png">
+      <Filter>Pliki zasobów\textures\back</Filter>
+    </Image>
+    <Image Include="back1s.png">
+      <Filter>Pliki zasobów\textures\back</Filter>
+    </Image>
+    <Image Include="back2.png">
+      <Filter>Pliki zasobów\textures\back</Filter>
+    </Image>
+    <Image Include="back2s.png">
+      <Filter>Pliki zasobów\textures\back</Filter>
+    </Image>
+    <Image Include="back3.png">
+      <Filter>Pliki zasobów\textures\back</Filter>
+    </Image>
+    <Image Include="back3s.png">
+      <Filter>Pliki zasobów\textures\back</Filter>
     </Image>
   </ItemGroup>
 </Project>

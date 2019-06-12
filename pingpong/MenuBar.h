@@ -11,6 +11,7 @@ private:
 
 public:
 	MenuBar(float xSize, float ySize, float xPos, float yPos, sf::String text, std::function<void()> functionOnClick);
+	void setBackground(sf::Texture &back);
 	void update();
 	~MenuBar();
 };

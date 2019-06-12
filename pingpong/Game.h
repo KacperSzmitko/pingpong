@@ -35,6 +35,7 @@ private:
 	static sf::Texture backgroundTexture1;
 	static sf::Texture backgroundTexture2;
 	static sf::Texture backgroundTexture3;
+	
 
 	static void calcTimes();
 
@@ -43,6 +44,7 @@ public:
 	static float timeForBall;
 	static bool reset_ball;
 	static sf::Font font;
+	static sf::Texture sb1, sb2, sb3;
 
 	Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle);
 

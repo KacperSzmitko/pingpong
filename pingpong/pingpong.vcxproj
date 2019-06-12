@@ -229,6 +229,12 @@
   <ItemGroup>
     <Image Include="arrow_down.png" />
     <Image Include="arrow_up.png" />
+    <Image Include="back1.png" />
+    <Image Include="back1s.png" />
+    <Image Include="back2.png" />
+    <Image Include="back2s.png" />
+    <Image Include="back3.png" />
+    <Image Include="back3s.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -23,6 +23,9 @@ sf::RectangleShape Game::background({ 1280, 720 });
 sf::Texture Game::backgroundTexture1;
 sf::Texture Game::backgroundTexture2;
 sf::Texture Game::backgroundTexture3;
+sf::Texture Game::sb1;
+sf::Texture Game::sb2;
+sf::Texture Game::sb3;
 bool Game::mousePress = false;
 bool Game::reset_ball = false;
 
@@ -37,9 +40,13 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 	this->licz = 0;
 	font.loadFromFile("opensans.ttf");
 
-	backgroundTexture1.loadFromFile("back.png");
+	backgroundTexture1.loadFromFile("back1.png");
+	backgroundTexture2.loadFromFile("back2.png");
+	backgroundTexture3.loadFromFile("back3.png");
 	background.setPosition(2.5, -720);
-
+	sb1.loadFromFile("back1s.png");
+	sb2.loadFromFile("back2s.png");
+	sb3.loadFromFile("back3s.png");
 }
 
 sf::RenderWindow &Game::getWindowObj() {
