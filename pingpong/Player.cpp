@@ -15,7 +15,7 @@ Player::Player(int mode, Racket* racket, Table* table,Ball* ball, int playerNumb
 	licz = 0;
 	this->TPMousePlayer1 = false;
 	this->TPMousePlayer2 = false;
-	if (racket->isAI) srand(time(NULL));
+	if (racket->isAI) srand((unsigned int)time(NULL));
 }
 
 void Player::move() {
@@ -69,13 +69,13 @@ void Player::move() {
 				{
 					if (lenght < 30)
 					{
-						x = ball->dObject->getPosition().x - 50 - racket->dObject->getPosition().x;
-						y = ball->dObject->getPosition().y + 50 - racket->dObject->getPosition().y;
+						x = ball->dObject->getPosition().x - 50.0f - racket->dObject->getPosition().x;
+						y = ball->dObject->getPosition().y + 50.0f- racket->dObject->getPosition().y;
 
-						if (ball->velocityVector.x < 1.4f && ball->dObject->getPosition().x<800) speed1 = speed1 * 0.8;
-						else if (abs(ball->velocityVector.x / ball->velocityVector.y) > 3) speed1 = speed1 * 1.7;
-						else if (abs(ball->velocityVector.y) > 3) speed1 = speed1 * 2;
-						else if (abs(ball->dObject->getPosition().y) > 310 && ball->Colision!=3)
+						if (ball->velocityVector.x < 1.4f && ball->dObject->getPosition().x<800.0f) speed1 = speed1 * 0.8f;
+						else if (abs(ball->velocityVector.x / ball->velocityVector.y) > 3) speed1 = speed1 * 1.7f;
+						else if (abs(ball->velocityVector.y) > 3) speed1 = speed1 * 2.0f;
+						else if (abs(ball->dObject->getPosition().y) > 310.0f && ball->Colision!=3)
 						{
 							licz=2;
 							racket->dObject->setRotation(-20);
@@ -89,10 +89,10 @@ void Player::move() {
 						}
 						if (licz == 0)
 						{
-							racket->dObject->setRotation(r1);
+							racket->dObject->setRotation((float)r1);
 							licz = 1;
 						}
-						if (licz == 2) speed1 = speed1 * 0.6;
+						if (licz == 2) speed1 = speed1 * 0.6f;
 						lenght = sqrt(x*x + y * y);
 						tempx = x / lenght;
 						tempy = y / lenght;
@@ -101,8 +101,8 @@ void Player::move() {
 					}
 					else
 					{
-						if (abs(ball->velocityVector.x / ball->velocityVector.y) > 3 || ball->velocityVector.x<1) speed1 = speed1 * 1.7;
-						if (abs(ball->velocityVector.y) > 3) speed1 = speed1 * 2;
+						if (abs(ball->velocityVector.x / ball->velocityVector.y) > 3 || ball->velocityVector.x<1) speed1 = speed1 * 1.7f;
+						if (abs(ball->velocityVector.y) > 3) speed1 = speed1 * 2.0f;
 						if (abs(ball->dObject->getPosition().y) > 310 && ball->Colision != 3)
 						{
 							float x = ball->dObject->getPosition().x - racket->dObject->getPosition().x + 30;
@@ -133,7 +133,7 @@ void Player::move() {
 				{
 
 					ball->isballmove = true;
-					ball->velocityVector.y = (std::rand() % 3) + 1;
+					ball->velocityVector.y = (float)((std::rand() % 3) + 1);
 					pom = ball->velocityVector.y;
 					if (ball->velocityVector.y < 2) ball->velocityVector.y = 2;
 					if (ball->velocityVector.y > 5) ball->velocityVector.y = 5;
@@ -159,13 +159,13 @@ void Player::move() {
 						{
 							r1 = 50;
 						}
-						racket->dObject->setRotation(r1);
+						racket->dObject->setRotation((float)r1);
 						licz = 1;
 
 					}
 					if (lenght < 20 && ball->p2 && ball->p1Serv != 2)
 					{
-						racket->angle = r1 * 3;
+						racket->angle = r1 * 3.0f;
 
 						if (ball->p1)licz = 0;
 						if (pom == 1) speed1 = 30;
