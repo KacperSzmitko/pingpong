@@ -4,7 +4,7 @@
 
 class ModeSelectMenu {
 private:
-	MenuBar *PVC, *PVP, *back;
+	MenuBar *PVC, *PVP, *FP, *back;
 
 public:
 	ModeSelectMenu();

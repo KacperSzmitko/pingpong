@@ -17,12 +17,16 @@ float Game::simTime = Game::elapsedTime / (float)Game::simPerFrame;
 sf::Font Game::font;
 MainMenu *Game::mainMenu;
 ModeSelectMenu *Game::modeSelectMenu;
+BackgroundSelectMenu *Game::backgroundSelectMenu;
 PhysicsSettingsMenu *Game::physicsSettingsMenu;
+sf::RectangleShape Game::background({ 1280, 720 });
+sf::Texture Game::backgroundTexture1;
+sf::Texture Game::backgroundTexture2;
+sf::Texture Game::backgroundTexture3;
 bool Game::mousePress = false;
 
 Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string windowTitle) : 
-	view({ (float)xSize / 2.0f, (float)ySize / -2.0f }, { (float)xSize, (float)ySize }),
-	background({ 1280, 720 }) {
+	view({ (float)xSize / 2.0f, (float)ySize / -2.0f }, { (float)xSize, (float)ySize }) {
 
 	this->windowObj.create(sf::VideoMode(xSize, ySize), windowTitle, sf::Style::Close);
 	this->windowObj.setFramerateLimit(refreshRate);
@@ -32,8 +36,7 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 	this->licz = 0;
 	font.loadFromFile("opensans.ttf");
 
-	backgroundTexture.loadFromFile("back.png");
-	background.setTexture(&backgroundTexture);
+	backgroundTexture1.loadFromFile("back.png");
 	background.setPosition(0, -720);
 
 }
@@ -89,12 +92,29 @@ void Game::startModeSelectMenu() {
 	modeSelectMenu = new ModeSelectMenu;
 }
 
+void Game::startBackgroundSelectMenu(int mode) {
+	backgroundSelectMenu = new BackgroundSelectMenu(mode);
+}
+
 void Game::startPhysicsSettingsMenu() {
 	physicsSettingsMenu = new PhysicsSettingsMenu;
 }
 
-void Game::startGameplay(int mode) {
+void Game::startGameplay(int mode, int backgroundNumber) {
 	gameplay = new Gameplay(mode);
+	switch (backgroundNumber) {
+	case 1:
+		background.setTexture(&backgroundTexture1);
+		break;
+	case 2:
+		background.setTexture(&backgroundTexture1);
+		break;
+	case 3:
+		background.setTexture(&backgroundTexture1);
+		break;
+	default:
+		break;
+	}
 }
 
 

@@ -4,6 +4,7 @@
 #include "Gameplay.h"
 #include "MainMenu.h"
 #include "ModeSelectMenu.h"
+#include "BackgroundSelectMenu.h"
 #include "PhysicsSettingsMenu.h"
 
 class Game {
@@ -19,6 +20,7 @@ private:
 
 	static MainMenu *mainMenu;
 	static ModeSelectMenu *modeSelectMenu;
+	static BackgroundSelectMenu *backgroundSelectMenu;
 	static PhysicsSettingsMenu *physicsSettingsMenu;
 	
 	static const int simPerFrame;
@@ -29,8 +31,10 @@ private:
 	sf::View view;
 	static sf::Event _event;
 
-	sf::RectangleShape background;
-	sf::Texture backgroundTexture;
+	static sf::RectangleShape background;
+	static sf::Texture backgroundTexture1;
+	static sf::Texture backgroundTexture2;
+	static sf::Texture backgroundTexture3;
 
 	static void calcTimes();
 
@@ -53,8 +57,9 @@ public:
 	static ObjectsVector<sf::Drawable*>& getDrawVector();
 	static void startMainMenu();
 	static void startModeSelectMenu();
+	static void startBackgroundSelectMenu(int mode);
 	static void startPhysicsSettingsMenu();
-	static void startGameplay(int mode);
+	static void startGameplay(int mode, int backgroundNumber);
 	void manageEvents();
 	void updateObjects();
 	void drawObjects();

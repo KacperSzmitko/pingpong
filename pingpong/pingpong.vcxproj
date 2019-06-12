@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundSelectMenu.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="DisplayWind.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundSelectMenu.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DisplayWind.cpp" />
