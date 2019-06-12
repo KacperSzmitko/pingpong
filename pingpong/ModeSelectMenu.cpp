@@ -4,15 +4,19 @@
 
 
 ModeSelectMenu::ModeSelectMenu() {
-	this->PVP = new MenuBar(300, 100, 490, 100, "Gracz vs Gracz", [this]() {
-		Game::startGameplay(0);
+	this->PVP = new MenuBar(300, 100, 490, 50, "Gracz vs Gracz", [this]() {
+		Game::startBackgroundSelectMenu(0);
 		delete this;
 	});
-	this->PVC = new MenuBar(300, 100, 490, 250, "Gracz vs Komputer", [this]() {
-		Game::startGameplay(1);
+	this->PVC = new MenuBar(300, 100, 490, 200, "Gracz vs Komputer", [this]() {
+		Game::startBackgroundSelectMenu(1);
 		delete this;
 	});
-	this->back = new MenuBar(200, 100, 540, 400, L"Powrót", [this]() {
+	this->FP = new MenuBar(300, 100, 490, 350, "Gra dowolna", [this]() {
+		Game::startBackgroundSelectMenu(2);
+		delete this;
+	});
+	this->back = new MenuBar(200, 100, 540, 500, L"Powrót", [this]() {
 		Game::startMainMenu();
 		delete this;
 	});
@@ -23,5 +27,6 @@ ModeSelectMenu::ModeSelectMenu() {
 ModeSelectMenu::~ModeSelectMenu() {
 	delete PVP;
 	delete PVC;
+	delete FP;
 	delete back;
 }

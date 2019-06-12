@@ -120,6 +120,9 @@
     <ClInclude Include="DisplayWind.h">
       <Filter>Pliki nagłówkowe\ui</Filter>
     </ClInclude>
+    <ClInclude Include="BackgroundSelectMenu.h">
+      <Filter>Pliki nagłówkowe\ui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -196,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="DisplayWind.cpp">
       <Filter>Pliki źródłowe\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundSelectMenu.cpp">
+      <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

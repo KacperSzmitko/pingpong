@@ -76,6 +76,7 @@ void Gameplay::update() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		Game::startMainMenu();
 		Game::getWindowObj().setMouseCursorVisible(true);
+		Game::gameplay = nullptr;
 		delete this;
 	}
 }
