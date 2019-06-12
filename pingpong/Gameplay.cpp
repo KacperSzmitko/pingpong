@@ -15,14 +15,13 @@ Gameplay::Gameplay(int mode) {
 	
 	this->mode = mode;
 	Game::getWindowObj().setMouseCursorVisible(false);
-	
 	this->ball = new Ball(200.0f, 300.0f);
 	this->racket1 = new Racket(150.0f, 360.0f,0,1);
 	this->racket2 = new Racket(1130.0f, 360.0f,mode,2);
 
 	this->table1 = new Table(340,15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 - 175), Game::getWindowObj().getSize().y / 4, 1);
 	this->table2 = new Table(340, 15, 0, Physics::Materials::wood, (Game::getWindowObj().getSize().x / 2 + 170), Game::getWindowObj().getSize().y / 4, 2);
-	this->net = new Table(5, 40, 0, Physics::Materials::wood, ((Game::getWindowObj().getSize().x / 2)-2.5f), (Game::getWindowObj().getSize().y / 4)+13.0f, 3);
+	this->net = new Table(5, 30, 0, Physics::Materials::wood, ((Game::getWindowObj().getSize().x / 2)-2.5f), (Game::getWindowObj().getSize().y / 4)+23.0f, 3);
 	
 	this->wallD = new Wall( Game::getWindowObj().getSize().x*10,10,0, Physics::Materials::wood,0,0);
 	this->wallL = new Wall(10, Game::getWindowObj().getSize().y * 10, 0, Physics::Materials::wood,0,0);

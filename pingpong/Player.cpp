@@ -20,7 +20,7 @@ Player::Player(int mode, Racket* racket, Table* table,Ball* ball, int playerNumb
 
 void Player::move() {
 
-	
+		
 		if (mode == 0 && playerNumber == 1) {
 			if (ball->p1Serv == 2 || Collision::who == 2) {
 				if (TPMousePlayer1) {
@@ -50,6 +50,7 @@ void Player::move() {
 		}
 		else if (mode == 1 && racket->isAI) {
 			
+		
 				float x = ball->dObject->getPosition().x - racket->dObject->getPosition().x;
 				float y = ball->dObject->getPosition().y - racket->dObject->getPosition().y;
 				float lenght = sqrt(x*x + y * y);
@@ -71,15 +72,21 @@ void Player::move() {
 						x = ball->dObject->getPosition().x - 50 - racket->dObject->getPosition().x;
 						y = ball->dObject->getPosition().y + 50 - racket->dObject->getPosition().y;
 
-						if (ball->velocityVector.x < 1) speed1 = speed1 * 1.4;
-						if (abs(ball->velocityVector.x / ball->velocityVector.y) > 3 || ball->velocityVector.x < 1) speed1 = speed1 * 1.7;
-						if (abs(ball->velocityVector.y) > 3) speed1 = speed1 * 2;
-						if (abs(ball->dObject->getPosition().y) > 310 && ball->Colision!=3)
+						if (ball->velocityVector.x < 1.4f && ball->dObject->getPosition().x<800) speed1 = speed1 * 0.8;
+						else if (abs(ball->velocityVector.x / ball->velocityVector.y) > 3) speed1 = speed1 * 1.7;
+						else if (abs(ball->velocityVector.y) > 3) speed1 = speed1 * 2;
+						else if (abs(ball->dObject->getPosition().y) > 310 && ball->Colision!=3)
 						{
 							licz=2;
 							racket->dObject->setRotation(-20);
 						}
-						
+						else if (ball->dObject->getPosition().x > 800)
+						{
+							racket->dObject->setRotation(30);
+							speed1 = speed1 * 2.0f;
+							std::cout << ball->dObject->getPosition().x << "\n";
+							
+						}
 						if (licz == 0)
 						{
 							racket->dObject->setRotation(r1);
@@ -164,7 +171,6 @@ void Player::move() {
 						if (pom == 1) speed1 = 30;
 						if (pom == 2) speed1 = 32;
 						if (pom == 3) speed1 = 40;
-						std::cout << pom << "  " << speed1 << "\n";
 						x = x - 50;
 						y = y + 40;
 						lenght = sqrt(x*x + y * y);

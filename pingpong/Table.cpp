@@ -8,7 +8,10 @@ Table::Table(float pixelSizeX, float pixelSizeY, float angle, Physics::Material 
 {
 	this->player = player;
 	Collision::getTableCollisionVector()._add(this);
-	
+	if (player == 1 || player == 2)
+	{
+		dObject->setFillColor(sf::Color::Transparent);
+	}
 }
 
 Table::~Table()

@@ -34,7 +34,7 @@ Game::Game(int xSize, int ySize, int refreshRate, bool verticalSync, std::string
 
 	backgroundTexture.loadFromFile("back.png");
 	background.setTexture(&backgroundTexture);
-	background.setPosition(0, -720);
+	background.setPosition(2.5, -720);
 
 }
 
@@ -141,7 +141,9 @@ void Game::updateObjects() {
 
 void Game::drawObjects() {
 	drawVector.forEach([](sf::Drawable* &obj) {
+	
 		windowObj.draw(*obj);
+		
 	});
 
 }
@@ -154,9 +156,10 @@ void Game::run() {
 		calcTimes();
 		updateObjects();
 		for (int i = 0; i < simPerFrame; i++) gameplay->simulate();
-		if (gameplay != nullptr) windowObj.draw(background);
+		if (gameplay != nullptr) 
+		windowObj.draw(background);
 		drawObjects();
-		
+
 		windowObj.display();
 		tests();
 		frameClock.restart();

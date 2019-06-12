@@ -18,8 +18,8 @@ Racket::Racket(float posX, float posY,bool isAI, int whichPlayer) :
 
 void Racket::rotation() {
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= (247.5f / Game::getSimPerFrame()) * elapsedTime;
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += (247.5f / Game::getSimPerFrame()) * elapsedTime;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) angle -= (150.5f / Game::getSimPerFrame()) * elapsedTime;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) angle += (150.5f / Game::getSimPerFrame()) * elapsedTime;
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) angle = 0.0f;
 
 		if (angle >= 180.0f) angle -= 180.0f;

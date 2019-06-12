@@ -7,6 +7,7 @@ class Table : public Rect
 
 private:
 	int player; // 1 player nr1   2 player nr2
+	sf::Texture alpha;
 
 public:
 	Table(float pixelSizeX, float pixelSizeY, float angle, Physics::Material material, float pixelPosX, float pixelPosY, int player);

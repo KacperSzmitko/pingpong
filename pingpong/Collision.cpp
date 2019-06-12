@@ -205,9 +205,9 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 		{
 			//std::cout << racket->velocityVector.x << " 3\n";
 			ball->Colision = 0;
+			calcballRacketCol(ball, racket);
 			ball->p1 = false;
 			ball->p2 = false;
-			calcballRacketCol(ball, racket);
 			who = 2;
 		}
 		else if (!ball->p2 && ball->Colision != 0 && racket->whichPlayer == 2)
@@ -221,10 +221,11 @@ void Collision::ballRacketCol(Ball *ball, Racket *racket) {
 		{
 			//std::cout << racket->velocityVector.x << " 4\n";
 			ball->Colision = 0;
+			calcballRacketCol(ball, racket);
 			ball->p1 = false;
 			ball->p2 = false;
-			calcballRacketCol(ball, racket);
 			who = 1;
+
 		}
 		else if (!ball->p1 && ball->Colision!=0 && racket->whichPlayer == 1)
 		{
@@ -478,12 +479,17 @@ void Collision::calcballRacketCol(Ball *ball, Racket *racket)
 	else if (angle < -1.4) angle = -1.3;
 	if (racket->velocityVector.x == 0 && racket->velocityVector.y == 0)
 	{
+		std::cout << ball->p1;
 		if (racket->angle>0 && racket->angle<90 && ball->p1)
 		{
+			
 			ball->velocityVector = { -ball->velocity*cos(angle) , ball->velocity*sin(angle) };
 		}
-		else if(ball->p1)
-		ball->velocityVector = { ball->velocity*cos(angle) , ball->velocity*sin(angle) };
+		else if (ball->p1)
+		{
+			ball->velocityVector = { ball->velocity*cos(angle) , ball->velocity*sin(angle) };
+			std::cout << racket->velocityVector.x << "  " << racket->velocityVector.y << "\n";
+		}
 		else if (racket->angle < 0 && racket->angle >-90  && ball->p2)
 		ball->velocityVector = { -ball->velocity*cos(angle) , ball->velocity*sin(angle) };
 		else if(ball->p2)

@@ -28,6 +28,7 @@ private:
 	Score score;
 	DisplayWind displayWind;
 
+
 public:
 	Gameplay(int mode);
 	static sf::Vector2f default_ballLPos, default_ballRPos, default_racketLPos, default_racketRPos;
