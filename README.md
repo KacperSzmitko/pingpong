@@ -1,6 +1,6 @@
-# pingpong
+# Description
+2D ping-pong game, written in C++ using SFML framework. The game has a custom physics engine. The game has three game modes: player vs player, player vs computer and "fun" mode where you can freely play with game physics. You can change game engine physics parameters such as: gravity, air resistance, wind etc. 
 
-Gra ping-pong 2D, zrealizowana za pomocą SFML'a. Gra posiada:
-- autorski silnik graficzny obsuługujący zaawansowaną fizykę (opór powietrza, wpływ grawitacji, wpływ wiatru etc.)
-- 3 tryby gry (gra człowiek vs człowiek, gra człowiek vs komputer, oraz tryb dowolny do zabawy fizyką
-- Parametry fizyczne można dowolnie zmieniać
+# Used technologies
+- C++
+- SFML
